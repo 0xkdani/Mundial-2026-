@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Calendar, MapPin, Clock } from 'lucide-react';
-import { matchesData, groupStandings } from '../data/matches';
+import { matchesData, groupPosiciones } from '../data/matches';
 
 export function MatchResults() {
   const [selectedTab, setSelectedTab] = useState<'matches' | 'standings'>('matches');
-  const [selectedGroup, setSelectedGroup] = useState('Group A');
+  const [selectedGroup, setSelectedGroup] = useState('Grupo A');
 
-  const liveMatches = matchesData.filter(m => m.status === 'live');
-  const finishedMatches = matchesData.filter(m => m.status === 'finished');
-  const scheduledMatches = matchesData.filter(m => m.status === 'scheduled');
+  const livePartidos = matchesData.filter(m => m.status === 'live');
+  const finishedPartidos = matchesData.filter(m => m.status === 'finished');
+  const scheduledPartidos = matchesData.filter(m => m.status === 'scheduled');
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -16,7 +16,7 @@ export function MatchResults() {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-slate-900 via-black to-slate-900">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -24,53 +24,31 @@ export function MatchResults() {
             FIFA World Cup 2026™
           </div>
           <h1 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight">
-            Matches & Results
+            Partidos
           </h1>
           <p className="text-xl text-gray-400">
-            Follow all the action from the tournament
+            Sigue toda la accion del torneo
           </p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-12">
-          <button
-            onClick={() => setSelectedTab('matches')}
-            className={`px-8 py-4 rounded-full font-bold text-lg transition-all ${
-              selectedTab === 'matches'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg border border-purple-500'
-                : 'bg-slate-900 text-gray-300 hover:bg-slate-800 border border-purple-900'
-            }`}
-          >
-            Matches
-          </button>
-          <button
-            onClick={() => setSelectedTab('standings')}
-            className={`px-8 py-4 rounded-full font-bold text-lg transition-all ${
-              selectedTab === 'standings'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg border border-purple-500'
-                : 'bg-slate-900 text-gray-300 hover:bg-slate-800 border border-purple-900'
-            }`}
-          >
-            Standings
-          </button>
-        </div>
+       
 
         {selectedTab === 'matches' ? (
           <div className="space-y-12">
-            {/* Live Matches */}
-            {liveMatches.length > 0 && (
+            {/* En vivo Partidos */}
+            {livePartidos.length > 0 && (
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
-                  <h2 className="text-3xl font-black text-white">Live Now</h2>
+                  <h2 className="text-3xl font-black text-white">En vivo ahora</h2>
                 </div>
                 <div className="space-y-4">
-                  {liveMatches.map(match => (
+                  {livePartidos.map(match => (
                     <div key={match.id} className="bg-gradient-to-br from-slate-900 to-black rounded-2xl p-6 shadow-lg hover-lift border border-purple-900">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2 text-sm">
                           <span className="bg-purple-600 text-white px-3 py-1 rounded-full font-bold uppercase text-xs border border-purple-400">
-                            Live
+                            En vivo
                           </span>
                           <span className="text-gray-400 font-semibold">{match.stage}</span>
                         </div>
@@ -78,23 +56,23 @@ export function MatchResults() {
                       </div>
                       
                       <div className="grid grid-cols-[1fr,auto,1fr] gap-6 items-center mb-4">
-                        {/* Home Team */}
+                        {/* Inicio Equipo */}
                         <div className="flex items-center gap-3 justify-end">
-                          <span className="text-xl font-bold text-white">{match.homeTeam.name}</span>
-                          <span className="text-5xl">{match.homeTeam.flag}</span>
+                          <span className="text-xl font-bold text-white">{match.homeEquipo.name}</span>
+                          <span className="text-5xl">{match.homeEquipo.flag}</span>
                         </div>
                         
                         {/* Score */}
                         <div className="text-center">
                           <div className="text-5xl font-black text-white">
-                            {match.homeTeam.score} - {match.awayTeam.score}
+                            {match.homeEquipo.score} - {match.awayEquipo.score}
                           </div>
                         </div>
                         
-                        {/* Away Team */}
+                        {/* Away Equipo */}
                         <div className="flex items-center gap-3">
-                          <span className="text-5xl">{match.awayTeam.flag}</span>
-                          <span className="text-xl font-bold text-white">{match.awayTeam.name}</span>
+                          <span className="text-5xl">{match.awayEquipo.flag}</span>
+                          <span className="text-xl font-bold text-white">{match.awayEquipo.name}</span>
                         </div>
                       </div>
                       
@@ -110,17 +88,17 @@ export function MatchResults() {
               </div>
             )}
 
-            {/* Finished Matches */}
-            {finishedMatches.length > 0 && (
+            {/* Finished Partidos */}
+            {finishedPartidos.length > 0 && (
               <div>
-                <h2 className="text-3xl font-black text-white mb-6">Recent Results</h2>
+                <h2 className="text-3xl font-black text-white mb-6">Resultados recientes</h2>
                 <div className="space-y-4">
-                  {finishedMatches.map(match => (
+                  {finishedPartidos.map(match => (
                     <div key={match.id} className="bg-gradient-to-br from-slate-900 to-black rounded-2xl p-6 shadow-lg hover-lift border border-purple-900">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2 text-sm">
                           <span className="bg-slate-800 text-gray-300 px-3 py-1 rounded-full font-bold uppercase text-xs border border-slate-700">
-                            Full Time
+                            Finalizado
                           </span>
                           <span className="text-gray-400 font-semibold">{match.stage}</span>
                         </div>
@@ -131,23 +109,23 @@ export function MatchResults() {
                       </div>
                       
                       <div className="grid grid-cols-[1fr,auto,1fr] gap-6 items-center mb-4">
-                        {/* Home Team */}
+                        {/* Inicio Equipo */}
                         <div className="flex items-center gap-3 justify-end">
-                          <span className="text-xl font-bold text-white">{match.homeTeam.name}</span>
-                          <span className="text-5xl">{match.homeTeam.flag}</span>
+                          <span className="text-xl font-bold text-white">{match.homeEquipo.name}</span>
+                          <span className="text-5xl">{match.homeEquipo.flag}</span>
                         </div>
                         
                         {/* Score */}
                         <div className="text-center">
                           <div className="text-5xl font-black text-white">
-                            {match.homeTeam.score} - {match.awayTeam.score}
+                            {match.homeEquipo.score} - {match.awayEquipo.score}
                           </div>
                         </div>
                         
-                        {/* Away Team */}
+                        {/* Away Equipo */}
                         <div className="flex items-center gap-3">
-                          <span className="text-5xl">{match.awayTeam.flag}</span>
-                          <span className="text-xl font-bold text-white">{match.awayTeam.name}</span>
+                          <span className="text-5xl">{match.awayEquipo.flag}</span>
+                          <span className="text-xl font-bold text-white">{match.awayEquipo.name}</span>
                         </div>
                       </div>
                       
@@ -163,12 +141,12 @@ export function MatchResults() {
               </div>
             )}
 
-            {/* Scheduled Matches */}
-            {scheduledMatches.length > 0 && (
+            {/* Scheduled Partidos */}
+            {scheduledPartidos.length > 0 && (
               <div>
-                <h2 className="text-3xl font-black text-white mb-6">Upcoming Matches</h2>
+                <h2 className="text-3xl font-black text-white mb-6">Proximos partidos</h2>
                 <div className="space-y-4">
-                  {scheduledMatches.map(match => (
+                  {scheduledPartidos.map(match => (
                     <div key={match.id} className="bg-gradient-to-br from-slate-900 to-black rounded-2xl p-6 shadow-lg hover-lift border border-purple-900">
                       <div className="flex items-center justify-between mb-4">
                         <span className="text-sm text-gray-400 font-semibold">{match.stage}</span>
@@ -185,10 +163,10 @@ export function MatchResults() {
                       </div>
                       
                       <div className="grid grid-cols-[1fr,auto,1fr] gap-6 items-center mb-4">
-                        {/* Home Team */}
+                        {/* Inicio Equipo */}
                         <div className="flex items-center gap-3 justify-end">
-                          <span className="text-xl font-bold text-white">{match.homeTeam.name}</span>
-                          <span className="text-5xl">{match.homeTeam.flag}</span>
+                          <span className="text-xl font-bold text-white">{match.homeEquipo.name}</span>
+                          <span className="text-5xl">{match.homeEquipo.flag}</span>
                         </div>
                         
                         {/* VS */}
@@ -196,10 +174,10 @@ export function MatchResults() {
                           <div className="text-2xl font-bold text-purple-400">VS</div>
                         </div>
                         
-                        {/* Away Team */}
+                        {/* Away Equipo */}
                         <div className="flex items-center gap-3">
-                          <span className="text-5xl">{match.awayTeam.flag}</span>
-                          <span className="text-xl font-bold text-white">{match.awayTeam.name}</span>
+                          <span className="text-5xl">{match.awayEquipo.flag}</span>
+                          <span className="text-xl font-bold text-white">{match.awayEquipo.name}</span>
                         </div>
                       </div>
                       
@@ -219,7 +197,7 @@ export function MatchResults() {
           <div>
             {/* Group Selector */}
             <div className="flex justify-center gap-3 mb-8 flex-wrap">
-              {Object.keys(groupStandings).map(group => (
+              {Object.keys(groupPosiciones).map(group => (
                 <button
                   key={group}
                   onClick={() => setSelectedGroup(group)}
@@ -234,7 +212,7 @@ export function MatchResults() {
               ))}
             </div>
 
-            {/* Standings Table */}
+            {/* Posiciones Table */}
             <div className="bg-gradient-to-br from-slate-900 to-black rounded-2xl shadow-xl overflow-hidden border border-purple-900">
               <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6 border-b border-purple-500">
                 <h3 className="text-2xl font-black">{selectedGroup}</h3>
@@ -245,7 +223,7 @@ export function MatchResults() {
                   <thead className="bg-slate-800 border-b border-purple-900">
                     <tr>
                       <th className="text-left p-4 font-bold text-gray-300 text-sm">Pos</th>
-                      <th className="text-left p-4 font-bold text-gray-300 text-sm">Team</th>
+                      <th className="text-left p-4 font-bold text-gray-300 text-sm">Equipo</th>
                       <th className="text-center p-4 font-bold text-gray-300 text-sm">P</th>
                       <th className="text-center p-4 font-bold text-gray-300 text-sm">W</th>
                       <th className="text-center p-4 font-bold text-gray-300 text-sm">D</th>
@@ -257,7 +235,7 @@ export function MatchResults() {
                     </tr>
                   </thead>
                   <tbody>
-                    {groupStandings[selectedGroup as keyof typeof groupStandings]?.map((team, index) => (
+                    {groupPosiciones[selectedGroup as keyof typeof groupPosiciones]?.map((team, index) => (
                       <tr key={team.team} className="border-t border-purple-900 hover:bg-slate-800/50">
                         <td className="p-4">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
@@ -293,7 +271,7 @@ export function MatchResults() {
               <div className="bg-slate-900 p-4 text-sm text-gray-400 border-t border-purple-900">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-purple-600 rounded border border-purple-400"></div>
-                  <span>Qualified for Round of 32</span>
+                  <span>Clasificado a dieciseisavos</span>
                 </div>
               </div>
             </div>

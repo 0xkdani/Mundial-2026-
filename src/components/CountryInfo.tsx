@@ -16,7 +16,7 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-slate-900 via-black to-slate-900">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Country Header */}
         <div className="bg-gradient-to-br from-purple-600 to-purple-800 rounded-3xl p-12 mb-8 text-center shadow-2xl relative overflow-hidden border-2 border-purple-500">
@@ -28,18 +28,18 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
           
           <div className="flex flex-wrap justify-center gap-4 mb-6">
             <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-purple-300">
-              <span className="text-purple-100 font-semibold">FIFA Ranking: </span>
+              <span className="text-purple-100 font-semibold">Ranking FIFA: </span>
               <span className="text-white font-bold">#{country.fifaRanking}</span>
             </div>
             <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-purple-300">
-              <span className="text-purple-100 font-semibold">World Cups: </span>
+              <span className="text-purple-100 font-semibold">Mundiales: </span>
               <span className="text-white font-bold">{country.worldCupParticipations}</span>
             </div>
-            {country.worldCupTitles > 0 && (
+            {country.worldCupTitulos > 0 && (
               <div className="bg-yellow-400 rounded-full px-6 py-3 shadow-lg border-2 border-yellow-300">
                 <Trophy className="inline w-5 h-5 mr-2" />
                 <span className="text-slate-900 font-black">
-                  {country.worldCupTitles} {country.worldCupTitles === 1 ? 'Title' : 'Titles'}
+                  {country.worldCupTitulos} {country.worldCupTitulos === 1 ? 'Titulo' : 'Titulos'}
                 </span>
               </div>
             )}
@@ -62,7 +62,7 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
               <div className="bg-purple-600 w-12 h-12 rounded-xl flex items-center justify-center border border-purple-400">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">Coach</h3>
+              <h3 className="text-xl font-bold text-white">Entrenador</h3>
             </div>
             <p className="text-2xl text-gray-300 font-semibold">{country.coach}</p>
           </div>
@@ -82,16 +82,16 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
               <div className="bg-purple-600 w-12 h-12 rounded-xl flex items-center justify-center border border-purple-400">
                 <Star className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">Best Result</h3>
+              <h3 className="text-xl font-bold text-white">Mejor resultado</h3>
             </div>
             <p className="text-lg text-gray-300 font-semibold">{country.bestResult}</p>
           </div>
         </div>
 
-        {/* Top Players */}
+        {/* Jugadores destacados */}
         <div className="bg-gradient-to-br from-slate-900 to-black rounded-3xl p-10 shadow-xl border border-purple-900">
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-black text-white mb-2 tracking-tight">Top Players</h2>
+            <h2 className="text-4xl font-black text-white mb-2 tracking-tight">Jugadores destacados</h2>
             <div className="h-1 w-20 bg-purple-600 mx-auto rounded-full"></div>
           </div>
           
@@ -120,22 +120,22 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
                 
                 <div className="space-y-2 bg-slate-900 rounded-xl p-4 shadow-sm border border-purple-900">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-400 font-semibold">Age</span>
-                    <span className="text-white font-bold">{player.age} years</span>
+                    <span className="text-gray-400 font-semibold">Edad</span>
+                    <span className="text-white font-bold">{player.age} anos</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-400 font-semibold">Caps</span>
+                    <span className="text-gray-400 font-semibold">Partidos</span>
                     <span className="text-white font-bold">{player.caps}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-400 font-semibold">Goals</span>
+                    <span className="text-gray-400 font-semibold">Goles</span>
                     <span className="text-white font-bold">{player.goals}</span>
                   </div>
                 </div>
 
                 {player.achievements && (
                   <div className="mt-4 pt-4 border-t border-purple-900">
-                    <p className="text-xs text-purple-400 mb-2 font-bold uppercase">Achievements:</p>
+                    <p className="text-xs text-purple-400 mb-2 font-bold uppercase">Logros:</p>
                     <p className="text-sm text-gray-300">{player.achievements}</p>
                   </div>
                 )}
@@ -147,7 +147,7 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
         {/* Fun Facts */}
         {country.funFacts && country.funFacts.length > 0 && (
           <div className="mt-8 bg-gradient-to-br from-slate-900 to-black rounded-3xl p-8 border-2 border-purple-900">
-            <h3 className="text-3xl font-black text-white mb-6">Did You Know?</h3>
+            <h3 className="text-3xl font-black text-white mb-6">Sabias que?</h3>
             <ul className="space-y-4">
               {country.funFacts.map((fact, index) => (
                 <li key={index} className="flex gap-4 items-start bg-slate-800 p-4 rounded-xl shadow-sm border border-purple-900">
@@ -224,7 +224,7 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
                       <p className="text-purple-300 font-semibold">Mundiales Jugados</p>
                     </div>
                     <div className="bg-gradient-to-br from-purple-900/50 to-purple-800/50 rounded-xl p-6 border border-purple-700 text-center">
-                      <div className="text-4xl font-black text-white mb-2">{country.worldCupTitles}</div>
+                      <div className="text-4xl font-black text-white mb-2">{country.worldCupTitulos}</div>
                       <p className="text-purple-300 font-semibold">Títulos</p>
                     </div>
                   </div>
@@ -250,11 +250,11 @@ export function CountryInfo({ countryCode, onBack }: CountryInfoProps) {
                           <span className="text-purple-500 mt-1">•</span>
                           <span>Participaciones en Copas del Mundo: {country.worldCupParticipations}</span>
                         </li>
-                        {country.worldCupTitles > 0 && (
+                        {country.worldCupTitulos > 0 && (
                           <li className="flex items-start gap-2">
                             <span className="text-yellow-400 mt-1">🏆</span>
                             <span className="font-bold text-yellow-400">
-                              Campeón del Mundo {country.worldCupTitles} {country.worldCupTitles === 1 ? 'vez' : 'veces'}
+                              Campeón del Mundo {country.worldCupTitulos} {country.worldCupTitulos === 1 ? 'vez' : 'veces'}
                             </span>
                           </li>
                         )}

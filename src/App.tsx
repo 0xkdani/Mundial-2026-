@@ -11,7 +11,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<'home' | 'ar' | 'matches' | 'quiz' | 'videos'>('home');
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-black to-slate-900">
       <Navigation activeSection={activeSection} onNavigate={setActiveSection} />
       
       <div className="pt-20">

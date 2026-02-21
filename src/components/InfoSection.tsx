@@ -16,7 +16,7 @@ const cities: City[] = [
 
 export function InfoSection() {
   return (
-    <div className="py-24 px-4 bg-gradient-to-b from-slate-900 via-black to-slate-900">
+    <div className="py-24 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">

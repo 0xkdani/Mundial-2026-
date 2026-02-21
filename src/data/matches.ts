@@ -5,13 +5,13 @@ export interface Match {
   stadium: string;
   city: string;
   stage: string;
-  homeTeam: {
+  homeEquipo: {
     name: string;
     code: string;
     flag: string;
     score?: number;
   };
-  awayTeam: {
+  awayEquipo: {
     name: string;
     code: string;
     flag: string;
@@ -28,14 +28,14 @@ export const matchesData: Match[] = [
     time: '20:00',
     stadium: 'Estadio Azteca',
     city: 'Mexico City',
-    stage: 'Group A',
-    homeTeam: {
+    stage: 'Grupo A',
+    homeEquipo: {
       name: 'Mexico',
       code: 'MEX',
       flag: '🇲🇽',
       score: 2
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Poland',
       code: 'POL',
       flag: '🇵🇱',
@@ -47,16 +47,16 @@ export const matchesData: Match[] = [
     id: '2',
     date: '2026-06-11',
     time: '17:00',
-    stadium: 'MetLife Stadium',
+    stadium: 'MetLife Estadio',
     city: 'New York/New Jersey',
-    stage: 'Group A',
-    homeTeam: {
+    stage: 'Grupo A',
+    homeEquipo: {
       name: 'USA',
       code: 'USA',
       flag: '🇺🇸',
       score: 3
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Wales',
       code: 'WAL',
       flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
@@ -68,16 +68,16 @@ export const matchesData: Match[] = [
     id: '3',
     date: '2026-06-12',
     time: '14:00',
-    stadium: 'SoFi Stadium',
+    stadium: 'SoFi Estadio',
     city: 'Los Angeles',
-    stage: 'Group B',
-    homeTeam: {
+    stage: 'Grupo B',
+    homeEquipo: {
       name: 'Argentina',
       code: 'ARG',
       flag: '🇦🇷',
       score: 1
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Australia',
       code: 'AUS',
       flag: '🇦🇺',
@@ -92,13 +92,13 @@ export const matchesData: Match[] = [
     time: '17:00',
     stadium: 'BMO Field',
     city: 'Toronto',
-    stage: 'Group B',
-    homeTeam: {
+    stage: 'Grupo B',
+    homeEquipo: {
       name: 'Canada',
       code: 'CAN',
       flag: '🇨🇦'
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Morocco',
       code: 'MAR',
       flag: '🇲🇦'
@@ -109,16 +109,16 @@ export const matchesData: Match[] = [
     id: '5',
     date: '2026-06-13',
     time: '20:00',
-    stadium: 'AT&T Stadium',
+    stadium: 'AT&T Estadio',
     city: 'Dallas',
-    stage: 'Group C',
-    homeTeam: {
+    stage: 'Grupo C',
+    homeEquipo: {
       name: 'Brazil',
       code: 'BRA',
       flag: '🇧🇷',
       score: 4
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Japan',
       code: 'JPN',
       flag: '🇯🇵',
@@ -132,14 +132,14 @@ export const matchesData: Match[] = [
     time: '17:00',
     stadium: 'Lumen Field',
     city: 'Seattle',
-    stage: 'Group C',
-    homeTeam: {
+    stage: 'Grupo C',
+    homeEquipo: {
       name: 'Spain',
       code: 'ESP',
       flag: '🇪🇸',
       score: 2
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Germany',
       code: 'GER',
       flag: '🇩🇪',
@@ -151,15 +151,15 @@ export const matchesData: Match[] = [
     id: '7',
     date: '2026-06-14',
     time: '14:00',
-    stadium: 'Hard Rock Stadium',
+    stadium: 'Hard Rock Estadio',
     city: 'Miami',
-    stage: 'Group D',
-    homeTeam: {
+    stage: 'Grupo D',
+    homeEquipo: {
       name: 'France',
       code: 'FRA',
       flag: '🇫🇷'
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'England',
       code: 'ENG',
       flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿'
@@ -170,15 +170,15 @@ export const matchesData: Match[] = [
     id: '8',
     date: '2026-06-14',
     time: '20:00',
-    stadium: 'NRG Stadium',
+    stadium: 'NRG Estadio',
     city: 'Houston',
-    stage: 'Group D',
-    homeTeam: {
+    stage: 'Grupo D',
+    homeEquipo: {
       name: 'Netherlands',
       code: 'NED',
       flag: '🇳🇱'
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Belgium',
       code: 'BEL',
       flag: '🇧🇪'
@@ -189,16 +189,16 @@ export const matchesData: Match[] = [
     id: '9',
     date: '2026-06-15',
     time: '17:00',
-    stadium: 'Mercedes-Benz Stadium',
+    stadium: 'Mercedes-Benz Estadio',
     city: 'Atlanta',
-    stage: 'Group E',
-    homeTeam: {
+    stage: 'Grupo E',
+    homeEquipo: {
       name: 'Portugal',
       code: 'POR',
       flag: '🇵🇹',
       score: 3
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Uruguay',
       code: 'URU',
       flag: '🇺🇾',
@@ -212,13 +212,13 @@ export const matchesData: Match[] = [
     time: '14:00',
     stadium: 'BC Place',
     city: 'Vancouver',
-    stage: 'Group E',
-    homeTeam: {
+    stage: 'Grupo E',
+    homeEquipo: {
       name: 'Italy',
       code: 'ITA',
       flag: '🇮🇹'
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Croatia',
       code: 'CRO',
       flag: '🇭🇷'
@@ -229,15 +229,15 @@ export const matchesData: Match[] = [
     id: '11',
     date: '2026-06-16',
     time: '20:00',
-    stadium: 'Gillette Stadium',
+    stadium: 'Gillette Estadio',
     city: 'Boston',
-    stage: 'Group F',
-    homeTeam: {
+    stage: 'Grupo F',
+    homeEquipo: {
       name: 'Colombia',
       code: 'COL',
       flag: '🇨🇴'
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Senegal',
       code: 'SEN',
       flag: '🇸🇳'
@@ -248,15 +248,15 @@ export const matchesData: Match[] = [
     id: '12',
     date: '2026-06-16',
     time: '17:00',
-    stadium: 'Arrowhead Stadium',
+    stadium: 'Arrowhead Estadio',
     city: 'Kansas City',
-    stage: 'Group F',
-    homeTeam: {
-      name: 'South Korea',
+    stage: 'Grupo F',
+    homeEquipo: {
+      name: 'Corea del Sur',
       code: 'KOR',
       flag: '🇰🇷'
     },
-    awayTeam: {
+    awayEquipo: {
       name: 'Switzerland',
       code: 'SUI',
       flag: '🇨🇭'
@@ -265,23 +265,24 @@ export const matchesData: Match[] = [
   }
 ];
 
-export const groupStandings = {
-  'Group A': [
+export const groupPosiciones = {
+  'Grupo A': [
     { team: 'USA', flag: '🇺🇸', played: 1, won: 1, drawn: 0, lost: 0, gf: 3, ga: 0, gd: 3, points: 3 },
     { team: 'Mexico', flag: '🇲🇽', played: 1, won: 1, drawn: 0, lost: 0, gf: 2, ga: 1, gd: 1, points: 3 },
     { team: 'Poland', flag: '🇵🇱', played: 1, won: 0, drawn: 0, lost: 1, gf: 1, ga: 2, gd: -1, points: 0 },
     { team: 'Wales', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', played: 1, won: 0, drawn: 0, lost: 1, gf: 0, ga: 3, gd: -3, points: 0 }
   ],
-  'Group B': [
+  'Grupo B': [
     { team: 'Argentina', flag: '🇦🇷', played: 1, won: 0, drawn: 1, lost: 0, gf: 1, ga: 1, gd: 0, points: 1 },
     { team: 'Australia', flag: '🇦🇺', played: 1, won: 0, drawn: 1, lost: 0, gf: 1, ga: 1, gd: 0, points: 1 },
     { team: 'Canada', flag: '🇨🇦', played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0 },
     { team: 'Morocco', flag: '🇲🇦', played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0 }
   ],
-  'Group C': [
+  'Grupo C': [
     { team: 'Brazil', flag: '🇧🇷', played: 1, won: 1, drawn: 0, lost: 0, gf: 4, ga: 2, gd: 2, points: 3 },
     { team: 'Spain', flag: '🇪🇸', played: 1, won: 0, drawn: 1, lost: 0, gf: 2, ga: 2, gd: 0, points: 1 },
     { team: 'Germany', flag: '🇩🇪', played: 1, won: 0, drawn: 1, lost: 0, gf: 2, ga: 2, gd: 0, points: 1 },
     { team: 'Japan', flag: '🇯🇵', played: 1, won: 0, drawn: 0, lost: 1, gf: 2, ga: 4, gd: -2, points: 0 }
   ]
 };
+

@@ -30,7 +30,7 @@ export function Navigation({ activeSection, onNavigate }: NavigationProps) {
               }`}
             >
               <Trophy className="w-5 h-5" />
-              <span className="hidden md:inline">Home</span>
+              <span className="hidden md:inline">Inicio</span>
             </button>
             
             <button
@@ -42,7 +42,7 @@ export function Navigation({ activeSection, onNavigate }: NavigationProps) {
               }`}
             >
               <Calendar className="w-5 h-5" />
-              <span className="hidden md:inline">Matches</span>
+              <span className="hidden md:inline">Partidos</span>
             </button>
             
             <button
@@ -78,7 +78,7 @@ export function Navigation({ activeSection, onNavigate }: NavigationProps) {
               }`}
             >
               <Scan className="w-5 h-5" />
-              <span className="hidden md:inline">AR Scanner</span>
+              <span className="hidden md:inline">Escaner AR</span>
             </button>
           </div>
         </div>

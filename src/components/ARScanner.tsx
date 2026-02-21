@@ -80,17 +80,17 @@ export function ARScanner({ onBack }: ARScannerProps) {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-slate-900 via-black to-slate-900">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-block bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2 rounded-full font-bold text-sm uppercase mb-4 border border-purple-500">
-            Augmented Reality
+            Realidad aumentada
           </div>
           <h2 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight">
-            Flag Scanner
+            Escaner de banderas
           </h2>
           <p className="text-xl text-gray-400">
-            {cameraActive ? 'Point your camera at a flag to learn more' : 'Activate your camera to begin'}
+            {cameraActive ? 'Apunta tu camara a una bandera para saber mas' : 'Activa tu camara para comenzar'}
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
                       onClick={startCamera}
                       className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg border-2 border-purple-500"
                     >
-                      Activate Camera
+                      Activar camara
                     </button>
                   </>
                 ) : (
@@ -114,25 +114,25 @@ export function ARScanner({ onBack }: ARScannerProps) {
                     <div className="bg-red-50 border-2 border-red-200 text-red-900 rounded-2xl p-6 mb-6">
                       <div className="text-4xl mb-3 text-center">⚠️</div>
                       <h3 className="text-xl font-bold mb-3 text-center">
-                        {cameraError === 'permission' && 'Camera Permission Denied'}
-                        {cameraError === 'notfound' && 'No Camera Found'}
-                        {cameraError === 'inuse' && 'Camera In Use'}
-                        {cameraError === 'general' && 'Camera Error'}
+                        {cameraError === 'permission' && 'Permiso de camara denegado'}
+                        {cameraError === 'notfound' && 'No se encontro camara'}
+                        {cameraError === 'inuse' && 'Camara en uso'}
+                        {cameraError === 'general' && 'Error de camara'}
                       </h3>
                       <p className="text-center mb-4 text-sm">
-                        {cameraError === 'permission' && 'Please allow camera access in your browser settings to use this feature.'}
-                        {cameraError === 'notfound' && 'No camera was detected on your device.'}
-                        {cameraError === 'inuse' && 'The camera is currently being used by another application.'}
-                        {cameraError === 'general' && 'An error occurred while accessing the camera.'}
+                        {cameraError === 'permission' && 'Permite el acceso a la camara en la configuracion del navegador para usar esta funcion.'}
+                        {cameraError === 'notfound' && 'No se detecto ninguna camara en tu dispositivo.'}
+                        {cameraError === 'inuse' && 'La camara esta siendo usada por otra aplicacion.'}
+                        {cameraError === 'general' && 'Ocurrio un error al acceder a la camara.'}
                       </p>
                       
                       {cameraError === 'permission' && (
                         <div className="bg-white rounded-xl p-4 mb-4 text-left">
-                          <p className="text-sm font-bold mb-2">How to enable camera:</p>
+                          <p className="text-sm font-bold mb-2">Como habilitar la camara:</p>
                           <ul className="text-sm space-y-1 list-disc list-inside text-slate-600">
-                            <li>Look for the camera icon in your address bar</li>
-                            <li>Click and select "Allow"</li>
-                            <li>Reload the page if necessary</li>
+                            <li>Busca el icono de camara en la barra de direcciones</li>
+                            <li>Haz clic y selecciona "Permitir"</li>
+                            <li>Recarga la pagina si es necesario</li>
                           </ul>
                         </div>
                       )}
@@ -141,7 +141,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
                         onClick={startCamera}
                         className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-bold transition-colors"
                       >
-                        Try Again
+                        Intentar de nuevo
                       </button>
                     </div>
                     
@@ -150,7 +150,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
                         💡 Continue without camera
                       </p>
                       <p className="text-center text-sm">
-                        Scroll down to select a country manually
+                        Desplazate hacia abajo para seleccionar un pais manualmente
                       </p>
                     </div>
                   </div>
@@ -185,7 +185,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
                   <div className="absolute bottom-6 left-0 right-0 text-center">
                     <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-full font-bold shadow-xl border-2 border-purple-500">
                       <Scan className="w-5 h-5 animate-spin" />
-                      Scanning...
+                      Escaneando...
                     </div>
                   </div>
                 )}
@@ -198,7 +198,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
             <div>
               <div className="flex items-center gap-3 bg-purple-900/50 border border-purple-700 text-white px-6 py-3 rounded-xl mb-6">
                 <Info className="w-5 h-5" />
-                <p className="font-semibold text-sm">Select a country to simulate scanning:</p>
+                <p className="font-semibold text-sm">Selecciona un pais para simular el escaneo:</p>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -221,7 +221,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
             <div>
               <div className="flex items-center gap-3 bg-purple-900/50 border border-purple-700 text-white px-6 py-3 rounded-xl mb-6">
                 <Info className="w-5 h-5" />
-                <p className="font-semibold text-sm">Select a country to view information:</p>
+                <p className="font-semibold text-sm">Selecciona un pais para ver informacion:</p>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -241,19 +241,19 @@ export function ARScanner({ onBack }: ARScannerProps) {
         </div>
 
         <div className="bg-gradient-to-br from-slate-900 to-black rounded-2xl p-8 shadow-lg border border-purple-900">
-          <h3 className="text-2xl font-bold text-white mb-4">How it works</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Como funciona</h3>
           <ol className="space-y-4 text-gray-300">
             <li className="flex gap-4 items-start">
               <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-400">1</span>
-              <span className="pt-1">Activate your device camera</span>
+              <span className="pt-1">Activa la camara de tu dispositivo</span>
             </li>
             <li className="flex gap-4 items-start">
               <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-400">2</span>
-              <span className="pt-1">Point at a flag or select a country</span>
+              <span className="pt-1">Apunta a una bandera o selecciona un pais</span>
             </li>
             <li className="flex gap-4 items-start">
               <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-400">3</span>
-              <span className="pt-1">Get instant information about the team and top players</span>
+              <span className="pt-1">Obtiene informacion instantanea del equipo y sus mejores jugadores</span>
             </li>
           </ol>
         </div>

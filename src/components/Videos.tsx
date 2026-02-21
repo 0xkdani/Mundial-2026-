@@ -152,7 +152,7 @@ export function Videos() {
   const useCanvasFilter = selectedFilter === 'pixelated' || selectedFilter === 'thermal';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

@@ -114,7 +114,7 @@ export function Quiz() {
 
   if (quizComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black py-12 px-4">
+      <div className="min-h-screen py-12 px-4">
         <div className="max-w-2xl mx-auto">
           <div className="bg-black/60 backdrop-blur-lg rounded-2xl p-8 border border-purple-500 shadow-2xl">
             <div className="text-center">
@@ -156,7 +156,7 @@ export function Quiz() {
   const question = questions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

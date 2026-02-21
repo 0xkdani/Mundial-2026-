@@ -7,12 +7,12 @@ interface HeroProps {
 
 export function Hero({ onStartAR }: HeroProps) {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Background Image */}
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1705593813682-033ee2991df6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjBzdGFkaXVtJTIwYWVyaWFsJTIwdmlld3xlbnwxfHx8fDE3NzA0NjcyNDF8MA&ixlib=rb-4.1.0&q=80&w=1080"
-          alt="Stadium"
+          alt="Estadio"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/50 to-black"></div>
@@ -47,7 +47,7 @@ export function Hero({ onStartAR }: HeroProps) {
           </div>
           <div className="flex items-center gap-2 text-white bg-purple-900/40 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-500">
             <MapPin className="w-5 h-5" />
-            <span className="font-semibold">16 Host Cities</span>
+            <span className="font-semibold">16 ciudades sede</span>
           </div>
         </div>
 
@@ -57,7 +57,7 @@ export function Hero({ onStartAR }: HeroProps) {
           className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-2xl border-2 border-purple-400"
         >
           <span className="text-2xl">📱</span>
-          Explore with AR
+          Explorar con AR
         </button>
       </div>
 
@@ -70,3 +70,4 @@ export function Hero({ onStartAR }: HeroProps) {
     </div>
   );
 }
+
