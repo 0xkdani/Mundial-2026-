@@ -160,8 +160,9 @@
         }
       });
 
-      /* Iniciar camara y mostrar copa */
-      startBtn.addEventListener('click', async () => {
+      const startAR = async () => {
+        if (startBtn.dataset.started === 'true') return;
+        startBtn.dataset.started = 'true';
         startBtn.textContent = 'Iniciando camara...';
         startBtn.style.pointerEvents = 'none';
         startBtn.style.opacity = '0.5';
@@ -216,12 +217,25 @@
 
         } catch (e) {
           console.error('Error camara:', e);
+          startBtn.dataset.started = 'false';
           startBtn.textContent = 'Activar camara AR';
           startBtn.style.pointerEvents = 'auto';
           startBtn.style.opacity = '1';
           showError('No se pudo acceder a la camara: ' + (e.message || e));
         }
-      });
+      };
+
+      /* Iniciar camara y mostrar copa */
+      startBtn.addEventListener('click', startAR);
+
+      /* Auto-inicio cuando se abre desde la app */
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('autostart') === '1') {
+        overlay.style.display = 'none';
+        setTimeout(() => {
+          startAR();
+        }, 0);
+      }
     </script>
   </body>
 </html>
