@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Escaner AR — Copa Mundial 2026</title>
+
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+      html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:Arial,sans-serif}
+
+      /* Video de camara de fondo */
+      #cameraVideo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+      /* Overlay de bienvenida */
+      #overlay{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);padding:24px;text-align:center;gap:14px}
+      #overlay h1{color:#fff;font-size:24px;font-weight:900}
+      #overlay p{color:#c4b5fd;font-size:14px;max-width:320px;line-height:1.6}
+      .trophy{font-size:64px;animation:float 3s ease-in-out infinite}
+      @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+      #startBtn{background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(124,58,237,.5);transition:transform .15s}
+      #startBtn:hover{transform:scale(1.05)}
+
+      #errorBox{display:none;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5;border-radius:12px;padding:12px 16px;font-size:13px;max-width:340px;line-height:1.5}
+
+      /* Escena 3D sobre la camara */
+      #sceneWrap{position:fixed;inset:0;z-index:5;pointer-events:none}
+      a-scene{background:transparent!important}
+      a-scene canvas,.a-canvas{background:transparent!important}
+
+      /* Debug info */
+      #debugInfo{position:fixed;top:50px;right:10px;z-index:50;background:rgba(0,0,0,.8);color:#4ade80;font-family:monospace;font-size:12px;padding:10px;border-radius:8px;max-width:280px;line-height:1.6;border:1px solid #4ade80}
+
+      /* Controles AR */
+      #backBtn{position:fixed;top:14px;left:14px;z-index:20;display:none;align-items:center;gap:6px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
+
+      #statusBar{position:fixed;bottom:20px;left:16px;right:16px;z-index:20;display:none;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,.65);color:#e9d5ff;border:1px solid rgba(124,58,237,.4);border-radius:999px;padding:10px 18px;font-size:14px;font-weight:500;backdrop-filter:blur(6px)}
+      .pulse-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
+      @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+      /* Marco de escaneo */
+      #scanFrame{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;pointer-events:none}
+      .frame-box{width:min(70vw,70vh);height:min(70vw,70vh);position:relative}
+      .corner{position:absolute;width:28px;height:28px;border-color:#a78bfa;border-style:solid;border-width:0}
+      .corner.tl{top:0;left:0;border-top-width:3px;border-left-width:3px;border-radius:4px 0 0 0}
+      .corner.tr{top:0;right:0;border-top-width:3px;border-right-width:3px;border-radius:0 4px 0 0}
+      .corner.bl{bottom:0;left:0;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 4px}
+      .corner.br{bottom:0;right:0;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 4px 0}
+      .scan-line{position:absolute;left:4px;right:4px;height:2px;background:linear-gradient(90deg,transparent,#a78bfa,transparent);animation:scanAnim 2s ease-in-out infinite}
+      @keyframes scanAnim{0%{top:4px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
+    </style>
+  </head>
+  <body>
+
+    <!-- Video de la camara -->
+    <video id="cameraVideo" autoplay playsinline muted></video>
+
+    <!-- Overlay de inicio -->
+    <div id="overlay">
+      <div class="trophy">🏆</div>
+      <h1>Copa AR — Mundial 2026</h1>
+      <p>Activa la camara y veras la Copa del Mundo en 3D flotando en realidad aumentada.</p>
+      <div id="errorBox"></div>
+      <button id="startBtn">Activar camara AR</button>
+    </div>
+
+    <!-- Controles -->
+    <button id="backBtn">&#8592; Volver</button>
+
+    <div id="scanFrame">
+      <div class="frame-box">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <div class="scan-line"></div>
+      </div>
+    </div>
+
+    <div id="statusBar">
+      <div class="pulse-dot"></div>
+      <span id="statusText">Copa 3D en pantalla</span>
+    </div>
+
+    <!-- Debug info -->
+    <div id="debugInfo" style="display:none"></div>
+
+    <!-- Escena 3D transparente sobre el video -->
+    <div id="sceneWrap">
+      <a-scene
+        id="arScene"
+        embedded
+        background="color: transparent; transparent: true"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+        renderer="alpha: true; antialias: true; colorManagement: true; physicallyCorrectLights: true"
+        style="width:100%;height:100%"
+      >
+        <a-assets timeout="10000">
+          <a-asset-item id="copaObj" src="./models/copa.obj"></a-asset-item>
+          <a-asset-item id="copaMtl" src="./models/copa.mtl"></a-asset-item>
+        </a-assets>
+
+        <a-entity id="cameraRig">
+          <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
+        </a-entity>
+
+        <!-- Copa 3D centrada frente a la camara -->
+        <a-entity
+          id="copaEntity"
+          obj-model="obj: #copaObj; mtl: #copaMtl"
+          position="0 -0.3 -2"
+          scale="0.005 0.005 0.005"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          visible="false"
+        ></a-entity>
+
+        <!-- Iluminacion -->
+        <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
+        <a-light type="directional" position="1 2 1" intensity="1.0" color="#ffffff"></a-light>
+        <a-light type="point" position="0 0.5 -1" intensity="0.8" color="#e9d5ff"></a-light>
+      </a-scene>
+    </div>
+
+    <script>
+      const overlay   = document.getElementById('overlay');
+      const startBtn  = document.getElementById('startBtn');
+      const backBtn   = document.getElementById('backBtn');
+      const statusBar = document.getElementById('statusBar');
+      const scanFrame = document.getElementById('scanFrame');
+      const errorBox  = document.getElementById('errorBox');
+      const video     = document.getElementById('cameraVideo');
+      const copaEl    = document.getElementById('copaEntity');
+      const scene     = document.getElementById('arScene');
+
+      const debugEl = document.getElementById('debugInfo');
+      const debugLog = (msg) => {
+        console.log('[AR]', msg);
+        debugEl.style.display = 'block';
+        debugEl.innerHTML += msg + '<br>';
+      };
+
+      const showError = (msg) => {
+        errorBox.textContent = msg;
+        errorBox.style.display = 'block';
+      };
+
+      /* Boton volver */
+      backBtn.addEventListener('click', () => {
+        /* Parar camara */
+        if (video.srcObject) {
+          video.srcObject.getTracks().forEach(t => t.stop());
+          video.srcObject = null;
+        }
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'AR_BACK' }, '*');
+        } else {
+          window.history.back();
+        }
+      });
+
+      /* Iniciar camara y mostrar copa */
+      startBtn.addEventListener('click', async () => {
+        startBtn.textContent = 'Iniciando camara...';
+        startBtn.style.pointerEvents = 'none';
+        startBtn.style.opacity = '0.5';
+
+        try {
+          /* Pedir acceso a la camara trasera */
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
+            audio: false
+          });
+          video.srcObject = stream;
+          await video.play();
+
+          debugLog('Camara activa: ' + stream.getVideoTracks()[0].label);
+
+          /* Ocultar overlay, mostrar controles */
+          overlay.style.display = 'none';
+          backBtn.style.display = 'flex';
+          statusBar.style.display = 'flex';
+          scanFrame.style.display = 'flex';
+
+          /* Verificar que la escena A-Frame cargo */
+          debugLog('A-Frame scene loaded: ' + scene.hasLoaded);
+          if (!scene.hasLoaded) {
+            debugLog('Esperando que A-Frame cargue...');
+            await new Promise(r => scene.addEventListener('loaded', r, { once: true }));
+            debugLog('A-Frame cargado!');
+          }
+
+          /* Forzar canvas transparente */
+          const canvas = scene.canvas || document.querySelector('.a-canvas');
+          if (canvas) {
+            canvas.style.background = 'transparent';
+            debugLog('Canvas encontrado: ' + canvas.width + 'x' + canvas.height);
+          } else {
+            debugLog('ERROR: No se encontro el canvas');
+          }
+
+          /* Verificar modelo */
+          const model = copaEl.getObject3D('mesh');
+          debugLog('Modelo cargado: ' + (model ? 'SI (' + model.type + ')' : 'NO - esperando...'));
+
+          if (!model) {
+            await new Promise(r => copaEl.addEventListener('model-loaded', r, { once: true }));
+            debugLog('Modelo cargado ahora: SI');
+          }
+
+          /* Mostrar la copa 3D con animacion de entrada */
+          copaEl.setAttribute('visible', 'true');
+          copaEl.setAttribute('animation__enter', 'property: scale; from: 0 0 0; to: 0.25 0.25 0.25; dur: 800; easing: easeOutElastic');
+          debugLog('Copa visible=true, scale animacion iniciada');
+
+        } catch (e) {
+          console.error('Error camara:', e);
+          startBtn.textContent = 'Activar camara AR';
+          startBtn.style.pointerEvents = 'auto';
+          startBtn.style.opacity = '1';
+          showError('No se pudo acceder a la camara: ' + (e.message || e));
+        }
+      });
+    </script>
+  </body>
+</html>

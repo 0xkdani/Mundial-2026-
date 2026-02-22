@@ -1,261 +1,115 @@
-import { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Camera, Scan, Info } from 'lucide-react';
-import { CountryInfo } from './CountryInfo';
-import { countriesData } from '../data/countries';
+import { useState, useEffect } from 'react';
+import { Scan, ExternalLink, Camera, Cpu, Target, Info } from 'lucide-react';
 
 interface ARScannerProps {
   onBack: () => void;
 }
 
 export function ARScanner({ onBack }: ARScannerProps) {
-  const [isScanning, setIsScanning] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const [cameraActive, setCameraActive] = useState(false);
-  const [cameraError, setCameraError] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const streamRef = useRef<MediaStream | null>(null);
+  const [arActive, setArActive] = useState(false);
 
   useEffect(() => {
-    return () => {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
-      }
+    const handler = (e: MessageEvent) => {
+      if (e.data?.type === 'AR_BACK') setArActive(false);
     };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
   }, []);
 
-  const startCamera = async () => {
-    setCameraError(null);
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' }
-      });
-      
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        streamRef.current = stream;
-        setCameraActive(true);
-      }
-    } catch (error) {
-      console.error('Error accessing camera:', error);
-      
-      if (error instanceof DOMException) {
-        if (error.name === 'NotAllowedError') {
-          setCameraError('permission');
-        } else if (error.name === 'NotFoundError') {
-          setCameraError('notfound');
-        } else if (error.name === 'NotReadableError') {
-          setCameraError('inuse');
-        } else {
-          setCameraError('general');
-        }
-      } else {
-        setCameraError('general');
-      }
-    }
-  };
-
-  const handleScan = (countryCode: string) => {
-    setIsScanning(true);
-    setTimeout(() => {
-      setSelectedCountry(countryCode);
-      setIsScanning(false);
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
-        setCameraActive(false);
-      }
-    }, 1500);
-  };
-
-  const handleReset = () => {
-    setSelectedCountry(null);
-    setCameraActive(false);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-      streamRef.current = null;
-    }
-  };
-
-  if (selectedCountry) {
-    return <CountryInfo countryCode={selectedCountry} onBack={handleReset} />;
+  if (arActive) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black flex flex-col">
+        <div className="flex items-center gap-3 px-4 py-2 bg-black/80 border-b border-purple-900">
+          <button
+            onClick={() => setArActive(false)}
+            className="text-white text-sm font-semibold flex items-center gap-2 hover:text-purple-300 transition-colors"
+          >
+            ← Volver
+          </button>
+          <span className="text-purple-400 text-sm font-medium ml-auto">Escaner AR · Escudos</span>
+          <a href="/ar.html" target="_blank" rel="noreferrer" className="text-purple-400 hover:text-purple-200 transition-colors" title="Abrir en pestaña nueva">
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+        <iframe
+          src="/ar.html"
+          title="Escaner AR de Escudos"
+          className="flex-1 w-full border-0"
+          allow="camera; fullscreen; accelerometer; gyroscope"
+        />
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="inline-block bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2 rounded-full font-bold text-sm uppercase mb-4 border border-purple-500">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="inline-block bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2 rounded-full font-bold text-sm uppercase mb-4 border border-purple-500 tracking-widest">
             Realidad aumentada
           </div>
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight">
-            Escaner de banderas
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-3 tracking-tight">
+            Escaner de escudos
           </h2>
-          <p className="text-xl text-gray-400">
-            {cameraActive ? 'Apunta tu camara a una bandera para saber mas' : 'Activa tu camara para comenzar'}
+          <p className="text-lg text-gray-400 max-w-lg mx-auto">
+            Apunta la camara al escudo de un equipo y aparecera la Copa del Mundial en 3D sobre el.
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-slate-900 to-black rounded-3xl p-8 shadow-xl mb-8 border border-purple-900">
-          {/* Camera View */}
-          <div className="relative bg-slate-900 rounded-2xl overflow-hidden mb-6 border-2 border-purple-700" style={{ aspectRatio: '16/9' }}>
-            {!cameraActive ? (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-black">
-                {!cameraError ? (
-                  <>
-                    <Camera className="w-24 h-24 text-purple-500 mb-6" />
-                    <button
-                      onClick={startCamera}
-                      className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg border-2 border-purple-500"
-                    >
-                      Activar camara
-                    </button>
-                  </>
-                ) : (
-                  <div className="max-w-md px-6">
-                    <div className="bg-red-50 border-2 border-red-200 text-red-900 rounded-2xl p-6 mb-6">
-                      <div className="text-4xl mb-3 text-center">⚠️</div>
-                      <h3 className="text-xl font-bold mb-3 text-center">
-                        {cameraError === 'permission' && 'Permiso de camara denegado'}
-                        {cameraError === 'notfound' && 'No se encontro camara'}
-                        {cameraError === 'inuse' && 'Camara en uso'}
-                        {cameraError === 'general' && 'Error de camara'}
-                      </h3>
-                      <p className="text-center mb-4 text-sm">
-                        {cameraError === 'permission' && 'Permite el acceso a la camara en la configuracion del navegador para usar esta funcion.'}
-                        {cameraError === 'notfound' && 'No se detecto ninguna camara en tu dispositivo.'}
-                        {cameraError === 'inuse' && 'La camara esta siendo usada por otra aplicacion.'}
-                        {cameraError === 'general' && 'Ocurrio un error al acceder a la camara.'}
-                      </p>
-                      
-                      {cameraError === 'permission' && (
-                        <div className="bg-white rounded-xl p-4 mb-4 text-left">
-                          <p className="text-sm font-bold mb-2">Como habilitar la camara:</p>
-                          <ul className="text-sm space-y-1 list-disc list-inside text-slate-600">
-                            <li>Busca el icono de camara en la barra de direcciones</li>
-                            <li>Haz clic y selecciona "Permitir"</li>
-                            <li>Recarga la pagina si es necesario</li>
-                          </ul>
-                        </div>
-                      )}
-                      
-                      <button
-                        onClick={startCamera}
-                        className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-bold transition-colors"
-                      >
-                        Intentar de nuevo
-                      </button>
-                    </div>
-                    
-                    <div className="bg-blue-50 border-2 border-blue-200 text-blue-900 rounded-2xl p-6">
-                      <p className="text-center font-bold mb-2">
-                        💡 Continue without camera
-                      </p>
-                      <p className="text-center text-sm">
-                        Desplazate hacia abajo para seleccionar un pais manualmente
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Scanning overlay */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="relative w-64 h-64 border-4 border-white/50 rounded-2xl">
-                    <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-blue-500 rounded-tl-2xl"></div>
-                    <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-blue-500 rounded-tr-2xl"></div>
-                    <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-blue-500 rounded-bl-2xl"></div>
-                    <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-blue-500 rounded-br-2xl"></div>
-                    
-                    {isScanning && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-1 bg-purple-500 shadow-lg"></div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {isScanning && (
-                  <div className="absolute bottom-6 left-0 right-0 text-center">
-                    <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-full font-bold shadow-xl border-2 border-purple-500">
-                      <Scan className="w-5 h-5 animate-spin" />
-                      Escaneando...
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
+        <div className="bg-gradient-to-br from-slate-900 to-black rounded-3xl p-8 shadow-xl mb-6 border border-purple-900 text-center">
+          <div className="text-7xl mb-4 select-none" aria-hidden>🏆</div>
+          <h3 className="text-2xl font-bold text-white mb-2">Copa 3D sobre tu escudo</h3>
+          <p className="text-gray-400 mb-8 max-w-sm mx-auto">
+            Usa tu camara para detectar escudos de equipos participantes en el Mundial 2026 y ve la copa animada en realidad aumentada.
+          </p>
+          <button
+            onClick={() => setArActive(true)}
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg border-2 border-purple-500"
+          >
+            <Camera className="w-5 h-5" />
+            Iniciar escaner AR
+          </button>
+          <div className="mt-5">
+            <a href="/ar.html" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors">
+              <ExternalLink className="w-4 h-4" />
+              Abrir en pantalla completa
+            </a>
           </div>
-
-          {/* Country Selection for Demo */}
-          {cameraActive && !isScanning && (
-            <div>
-              <div className="flex items-center gap-3 bg-purple-900/50 border border-purple-700 text-white px-6 py-3 rounded-xl mb-6">
-                <Info className="w-5 h-5" />
-                <p className="font-semibold text-sm">Selecciona un pais para simular el escaneo:</p>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {Object.keys(countriesData).map((countryCode) => (
-                  <button
-                    key={countryCode}
-                    onClick={() => handleScan(countryCode)}
-                    className="bg-slate-800 hover:bg-slate-700 border-2 border-purple-700 hover:border-purple-500 rounded-xl p-4 transition-all hover-lift"
-                  >
-                    <div className="text-5xl mb-2">{countriesData[countryCode].flag}</div>
-                    <div className="text-sm font-semibold text-white">{countriesData[countryCode].name}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {/* Manual selection on error */}
-          {!cameraActive && cameraError && (
-            <div>
-              <div className="flex items-center gap-3 bg-purple-900/50 border border-purple-700 text-white px-6 py-3 rounded-xl mb-6">
-                <Info className="w-5 h-5" />
-                <p className="font-semibold text-sm">Selecciona un pais para ver informacion:</p>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {Object.keys(countriesData).map((countryCode) => (
-                  <button
-                    key={countryCode}
-                    onClick={() => handleScan(countryCode)}
-                    className="bg-slate-800 hover:bg-slate-700 border-2 border-purple-700 hover:border-purple-500 rounded-xl p-4 transition-all hover-lift"
-                  >
-                    <div className="text-5xl mb-2">{countriesData[countryCode].flag}</div>
-                    <div className="text-sm font-semibold text-white">{countriesData[countryCode].name}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
-        <div className="bg-gradient-to-br from-slate-900 to-black rounded-2xl p-8 shadow-lg border border-purple-900">
-          <h3 className="text-2xl font-bold text-white mb-4">Como funciona</h3>
+        <div className="bg-gradient-to-br from-slate-900 to-black rounded-2xl p-8 shadow-lg border border-purple-900 mb-6">
+          <h3 className="text-xl font-bold text-white mb-5 flex items-center gap-2">
+            <Info className="w-5 h-5 text-purple-400" />
+            Como funciona
+          </h3>
           <ol className="space-y-4 text-gray-300">
             <li className="flex gap-4 items-start">
-              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-400">1</span>
-              <span className="pt-1">Activa la camara de tu dispositivo</span>
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-700 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-500">1</span>
+              <span className="pt-1">Pulsa <strong className="text-white">Iniciar escaner AR</strong> y acepta el permiso de camara.</span>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-400">2</span>
-              <span className="pt-1">Apunta a una bandera o selecciona un pais</span>
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-700 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-500">2</span>
+              <span className="pt-1">Apunta la camara a un <strong className="text-white">escudo de equipo</strong> de futbol soccer.</span>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-400">3</span>
-              <span className="pt-1">Obtiene informacion instantanea del equipo y sus mejores jugadores</span>
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-700 text-white rounded-full flex items-center justify-center font-bold text-sm border border-purple-500">3</span>
+              <span className="pt-1">La <strong className="text-white">Copa del Mundial en 3D</strong> aparecera sobre el escudo y girara automaticamente.</span>
             </li>
           </ol>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { icon: <Scan className="w-6 h-6" />, title: 'MindAR', desc: 'Reconocimiento de imagenes en tiempo real' },
+            { icon: <Cpu className="w-6 h-6" />, title: 'A-Frame', desc: 'Renderizado 3D en el navegador sin instalar nada' },
+            { icon: <Target className="w-6 h-6" />, title: 'GLTF/GLB', desc: 'Modelo copa.glb cargado desde el proyecto' },
+          ].map(({ icon, title, desc }) => (
+            <div key={title} className="bg-slate-900/80 border border-purple-900/50 rounded-xl p-5 flex flex-col items-center text-center gap-2">
+              <div className="text-purple-400">{icon}</div>
+              <p className="text-white font-bold text-sm">{title}</p>
+              <p className="text-gray-400 text-xs">{desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
