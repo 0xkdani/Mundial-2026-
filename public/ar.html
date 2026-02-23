@@ -41,6 +41,11 @@
       .pulse-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
       @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 
+      #actionBar{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:20;display:none;align-items:center;gap:10px}
+      .action-btn{background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:1px solid rgba(124,58,237,.6);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px)}
+
+      #infoPanel{position:fixed;bottom:120px;left:16px;right:16px;z-index:20;display:none;background:rgba(15,23,42,.85);color:#e2e8f0;border:1px solid rgba(124,58,237,.35);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;backdrop-filter:blur(8px)}
+
       /* Marco de escaneo */
       #scanFrame{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;pointer-events:none}
       .frame-box{width:min(70vw,70vh);height:min(70vw,70vh);position:relative}
@@ -81,6 +86,15 @@
     <div id="statusBar">
       <div class="pulse-dot"></div>
       <span id="statusText">Copa 3D en pantalla</span>
+    </div>
+
+    <div id="actionBar">
+      <button id="animateBtn" class="action-btn">Animar</button>
+      <button id="infoBtn" class="action-btn">Info</button>
+    </div>
+
+    <div id="infoPanel">
+      Mueve la camara lentamente y manten el escudo bien iluminado. La copa aparece cuando el sistema reconoce la imagen.
     </div>
 
     <!-- Debug info -->
@@ -128,11 +142,17 @@
       const startBtn  = document.getElementById('startBtn');
       const backBtn   = document.getElementById('backBtn');
       const statusBar = document.getElementById('statusBar');
+      const actionBar = document.getElementById('actionBar');
+      const animateBtn = document.getElementById('animateBtn');
+      const infoBtn = document.getElementById('infoBtn');
+      const infoPanel = document.getElementById('infoPanel');
       const scanFrame = document.getElementById('scanFrame');
       const errorBox  = document.getElementById('errorBox');
       const video     = document.getElementById('cameraVideo');
       const copaEl    = document.getElementById('copaEntity');
       const scene     = document.getElementById('arScene');
+
+      const rotationAnim = 'property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 6000; easing: linear';
 
       const debugEl = document.getElementById('debugInfo');
       const debugLog = (msg) => {
@@ -160,6 +180,21 @@
         }
       });
 
+      animateBtn.addEventListener('click', () => {
+        copaEl.removeAttribute('animation__spin');
+        copaEl.setAttribute('animation__spin', 'property: rotation; from: 0 0 0; to: 0 360 0; loop: false; dur: 1200; easing: easeInOutQuad');
+      });
+
+      infoBtn.addEventListener('click', () => {
+        infoPanel.style.display = infoPanel.style.display === 'block' ? 'none' : 'block';
+      });
+
+      window.addEventListener('message', (e) => {
+        if (e.data?.type === 'AR_TEAM_INFO') {
+          infoPanel.textContent = e.data?.info || 'Escudo detectado. Informacion del equipo no disponible.';
+        }
+      });
+
       const startAR = async () => {
         if (startBtn.dataset.started === 'true') return;
         startBtn.dataset.started = 'true';
@@ -182,6 +217,7 @@
           overlay.style.display = 'none';
           backBtn.style.display = 'flex';
           statusBar.style.display = 'flex';
+          actionBar.style.display = 'flex';
           scanFrame.style.display = 'flex';
 
           /* Verificar que la escena A-Frame cargo */
@@ -214,6 +250,8 @@
           copaEl.setAttribute('visible', 'true');
           copaEl.setAttribute('animation__enter', 'property: scale; from: 0 0 0; to: 0.25 0.25 0.25; dur: 800; easing: easeOutElastic');
           debugLog('Copa visible=true, scale animacion iniciada');
+
+          infoPanel.textContent = 'Escanea un escudo para ver la informacion del equipo.';
 
         } catch (e) {
           console.error('Error camara:', e);
