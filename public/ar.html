@@ -112,8 +112,7 @@
         style="width:100%;height:100%"
       >
         <a-assets timeout="10000">
-          <a-asset-item id="copaObj" src="./models/copa.obj"></a-asset-item>
-          <a-asset-item id="copaMtl" src="./models/copa.mtl"></a-asset-item>
+          <a-asset-item id="copaModel" src="./models/CopaMexicoOficial.glb"></a-asset-item>
         </a-assets>
 
         <a-entity id="cameraRig">
@@ -123,9 +122,10 @@
         <!-- Copa 3D centrada frente a la camara -->
         <a-entity
           id="copaEntity"
-          obj-model="obj: #copaObj; mtl: #copaMtl"
-          position="0 -0.3 -2"
-          scale="0.005 0.005 0.005"
+          gltf-model="#copaModel"
+          position="0 0.3 -2"
+          scale="7 7 7"
+          rotation="0.0 0.5 0.5"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           visible="false"
         ></a-entity>
