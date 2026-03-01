@@ -6,6 +6,7 @@
     <title>Escaner AR — Copa Mundial 2026</title>
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
     <style>
       *{box-sizing:border-box;margin:0;padding:0}
@@ -13,6 +14,10 @@
 
       /* Video de camara de fondo */
       #cameraVideo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+      
+      /* Ocultar el canvas de MindAR por defecto */
+      .mindar-ui-overlay{display:none!important}
+      .mindar-ui-loading{display:none!important}
 
       /* Overlay de bienvenida */
       #overlay{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);padding:24px;text-align:center;gap:14px}
@@ -98,42 +103,53 @@
     </div>
 
     <!-- Debug info -->
-    <div id="debugInfo" style="display:none"></div>
+    <div id="debugInfo" style="display:block"></div>
 
-    <!-- Escena 3D transparente sobre el video -->
+    <!-- Escena 3D con MindAR -->
     <div id="sceneWrap">
       <a-scene
         id="arScene"
+        mindar-image="imageTargetSrc: ./targets/targets.mind; autoStart: true; uiLoading: no; uiScanning: no; uiError: no;"
         embedded
-        background="color: transparent; transparent: true"
+        color-space="sRGB"
+        renderer="colorManagement: true; physicallyCorrectLights: true; alpha: true;"
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false"
-        renderer="alpha: true; antialias: true; colorManagement: true; physicallyCorrectLights: true"
         style="width:100%;height:100%"
       >
-        <a-assets timeout="10000">
+        <a-assets timeout="15000">
           <a-asset-item id="copaModel" src="./models/CopaMexicoOficial.glb"></a-asset-item>
         </a-assets>
 
-        <a-entity id="cameraRig">
-          <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
+        <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
+
+        <!-- Target 0: Escudo de Mexico -->
+        <a-entity id="mexicoTarget" mindar-image-target="targetIndex: 0">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaEntity"
+            gltf-model="#copaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
         </a-entity>
 
-        <!-- Copa 3D centrada frente a la camara -->
+        <!-- MODELO DE PRUEBA - visible siempre en el centro -->
         <a-entity
-          id="copaEntity"
+          id="copaTest"
           gltf-model="#copaModel"
-          position="0 0.3 -2"
-          scale="7 7 7"
-          rotation="0.0 0.5 0.5"
-          animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 6000; easing: linear"
-          visible="false"
+          position="0 0 -1.5"
+          scale="0.3 0.3 0.3"
+          rotation="0 0 0"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"
         ></a-entity>
 
         <!-- Iluminacion -->
-        <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
-        <a-light type="directional" position="1 2 1" intensity="1.0" color="#ffffff"></a-light>
-        <a-light type="point" position="0 0.5 -1" intensity="0.8" color="#e9d5ff"></a-light>
+        <a-light type="ambient" color="#ffffff" intensity="0.8"></a-light>
+        <a-light type="directional" position="1 2 1" intensity="1.2" color="#ffffff"></a-light>
+        <a-light type="point" position="0 0.5 0" intensity="1.0" color="#e9d5ff"></a-light>
       </a-scene>
     </div>
 
@@ -168,11 +184,9 @@
 
       /* Boton volver */
       backBtn.addEventListener('click', () => {
-        /* Parar camara */
-        if (video.srcObject) {
-          video.srcObject.getTracks().forEach(t => t.stop());
-          video.srcObject = null;
-        }
+        /* MindAR maneja la cámara automáticamente al detener la escena */
+        debugLog('Deteniendo AR y volviendo...');
+        
         if (window.parent !== window) {
           window.parent.postMessage({ type: 'AR_BACK' }, '*');
         } else {
@@ -195,24 +209,18 @@
         }
       });
 
+      let isTracking = false;
+
       const startAR = async () => {
         if (startBtn.dataset.started === 'true') return;
         startBtn.dataset.started = 'true';
-        startBtn.textContent = 'Iniciando camara...';
+        startBtn.textContent = 'Iniciando AR...';
         startBtn.style.pointerEvents = 'none';
         startBtn.style.opacity = '0.5';
 
         try {
-          /* Pedir acceso a la camara trasera */
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
-            audio: false
-          });
-          video.srcObject = stream;
-          await video.play();
-
-          debugLog('Camara activa: ' + stream.getVideoTracks()[0].label);
-
+          debugLog('Iniciando sistema AR...');
+          
           /* Ocultar overlay, mostrar controles */
           overlay.style.display = 'none';
           backBtn.style.display = 'flex';
@@ -220,46 +228,97 @@
           actionBar.style.display = 'flex';
           scanFrame.style.display = 'flex';
 
-          /* Verificar que la escena A-Frame cargo */
-          debugLog('A-Frame scene loaded: ' + scene.hasLoaded);
+          /* Esperar que la escena cargue */
           if (!scene.hasLoaded) {
             debugLog('Esperando que A-Frame cargue...');
             await new Promise(r => scene.addEventListener('loaded', r, { once: true }));
             debugLog('A-Frame cargado!');
           }
 
+          /* MindAR se inicia automáticamente, solo esperamos a que esté listo */
+          debugLog('Esperando inicialización de MindAR...');
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          debugLog('MindAR listo');
+
+          /* Configurar eventos de tracking DESPUÉS de que todo esté listo */
+          const mexicoTarget = document.getElementById('mexicoTarget');
+          if (mexicoTarget) {
+            debugLog('Target de México encontrado, configurando eventos...');
+            
+            mexicoTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE MÉXICO DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'México - Anfitrión del Mundial 2026. ¡El Tri está listo para competir!';
+              infoPanel.style.display = 'block';
+            });
+
+            mexicoTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo perdido');
+              isTracking = false;
+              document.getElementById('statusText').textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+            });
+            
+            debugLog('Eventos configurados correctamente');
+          } else {
+            debugLog('ERROR: No se encontró el elemento mexicoTarget');
+          }
+
+          /* Agregar listeners globales al sistema MindAR */
+          scene.addEventListener('arReady', () => {
+            debugLog('MindAR: Sistema AR completamente listo');
+          });
+
+          scene.addEventListener('arError', (event) => {
+            debugLog('MindAR ERROR: ' + JSON.stringify(event.detail));
+          });
+
+          /* Listener para debugging de tracking */
+          let lastTrackingUpdate = Date.now();
+          setInterval(() => {
+            const sceneEl = document.querySelector('a-scene');
+            if (sceneEl && sceneEl.systems && sceneEl.systems['mindar-image']) {
+              const system = sceneEl.systems['mindar-image'];
+              if (system.targetFound !== undefined) {
+                const now = Date.now();
+                if (now - lastTrackingUpdate > 5000) {  // Log cada 5 segundos
+                  debugLog('MindAR activo - Buscando targets...');
+                  lastTrackingUpdate = now;
+                }
+              }
+            }
+          }, 1000);
+
           /* Forzar canvas transparente */
           const canvas = scene.canvas || document.querySelector('.a-canvas');
           if (canvas) {
             canvas.style.background = 'transparent';
-            debugLog('Canvas encontrado: ' + canvas.width + 'x' + canvas.height);
-          } else {
-            debugLog('ERROR: No se encontro el canvas');
+            debugLog('Canvas configurado');
           }
 
           /* Verificar modelo */
-          const model = copaEl.getObject3D('mesh');
-          debugLog('Modelo cargado: ' + (model ? 'SI (' + model.type + ')' : 'NO - esperando...'));
-
-          if (!model) {
-            await new Promise(r => copaEl.addEventListener('model-loaded', r, { once: true }));
-            debugLog('Modelo cargado ahora: SI');
+          const copaEntity = document.getElementById('copaEntity');
+          if (copaEntity) {
+            debugLog('Entidad de copa encontrada');
+          } else {
+            debugLog('ERROR: No se encontró copaEntity');
           }
 
-          /* Mostrar la copa 3D con animacion de entrada */
-          copaEl.setAttribute('visible', 'true');
-          copaEl.setAttribute('animation__enter', 'property: scale; from: 0 0 0; to: 0.25 0.25 0.25; dur: 800; easing: easeOutElastic');
-          debugLog('Copa visible=true, scale animacion iniciada');
-
-          infoPanel.textContent = 'Escanea un escudo para ver la informacion del equipo.';
+          document.getElementById('statusText').textContent = 'Buscando escudo...';
+          infoPanel.textContent = 'Apunta la cámara al escudo de México para ver el modelo 3D.';
+          infoPanel.style.display = 'block';
+          
+          debugLog('=== SISTEMA AR LISTO ===');
 
         } catch (e) {
-          console.error('Error camara:', e);
+          console.error('Error AR:', e);
           startBtn.dataset.started = 'false';
-          startBtn.textContent = 'Activar camara AR';
+          startBtn.textContent = 'Activar cámara AR';
           startBtn.style.pointerEvents = 'auto';
           startBtn.style.opacity = '1';
-          showError('No se pudo acceder a la camara: ' + (e.message || e));
+          showError('Error al iniciar AR: ' + (e.message || e));
+          debugLog('ERROR: ' + e.message);
         }
       };
 

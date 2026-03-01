@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compilador de Targets - MindAR</title>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image.prod.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 40px;
+      max-width: 700px;
+      width: 100%;
+    }
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .upload-zone {
+      border: 3px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 25px;
+    }
+    .upload-zone:hover {
+      border-color: #667eea;
+      background: #f1f5f9;
+    }
+    .upload-zone.drag-over {
+      border-color: #667eea;
+      background: #e0e7ff;
+    }
+    .file-input {
+      display: none;
+    }
+    .upload-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    .upload-text {
+      color: #475569;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .upload-hint {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    .preview-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+    .preview-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .preview-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .preview-item .remove-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(239, 68, 68, 0.9);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .preview-item .index {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      background: rgba(102, 126, 234, 0.9);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .compile-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin-bottom: 15px;
+    }
+    .compile-btn:hover:not(:disabled) {
+      transform: scale(1.02);
+    }
+    .compile-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .progress-container {
+      display: none;
+      margin-bottom: 20px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background: #e2e8f0;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      width: 0%;
+      transition: width 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .status {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #475569;
+      margin-top: 15px;
+      display: none;
+    }
+    .status.success {
+      background: #dcfce7;
+      color: #166534;
+      display: block;
+    }
+    .status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      display: block;
+    }
+    .download-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #667eea;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .instructions {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+    .instructions h3 {
+      color: #92400e;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .instructions ol {
+      margin-left: 20px;
+      color: #78350f;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Compilador de Targets</h1>
+    <p class="subtitle">Convierte imágenes de escudos en targets para reconocimiento AR</p>
+
+    <div class="instructions">
+      <h3>📋 Instrucciones:</h3>
+      <ol>
+        <li>Agrega las imágenes de los escudos (PNG/JPG)</li>
+        <li>Haz clic en "Compilar Targets"</li>
+        <li>Descarga el archivo <strong>targets.mind</strong></li>
+        <li>Colócalo en la carpeta <strong>public/targets/</strong></li>
+      </ol>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" class="file-input" multiple accept="image/*">
+      <div class="upload-icon">📁</div>
+      <div class="upload-text">Arrastra imágenes aquí o haz clic para seleccionar</div>
+      <div class="upload-hint">Soporta PNG, JPG - Máximo recomendado: 10 imágenes</div>
+    </div>
+
+    <div class="preview-container" id="previewContainer"></div>
+
+    <button class="compile-btn" id="compileBtn" disabled>
+      🚀 Compilar Targets
+    </button>
+
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill">0%</div>
+      </div>
+    </div>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const compileBtn = document.getElementById('compileBtn');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const status = document.getElementById('status');
+
+    let selectedFiles = [];
+
+    // Drag and drop
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('drag-over');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+      uploadZone.classList.remove('drag-over');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('drag-over');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    uploadZone.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      const imageFiles = Array.from(files).filter(file => 
+        file.type.startsWith('image/')
+      );
+
+      if (imageFiles.length === 0) {
+        alert('Por favor selecciona archivos de imagen válidos');
+        return;
+      }
+
+      selectedFiles = [...selectedFiles, ...imageFiles];
+      updatePreview();
+    }
+
+    function updatePreview() {
+      previewContainer.innerHTML = '';
+      
+      selectedFiles.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const div = document.createElement('div');
+          div.className = 'preview-item';
+          div.innerHTML = `
+            <img src="${e.target.result}" alt="Target ${index}">
+            <button class="remove-btn" onclick="removeFile(${index})">×</button>
+            <div class="index">Target ${index}</div>
+          `;
+          previewContainer.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      compileBtn.disabled = selectedFiles.length === 0;
+    }
+
+    window.removeFile = function(index) {
+      selectedFiles.splice(index, 1);
+      updatePreview();
+    };
+
+    compileBtn.addEventListener('click', async () => {
+      if (selectedFiles.length === 0) return;
+
+      compileBtn.disabled = true;
+      progressContainer.style.display = 'block';
+      status.className = 'status';
+      status.style.display = 'none';
+
+      try {
+        // Leer imágenes
+        const images = [];
+        for (let i = 0; i < selectedFiles.length; i++) {
+          const img = await loadImage(selectedFiles[i]);
+          images.push(img);
+          updateProgress(((i + 1) / selectedFiles.length) * 50, `Cargando imagen ${i + 1}/${selectedFiles.length}`);
+        }
+
+        updateProgress(60, 'Compilando targets...');
+
+        // Compilar con MindAR
+        const compiler = new window.MINDAR.IMAGE.Compiler();
+        const dataList = await compiler.compileImageTargets(images, (progress) => {
+          updateProgress(60 + (progress * 40), 'Procesando...');
+        });
+
+        // Crear archivo para descargar
+        const exportedBuffer = await compiler.exportData();
+        const blob = new Blob([exportedBuffer]);
+        const url = URL.createObjectURL(blob);
+
+        updateProgress(100, '¡Completado!');
+
+        status.className = 'status success';
+        status.innerHTML = `
+          ✅ ¡Targets compilados exitosamente!<br>
+          <strong>${selectedFiles.length}</strong> imagen(es) procesada(s)<br>
+          <a href="${url}" download="targets.mind" class="download-link">
+            💾 Descargar targets.mind
+          </a>
+        `;
+
+        // Auto-descargar
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'targets.mind';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+      } catch (error) {
+        console.error('Error:', error);
+        status.className = 'status error';
+        status.textContent = '❌ Error al compilar: ' + error.message;
+      } finally {
+        compileBtn.disabled = false;
+        setTimeout(() => {
+          progressContainer.style.display = 'none';
+          updateProgress(0, '');
+        }, 2000);
+      }
+    });
+
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    function updateProgress(percent, text) {
+      progressFill.style.width = percent + '%';
+      progressFill.textContent = text || Math.round(percent) + '%';
+    }
+  </script>
+</body>
+</html>
