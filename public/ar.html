@@ -37,7 +37,7 @@
       a-scene canvas,.a-canvas{background:transparent!important}
 
       /* Debug info */
-      #debugInfo{position:fixed;top:50px;right:10px;z-index:50;background:rgba(0,0,0,.8);color:#4ade80;font-family:monospace;font-size:12px;padding:10px;border-radius:8px;max-width:280px;line-height:1.6;border:1px solid #4ade80}
+      #debugInfo{display:none}
 
       /* Controles AR */
       #backBtn{position:fixed;top:14px;left:14px;z-index:20;display:none;align-items:center;gap:6px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
@@ -61,6 +61,14 @@
       .corner.br{bottom:0;right:0;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 4px 0}
       .scan-line{position:absolute;left:4px;right:4px;height:2px;background:linear-gradient(90deg,transparent,#a78bfa,transparent);animation:scanAnim 2s ease-in-out infinite}
       @keyframes scanAnim{0%{top:4px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
+      /* Video modal */
+      #videoModal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7)}
+      .video-modal-content{width:min(920px,94vw);background:#0b1020;border-radius:12px;padding:12px;box-shadow:0 8px 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:8px}
+      .video-area{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:8px}
+      .video-area video, .video-area iframe{width:100%;height:100%;object-fit:cover;border:0}
+      .filters-row{display:flex;gap:8px;align-items:center}
+      .filters-row label{color:#e6e8eb;font-size:13px}
+      .close-video-btn{margin-left:auto;padding:8px 12px;border-radius:8px;background:#a78bfa;color:#111;border:none;cursor:pointer}
     </style>
   </head>
   <body>
@@ -182,6 +190,125 @@
         errorBox.style.display = 'block';
       };
 
+      // --- Video button UI (appears when a target is detected) ---
+      const videoBtnContainer = document.createElement('div');
+      videoBtnContainer.id = 'videoBtnContainer';
+      videoBtnContainer.style.position = 'fixed';
+      videoBtnContainer.style.bottom = '140px';
+      videoBtnContainer.style.left = '50%';
+      videoBtnContainer.style.transform = 'translateX(-50%)';
+      videoBtnContainer.style.zIndex = '30';
+      videoBtnContainer.style.display = 'none';
+      document.body.appendChild(videoBtnContainer);
+
+      const videoBtn = document.createElement('button');
+      videoBtn.id = 'videoBtn';
+      videoBtn.textContent = 'Ver video';
+      videoBtn.className = 'action-btn';
+      videoBtn.style.padding = '12px 24px';
+      videoBtnContainer.appendChild(videoBtn);
+
+      // Mapeo de videos por clave de target (extiende según necesites)
+      const videosPorSeleccion = {
+        mexico: '/Videos/Video%20Mexico.mp4'
+        // agrega otras entradas como: argentina: '/Videos/Video%20Argentina.mp4'
+      };
+
+      // Modal y reproductor embebido (soporta mp4 local o YouTube iframe)
+      const videoModal = document.createElement('div');
+      videoModal.id = 'videoModal';
+      videoModal.style.display = 'none';
+      videoModal.innerHTML = `
+        <div class="video-modal-content">
+          <div style="display:flex;align-items:center;gap:8px">
+            <strong style="color:#fff">Reproductor</strong>
+            <button id="closeVideoModal" class="close-video-btn">Cerrar</button>
+          </div>
+          <div class="video-area" id="videoArea"></div>
+          <div class="filters-row">
+            <label>Grayscale <input type="checkbox" id="fGray"></label>
+            <label>Sepia <input type="checkbox" id="fSepia"></label>
+            <label>Invert <input type="checkbox" id="fInvert"></label>
+            <label>Brillo <input type="range" id="fBrightness" min="50" max="150" value="100"></label>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(videoModal);
+
+      const videoArea = videoModal.querySelector('#videoArea');
+      const closeVideoModal = videoModal.querySelector('#closeVideoModal');
+      const fGray = videoModal.querySelector('#fGray');
+      const fSepia = videoModal.querySelector('#fSepia');
+      const fInvert = videoModal.querySelector('#fInvert');
+      const fBrightness = videoModal.querySelector('#fBrightness');
+
+      function aplicarFiltros() {
+        const parts = [];
+        if (fGray.checked) parts.push('grayscale(100%)');
+        if (fSepia.checked) parts.push('sepia(60%)');
+        if (fInvert.checked) parts.push('invert(100%)');
+        parts.push(`brightness(${fBrightness.value}%)`);
+        videoArea.style.filter = parts.join(' ');
+      }
+
+      fGray.addEventListener('change', aplicarFiltros);
+      fSepia.addEventListener('change', aplicarFiltros);
+      fInvert.addEventListener('change', aplicarFiltros);
+      fBrightness.addEventListener('input', aplicarFiltros);
+
+      function abrirModalVideo(url) {
+        // Limpiar area
+        videoArea.innerHTML = '';
+        // Elegir entre mp4 local o youtube
+        if (url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.ogg')) {
+          const v = document.createElement('video');
+          v.src = url;
+          v.controls = true;
+          v.autoplay = true;
+          v.playsInline = true;
+          videoArea.appendChild(v);
+        } else {
+          // asumir YouTube u otras iframes
+          const iframe = document.createElement('iframe');
+          iframe.src = url.replace('watch?v=', 'embed/');
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          videoArea.appendChild(iframe);
+        }
+        aplicarFiltros();
+        videoModal.style.display = 'flex';
+      }
+
+      function cerrarModalVideo() {
+        // detener cualquier video
+        const vid = videoArea.querySelector('video');
+        if (vid) { vid.pause(); vid.src = ''; }
+        videoArea.innerHTML = '';
+        videoModal.style.display = 'none';
+      }
+
+      closeVideoModal.addEventListener('click', cerrarModalVideo);
+
+      // Función para mostrar el botón y configurar la acción según la selección
+      function mostrarBotonVideo(clave) {
+        const url = videosPorSeleccion[clave];
+        if (!url) return;
+        videoBtnContainer.style.display = 'block';
+        // Si estamos embebidos en un iframe, pedir al padre que abra el modal full-screen
+        if (window.parent && window.parent !== window) {
+          videoBtn.onclick = () => {
+            window.parent.postMessage({ type: 'AR_OPEN_VIDEO', url }, '*');
+          };
+        } else {
+          videoBtn.onclick = () => abrirModalVideo(url);
+        }
+      }
+
+      function ocultarBotonVideo() {
+        videoBtnContainer.style.display = 'none';
+        videoBtn.onclick = null;
+      }
+
       /* Boton volver */
       backBtn.addEventListener('click', () => {
         /* MindAR maneja la cámara automáticamente al detener la escena */
@@ -194,9 +321,19 @@
         }
       });
 
+      let animando = true;
       animateBtn.addEventListener('click', () => {
-        copaEl.removeAttribute('animation__spin');
-        copaEl.setAttribute('animation__spin', 'property: rotation; from: 0 0 0; to: 0 360 0; loop: false; dur: 1200; easing: easeInOutQuad');
+        if (animando) {
+          // Detener animación
+          copaEl.removeAttribute('animation');
+          copaEl.removeAttribute('animation__spin');
+          animateBtn.textContent = 'Reanudar animación';
+        } else {
+          // Reanudar animación a la velocidad original (6000ms)
+          copaEl.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear');
+          animateBtn.textContent = 'Detener animación';
+        }
+        animando = !animando;
       });
 
       infoBtn.addEventListener('click', () => {
@@ -251,6 +388,8 @@
               document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
               infoPanel.textContent = 'México - Anfitrión del Mundial 2026. ¡El Tri está listo para competir!';
               infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('mexico'); } catch (e) { console.warn(e); }
             });
 
             mexicoTarget.addEventListener('targetLost', (event) => {
@@ -258,6 +397,8 @@
               isTracking = false;
               document.getElementById('statusText').textContent = 'Buscando escudo...';
               infoPanel.style.display = 'none';
+              // Ocultar botón de video
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
             });
             
             debugLog('Eventos configurados correctamente');
