@@ -1,59 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Play, Filter, X } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-interface Video {
-  id: number;
-  title: string;
-  thumbnail: string;
-  duration: string;
-  category: 'highlights' | 'interviews' | 'training' | 'fans';
-}
-
-const videos: Video[] = [
-  {
-    id: 1,
-    title: "Mejores Goles del Mundial 2022",
-    thumbnail: "https://images.unsplash.com/photo-1671069833604-34a8b4d9a812?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMGN1cCUyMGZvb3RiYWxsJTIwY2VsZWJyYXRpb258ZW58MXx8fHwxNzcwNTM0OTc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    duration: "12:34",
-    category: "highlights"
-  },
-  {
-    id: 2,
-    title: "Estadios del Mundial 2026",
-    thumbnail: "https://images.unsplash.com/photo-1549923015-badf41b04831?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjBzdGFkaXVtJTIwY3Jvd2R8ZW58MXx8fHwxNzcwNTI3NDE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    duration: "8:45",
-    category: "highlights"
-  },
-  {
-    id: 3,
-    title: "Entrenamiento Selecciones",
-    thumbnail: "https://images.unsplash.com/photo-1596740327709-1645e2562a37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjBwbGF5ZXJzJTIwdHJhaW5pbmd8ZW58MXx8fHwxNzcwNTM0OTc2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    duration: "15:22",
-    category: "training"
-  },
-  {
-    id: 4,
-    title: "Aficionados en el Mundial",
-    thumbnail: "https://images.unsplash.com/photo-1626107117572-c73943b292c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMGZhbnMlMjBjZWxlYnJhdGluZ3xlbnwxfHx8fDE3NzA0NzU3NDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    duration: "6:18",
-    category: "fans"
-  },
-  {
-    id: 5,
-    title: "Resumen Final Argentina vs Francia",
-    thumbnail: "https://images.unsplash.com/photo-1671069833604-34a8b4d9a812?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMGN1cCUyMGZvb3RiYWxsJTIwY2VsZWJyYXRpb258ZW58MXx8fHwxNzcwNTM0OTc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    duration: "18:56",
-    category: "highlights"
-  },
-  {
-    id: 6,
-    title: "Mejores Atajadas del Mundial",
-    thumbnail: "https://images.unsplash.com/photo-1549923015-badf41b04831?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjBzdGFkaXVtJTIwY3Jvd2R8ZW58MXx8fHwxNzcwNTI3NDE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    duration: "10:12",
-    category: "highlights"
-  }
-];
+import { videos } from '../data/videos';
 
 type FilterType = 'none' | 'blur' | 'pixelated' | 'thermal' | 'color-adjust' | 'custom';
 
@@ -223,7 +171,18 @@ export function Videos() {
               className="bg-black/60 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-500 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all group cursor-pointer"
             >
               <div className="relative aspect-video overflow-hidden bg-black">
-                {useCanvasFilter ? (
+                {video.videoUrl ? (
+                  <video
+                    controls
+                    preload="metadata"
+                    className="w-full h-full object-cover"
+                    poster={video.thumbnail}
+                    style={{ filter: getFilterStyle(selectedFilter) }}
+                  >
+                    <source src={video.videoUrl} type="video/mp4" />
+                    Tu navegador no soporta la reproduccion de video.
+                  </video>
+                ) : useCanvasFilter ? (
                   <canvas
                     ref={(el) => {
                       canvasRefs.current[video.id] = el;
@@ -239,12 +198,13 @@ export function Videos() {
                   />
                 )}
                 
-                {/* Play Overlay */}
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                    <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                {!video.videoUrl && (
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                      <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Duration Badge */}
                 <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-white text-sm font-bold">

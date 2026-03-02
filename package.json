@@ -55,7 +55,9 @@
             "vite": "6.3.5"
       },
       "scripts": {
+            "predev": "node scripts/generate-videos-data.mjs",
             "dev": "vite",
+            "prebuild": "node scripts/generate-videos-data.mjs",
             "build": "vite build"
       }
 }
