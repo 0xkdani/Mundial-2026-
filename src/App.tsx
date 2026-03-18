@@ -6,6 +6,7 @@ import { InfoSection } from './components/InfoSection';
 import { MatchResults } from './components/MatchResults';
 import { Quiz } from './components/Quiz';
 import { Videos } from './components/Videos';
+import { HelpModal } from './components/HelpModal';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<'home' | 'ar' | 'matches' | 'quiz' | 'videos'>('home');
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-black to-slate-900">
       <Navigation activeSection={activeSection} onNavigate={setActiveSection} />
+      <HelpModal />
       
       <div className="pt-20">
         {activeSection === 'home' && (

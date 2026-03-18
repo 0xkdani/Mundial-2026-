@@ -199,6 +199,10 @@ export function Videos() {
             if ((v as any).team) return (v as any).team;
             const src = v.videoUrl ?? v.title ?? '';
             if (/mexico/i.test(src) || /méxico/i.test(src)) return 'México';
+            // Mapeo especial para USA
+            if (/usa/i.test(src) || /estados unidos/i.test(src)) return 'Estados Unidos';
+            // Mapeo especial para Canadá
+            if (/canada/i.test(src) || /canadá/i.test(src)) return 'Canadá';
             // intentar matchear con cualquier team del listado
             for (const t of teams) {
               const re = new RegExp(t.replace(/[-/\^$*+?.()|[\]{}]/g, '\\$&'), 'i');
