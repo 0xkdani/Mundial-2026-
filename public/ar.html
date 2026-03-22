@@ -126,17 +126,677 @@
         style="width:100%;height:100%"
       >
         <a-assets timeout="15000">
+          <a-asset-item id="copaAlemaniaModel" src="./models/CopaAlemania.glb"></a-asset-item>
+          <a-asset-item id="copaArabiaModel" src="./models/Arabia Saudita.glb"></a-asset-item>
+          <a-asset-item id="copaArgeliaModel" src="./models/CopaArgelia.glb"></a-asset-item>
+          <a-asset-item id="copaArgentinaModel" src="./models/CopaArgentina.glb"></a-asset-item>
+          <a-asset-item id="copaAustraliaModel" src="./models/CopaAustralia.glb"></a-asset-item>
+          <a-asset-item id="copaAustriaModel" src="./models/CopaAustria.glb"></a-asset-item>
+          <a-asset-item id="copaBelgicaModel" src="./models/CopaBelgica.glb"></a-asset-item>
+          <a-asset-item id="copaBrasilModel" src="./models/CopaBrasil.glb"></a-asset-item>
+          <a-asset-item id="copaCamerunModel" src="./models/CopaCamerun.glb"></a-asset-item>
+          <a-asset-item id="copaCanadaModel" src="./models/CopaCanada.glb"></a-asset-item>
+          <a-asset-item id="copaChileModel" src="./models/CopaChile.glb"></a-asset-item>
+          <a-asset-item id="copaColombiaModel" src="./models/CopaColombia.glb"></a-asset-item>
+          <a-asset-item id="copaCoreaModel" src="./models/CopaCorea.glb"></a-asset-item>
+          <a-asset-item id="copaCostaMarfilModel" src="./models/CopaCostaDeMarfil.glb"></a-asset-item>
+          <a-asset-item id="copaCostaRicaModel" src="./models/CopaCostaRica.glb"></a-asset-item>
+          <a-asset-item id="copaCroaciaModel" src="./models/CopaCroacia.glb"></a-asset-item>
+          <a-asset-item id="copaDinamarcaModel" src="./models/CopaDinamarca.glb"></a-asset-item>
+          <a-asset-item id="copaEcuadorModel" src="./models/CopaEcuador.glb"></a-asset-item>
+          <a-asset-item id="copaEgiptoModel" src="./models/CopaEgipto.glb"></a-asset-item>
+          <a-asset-item id="copaEmiratosModel" src="./models/EmiratosArabes.glb"></a-asset-item>
+          <a-asset-item id="copaEspanaModel" src="./models/CopaEspaña.glb"></a-asset-item>
+          <a-asset-item id="copaFranciaModel" src="./models/CopaFrancia.glb"></a-asset-item>
+          <a-asset-item id="copaGhanaModel" src="./models/CopaGhana.glb"></a-asset-item>
+          <a-asset-item id="copaInglaterraModel" src="./models/CopaInglaterra.glb"></a-asset-item>
+          <a-asset-item id="copaIrakModel" src="./models/CopaIrak.glb"></a-asset-item>
+          <a-asset-item id="copaIranModel" src="./models/CopaIran.glb"></a-asset-item>
+          <a-asset-item id="copaItaliaModel" src="./models/CopaItalia.glb"></a-asset-item>
+          <a-asset-item id="copaJamaicaModel" src="./models/CopaJamaica.glb"></a-asset-item>
+          <a-asset-item id="copaJaponModel" src="./models/CopaJapon.glb"></a-asset-item>
+          <a-asset-item id="copaMarruecosModel" src="./models/CopaMarruecos.glb"></a-asset-item>
           <a-asset-item id="copaModel" src="./models/CopaMexicoOficial.glb"></a-asset-item>
+          <a-asset-item id="copaNigeriaModel" src="./models/CopaNigeria.glb"></a-asset-item>
+          <a-asset-item id="copaNuevaZelandaModel" src="./models/CopaNuevaZelanda.glb"></a-asset-item>
+          <a-asset-item id="copaPaisesBajosModel" src="./models/CopaPaisesBajos.glb"></a-asset-item>
+          <a-asset-item id="copaPanamaModel" src="./models/CopaPanama.glb"></a-asset-item>
+          <a-asset-item id="copaPeruModel" src="./models/CopaPeru.glb"></a-asset-item>
+          <a-asset-item id="copaPoloniaModel" src="./models/CopaPolonia.glb"></a-asset-item>
+          <a-asset-item id="copaPortugalModel" src="./models/CopaPortugal.glb"></a-asset-item>
+          <a-asset-item id="copaQatarModel" src="./models/Qatar.glb"></a-asset-item>
+          <a-asset-item id="copaSenegalModel" src="./models/CopaSenegal.glb"></a-asset-item>
+          <a-asset-item id="copaSerbiaModel" src="./models/CopaSerbia.glb"></a-asset-item>
+          <a-asset-item id="copaSueciaModel" src="./models/CopaSuecia.glb"></a-asset-item>
+          <a-asset-item id="copaSuizaModel" src="./models/CopaSuiza.glb"></a-asset-item>
+          <a-asset-item id="copaTunezModel" src="./models/CopaTunez.glb"></a-asset-item>
+          <a-asset-item id="copaTurquiaModel" src="./models/CopaTurquia.glb"></a-asset-item>
+          <a-asset-item id="copaUcraniaModel" src="./models/CopaUcrania.glb"></a-asset-item>
+          <a-asset-item id="copaUruguayModel" src="./models/CopaUruguay.glb"></a-asset-item>
+          <a-asset-item id="copaUSAModel" src="./models/CopaUSA.glb"></a-asset-item>
+
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
 
-        <!-- Target 0: Escudo de Mexico -->
-        <a-entity id="mexicoTarget" mindar-image-target="targetIndex: 0">
+
+        <!-- Target 0: Escudo de Alemania -->
+        <a-entity id="alemaniaTarget" mindar-image-target="targetIndex: 0">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaAlemaniaEntity"
+            gltf-model="#copaAlemaniaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 1: Escudo de Arabia Saudita -->
+        <a-entity id="arabiaTarget" mindar-image-target="targetIndex: 1">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaArabiaEntity"
+            gltf-model="#copaArabiaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 2: Escudo de Argelia -->
+        <a-entity id="argeliaTarget" mindar-image-target="targetIndex: 2">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaArgeliaEntity"
+            gltf-model="#copaArgeliaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 3: Escudo de Argentina -->
+        <a-entity id="argentinaTarget" mindar-image-target="targetIndex: 3">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaArgentinaEntity"
+            gltf-model="#copaArgentinaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 4: Escudo de Australia -->
+        <a-entity id="australiaTarget" mindar-image-target="targetIndex: 4">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaAustraliaEntity"
+            gltf-model="#copaAustraliaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 5: Escudo de Austria -->
+        <a-entity id="austriaTarget" mindar-image-target="targetIndex: 5">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaAustriaEntity"
+            gltf-model="#copaAustriaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 6: Escudo de Belgica -->
+        <a-entity id="belgicaTarget" mindar-image-target="targetIndex: 6">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaBelgicaEntity"
+            gltf-model="#copaBelgicaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 7: Escudo de Brasil -->
+        <a-entity id="brasilTarget" mindar-image-target="targetIndex: 7">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaBrasilEntity"
+            gltf-model="#copaBrasilModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 8: Escudo de Camerun -->
+        <a-entity id="camerunTarget" mindar-image-target="targetIndex: 8">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaCamerunEntity"
+            gltf-model="#copaCamerunModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 9: Escudo de Canada -->
+        <a-entity id="canadaTarget" mindar-image-target="targetIndex: 9">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaCanadaEntity"
+            gltf-model="#copaCanadaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 10: Escudo de Chile -->
+        <a-entity id="chileTarget" mindar-image-target="targetIndex: 10">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaChileEntity"
+            gltf-model="#copaChileModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 11: Escudo de Colombia -->
+        <a-entity id="colombiaTarget" mindar-image-target="targetIndex: 11">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaColombiaEntity"
+            gltf-model="#copaColombiaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 12: Escudo de Corea del Sur -->
+        <a-entity id="coreaTarget" mindar-image-target="targetIndex: 12">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaCoreaEntity"
+            gltf-model="#copaCoreaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 13: Escudo de CostaDeMarfil -->
+        <a-entity id="costaMarfilTarget" mindar-image-target="targetIndex: 13">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaCostaMarfilEntity"
+            gltf-model="#copaCostaMarfilModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 14: Escudo de Costa Rica -->
+        <a-entity id="costaRicaTarget" mindar-image-target="targetIndex: 14">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaCostaRicaEntity"
+            gltf-model="#copaCostaRicaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 15: Escudo de Croacia -->
+        <a-entity id="croaciaTarget" mindar-image-target="targetIndex: 15">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaCroaciaEntity"
+            gltf-model="#copaCroaciaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 16: Escudo de Dinamarca -->
+        <a-entity id="dinamarcaTarget" mindar-image-target="targetIndex: 16">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaDinamarcaEntity"
+            gltf-model="#copaDinamarcaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 17: Escudo de Ecuador -->
+        <a-entity id="ecuadorTarget" mindar-image-target="targetIndex: 17">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaEcuadorEntity"
+            gltf-model="#copaEcuadorModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 18: Escudo de Egipto -->
+        <a-entity id="egiptoTarget" mindar-image-target="targetIndex: 18">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaEgiptoEntity"
+            gltf-model="#copaEgiptoModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 19: Escudo de Emiratos Arabes Unidos -->
+        <a-entity id="emiratosTarget" mindar-image-target="targetIndex: 19">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaEmiratosEntity"
+            gltf-model="#copaEmiratosModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 20: Escudo de España -->
+        <a-entity id="espanaTarget" mindar-image-target="targetIndex: 20">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaEspanaEntity"
+            gltf-model="#copaEspanaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 21: Escudo de Francia -->
+        <a-entity id="franciaTarget" mindar-image-target="targetIndex: 21">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaFranciaEntity"
+            gltf-model="#copaFranciaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 22: Escudo de Ghana -->
+        <a-entity id="ghanaTarget" mindar-image-target="targetIndex: 22">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaGhanaEntity"
+            gltf-model="#copaGhanaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 23: Escudo de Inglaterra -->
+        <a-entity id="inglaterraTarget" mindar-image-target="targetIndex: 23">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaInglaterraEntity"
+            gltf-model="#copaInglaterraModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 24: Escudo de Irak -->
+        <a-entity id="irakTarget" mindar-image-target="targetIndex: 24">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaIrakEntity"
+            gltf-model="#copaIrakModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 25: Escudo de Iran -->
+        <a-entity id="iranTarget" mindar-image-target="targetIndex: 25">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaIranEntity"
+            gltf-model="#copaIranModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 26: Escudo de Italia -->
+        <a-entity id="italiaTarget" mindar-image-target="targetIndex: 26">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaItaliaEntity"
+            gltf-model="#copaItaliaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 27: Escudo de Jamaica -->
+        <a-entity id="jamaicaTarget" mindar-image-target="targetIndex: 27">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaJamaicaEntity"
+            gltf-model="#copaJamaicaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 28: Escudo de Japon -->
+        <a-entity id="japonTarget" mindar-image-target="targetIndex: 28">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaJaponEntity"
+            gltf-model="#copaJaponModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 29: Escudo de Marruecos -->
+        <a-entity id="marruecosTarget" mindar-image-target="targetIndex: 29">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaMarruecosEntity"
+            gltf-model="#copaMarruecosModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+         <!-- Target 30: Escudo de Mexico -->
+        <a-entity id="mexicoTarget" mindar-image-target="targetIndex: 30">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaEntity"
             gltf-model="#copaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 31: Escudo de Nigeria -->
+        <a-entity id="nigeriaTarget" mindar-image-target="targetIndex: 31">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaNigeriaEntity"
+            gltf-model="#copaNigeriaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 32: Escudo de Nueva Zelanda -->
+        <a-entity id="nuevaZelandaTarget" mindar-image-target="targetIndex: 32">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaNuevaZelandaEntity"
+            gltf-model="#copaNuevaZelandaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 33: Escudo de Paises bajos -->
+        <a-entity id="paisesBajosTarget" mindar-image-target="targetIndex: 33">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaPaisesBajosEntity"
+            gltf-model="#copaPaisesBajosModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 34: Escudo de Panama -->
+        <a-entity id="panamaTarget" mindar-image-target="targetIndex: 34">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaPanamaEntity"
+            gltf-model="#copaPanamaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 35: Escudo de Peru -->
+        <a-entity id="peruTarget" mindar-image-target="targetIndex: 35">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaPeruEntity"
+            gltf-model="#copaPeruModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 36: Escudo de Polonia -->
+        <a-entity id="poloniaTarget" mindar-image-target="targetIndex: 36">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaPoloniaEntity"
+            gltf-model="#copaPoloniaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 37: Escudo de Portugal -->
+        <a-entity id="portugalTarget" mindar-image-target="targetIndex: 37">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaPortugalEntity"
+            gltf-model="#copaPortugalModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 38: Escudo de Qatar -->
+        <a-entity id="qatarTarget" mindar-image-target="targetIndex: 38">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaQatarEntity"
+            gltf-model="#copaQatarModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 39: Escudo de Senegal -->
+        <a-entity id="senegalTarget" mindar-image-target="targetIndex: 39">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaSenegalEntity"
+            gltf-model="#copaSenegalModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 40: Escudo de Serbia -->
+        <a-entity id="serbiaTarget" mindar-image-target="targetIndex: 40">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaSerbiaEntity"
+            gltf-model="#copaSerbiaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 41: Escudo de Suecia -->
+        <a-entity id="sueciaTarget" mindar-image-target="targetIndex: 41">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaSueciaEntity"
+            gltf-model="#copaSueciaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 43: Escudo de Suiza -->
+        <a-entity id="suizaTarget" mindar-image-target="targetIndex: 42">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaSuizaEntity"
+            gltf-model="#copaSuizaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 44: Escudo de Tunez -->
+        <a-entity id="tunezTarget" mindar-image-target="targetIndex: 43">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaTunezEntity"
+            gltf-model="#copaTunezModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 45: Escudo de Turquia -->
+        <a-entity id="turquiaTarget" mindar-image-target="targetIndex: 44">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaTurquiaEntity"
+            gltf-model="#copaTurquiaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 46: Escudo de Ucrania -->
+        <a-entity id="ucraniaTarget" mindar-image-target="targetIndex: 45">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaUcraniaEntity"
+            gltf-model="#copaUcraniaModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 47: Escudo de Uruguay -->
+        <a-entity id="uruguayTarget" mindar-image-target="targetIndex: 46">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaUruguayEntity"
+            gltf-model="#copaUruguayModel"
+            position="0 0.25 0"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
+          ></a-entity>
+        </a-entity>
+
+        <!-- Target 48: Escudo de USA -->
+        <a-entity id="usaTarget" mindar-image-target="targetIndex: 47">
+          <!-- Copa 3D que aparece sobre el escudo -->
+          <a-entity
+            id="copaUSAEntity"
+            gltf-model="#copaUSAModel"
             position="0 0.25 0"
             scale="0.5 0.5 0.5"
             rotation="0 0 0"
