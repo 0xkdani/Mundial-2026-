@@ -36,6 +36,26 @@
       a-scene{background:transparent!important}
       a-scene canvas,.a-canvas{background:transparent!important}
 
+      /* Camera effect: ciclo de color tipo "luces/fuegos artificiales" */
+      #cameraVideo.effect-on{
+        animation: videoColorCycle 4s linear infinite;
+        filter:hue-rotate(0deg) saturate(1.3) contrast(1.05) brightness(1.05);
+      }
+
+      /* También aplicar el efecto a toda la escena AR cuando esté activo */
+      body.ar-effect-on #sceneWrap{
+        animation: videoColorCycle 4s linear infinite;
+        filter:hue-rotate(0deg) saturate(1.3) contrast(1.05) brightness(1.05);
+      }
+
+      @keyframes videoColorCycle{
+        0%{filter:hue-rotate(0deg) saturate(1.3) contrast(1.05) brightness(1.05);}
+        25%{filter:hue-rotate(90deg) saturate(1.6) contrast(1.1) brightness(1.08);}
+        50%{filter:hue-rotate(180deg) saturate(1.8) contrast(1.15) brightness(1.1);}
+        75%{filter:hue-rotate(270deg) saturate(1.6) contrast(1.1) brightness(1.08);}
+        100%{filter:hue-rotate(360deg) saturate(1.3) contrast(1.05) brightness(1.05);}
+      }
+
       /* Debug info */
       #debugInfo{display:none}
 
@@ -103,6 +123,7 @@
 
     <div id="actionBar">
       <button id="animateBtn" class="action-btn">Animar</button>
+      <button id="effectBtn" class="action-btn">Efecto</button>
       <button id="infoBtn" class="action-btn">Info</button>
     </div>
 
@@ -187,9 +208,8 @@
             id="copaAlemaniaEntity"
             gltf-model="#copaAlemaniaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -200,9 +220,8 @@
             id="copaArabiaEntity"
             gltf-model="#copaArabiaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -213,9 +232,8 @@
             id="copaArgeliaEntity"
             gltf-model="#copaArgeliaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -226,9 +244,8 @@
             id="copaArgentinaEntity"
             gltf-model="#copaArgentinaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -239,9 +256,8 @@
             id="copaAustraliaEntity"
             gltf-model="#copaAustraliaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -252,9 +268,8 @@
             id="copaAustriaEntity"
             gltf-model="#copaAustriaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -265,9 +280,8 @@
             id="copaBelgicaEntity"
             gltf-model="#copaBelgicaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -278,9 +292,8 @@
             id="copaBrasilEntity"
             gltf-model="#copaBrasilModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -291,9 +304,8 @@
             id="copaCamerunEntity"
             gltf-model="#copaCamerunModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -304,9 +316,8 @@
             id="copaCanadaEntity"
             gltf-model="#copaCanadaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -317,9 +328,8 @@
             id="copaChileEntity"
             gltf-model="#copaChileModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -330,9 +340,8 @@
             id="copaColombiaEntity"
             gltf-model="#copaColombiaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -343,9 +352,8 @@
             id="copaCoreaEntity"
             gltf-model="#copaCoreaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -356,9 +364,8 @@
             id="copaCostaMarfilEntity"
             gltf-model="#copaCostaMarfilModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -369,9 +376,8 @@
             id="copaCostaRicaEntity"
             gltf-model="#copaCostaRicaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -382,9 +388,8 @@
             id="copaCroaciaEntity"
             gltf-model="#copaCroaciaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -395,9 +400,8 @@
             id="copaDinamarcaEntity"
             gltf-model="#copaDinamarcaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -408,9 +412,8 @@
             id="copaEcuadorEntity"
             gltf-model="#copaEcuadorModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -421,9 +424,8 @@
             id="copaEgiptoEntity"
             gltf-model="#copaEgiptoModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -434,9 +436,8 @@
             id="copaEmiratosEntity"
             gltf-model="#copaEmiratosModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -447,9 +448,8 @@
             id="copaEspanaEntity"
             gltf-model="#copaEspanaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -460,9 +460,8 @@
             id="copaFranciaEntity"
             gltf-model="#copaFranciaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -473,9 +472,8 @@
             id="copaGhanaEntity"
             gltf-model="#copaGhanaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -486,9 +484,8 @@
             id="copaInglaterraEntity"
             gltf-model="#copaInglaterraModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -499,9 +496,8 @@
             id="copaIrakEntity"
             gltf-model="#copaIrakModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -512,9 +508,8 @@
             id="copaIranEntity"
             gltf-model="#copaIranModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -525,9 +520,8 @@
             id="copaItaliaEntity"
             gltf-model="#copaItaliaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -538,9 +532,8 @@
             id="copaJamaicaEntity"
             gltf-model="#copaJamaicaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -551,9 +544,8 @@
             id="copaJaponEntity"
             gltf-model="#copaJaponModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -564,9 +556,8 @@
             id="copaMarruecosEntity"
             gltf-model="#copaMarruecosModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -577,9 +568,8 @@
             id="copaEntity"
             gltf-model="#copaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -590,9 +580,8 @@
             id="copaNigeriaEntity"
             gltf-model="#copaNigeriaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -603,9 +592,8 @@
             id="copaNuevaZelandaEntity"
             gltf-model="#copaNuevaZelandaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -616,9 +604,8 @@
             id="copaPaisesBajosEntity"
             gltf-model="#copaPaisesBajosModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -629,9 +616,8 @@
             id="copaPanamaEntity"
             gltf-model="#copaPanamaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -642,9 +628,8 @@
             id="copaPeruEntity"
             gltf-model="#copaPeruModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -655,9 +640,8 @@
             id="copaPoloniaEntity"
             gltf-model="#copaPoloniaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -668,9 +652,8 @@
             id="copaPortugalEntity"
             gltf-model="#copaPortugalModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -681,9 +664,8 @@
             id="copaQatarEntity"
             gltf-model="#copaQatarModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -694,9 +676,8 @@
             id="copaSenegalEntity"
             gltf-model="#copaSenegalModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -707,9 +688,8 @@
             id="copaSerbiaEntity"
             gltf-model="#copaSerbiaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -720,87 +700,80 @@
             id="copaSueciaEntity"
             gltf-model="#copaSueciaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
-        <!-- Target 43: Escudo de Suiza -->
+        <!-- Target 42: Escudo de Suiza -->
         <a-entity id="suizaTarget" mindar-image-target="targetIndex: 42">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaSuizaEntity"
             gltf-model="#copaSuizaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
-        <!-- Target 44: Escudo de Tunez -->
+        <!-- Target 43: Escudo de Tunez -->
         <a-entity id="tunezTarget" mindar-image-target="targetIndex: 43">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaTunezEntity"
             gltf-model="#copaTunezModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
-        <!-- Target 45: Escudo de Turquia -->
+        <!-- Target 44: Escudo de Turquia -->
         <a-entity id="turquiaTarget" mindar-image-target="targetIndex: 44">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaTurquiaEntity"
             gltf-model="#copaTurquiaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
-        <!-- Target 46: Escudo de Ucrania -->
+        <!-- Target 45: Escudo de Ucrania -->
         <a-entity id="ucraniaTarget" mindar-image-target="targetIndex: 45">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaUcraniaEntity"
             gltf-model="#copaUcraniaModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
-        <!-- Target 47: Escudo de Uruguay -->
+        <!-- Target 46: Escudo de Uruguay -->
         <a-entity id="uruguayTarget" mindar-image-target="targetIndex: 46">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaUruguayEntity"
             gltf-model="#copaUruguayModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
-        <!-- Target 48: Escudo de USA -->
+        <!-- Target 47: Escudo de USA -->
         <a-entity id="usaTarget" mindar-image-target="targetIndex: 47">
           <!-- Copa 3D que aparece sobre el escudo -->
           <a-entity
             id="copaUSAEntity"
             gltf-model="#copaUSAModel"
             position="0 0.25 0"
-            scale="0.5 0.5 0.5"
+            scale="0.2 0.2 0.2"
             rotation="0 0 0"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"
           ></a-entity>
         </a-entity>
 
@@ -834,6 +807,7 @@
       const errorBox  = document.getElementById('errorBox');
       const video     = document.getElementById('cameraVideo');
       const copaEl    = document.getElementById('copaEntity');
+      const copaAlemaniaEl = document.getElementById('copaAlemaniaEntity');
       const scene     = document.getElementById('arScene');
 
       const rotationAnim = 'property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 6000; easing: linear';
@@ -911,10 +885,37 @@
         videoArea.style.filter = parts.join(' ');
       }
 
+      // Efecto para la cámara (botón Efecto)
+      const effectClass = 'effect-on';
+      function setCameraEffect(on) {
+        if (!video) return;
+        if (on) {
+          video.classList.add(effectClass);
+          document.body.classList.add('ar-effect-on');
+        } else {
+          video.classList.remove(effectClass);
+          document.body.classList.remove('ar-effect-on');
+        }
+      }
+
       fGray.addEventListener('change', aplicarFiltros);
       fSepia.addEventListener('change', aplicarFiltros);
       fInvert.addEventListener('change', aplicarFiltros);
       fBrightness.addEventListener('input', aplicarFiltros);
+
+      const effectBtn = document.getElementById('effectBtn');
+      let effectOn = false;
+      if (effectBtn) {
+        effectBtn.addEventListener('click', () => {
+          // Solo permitir ACTIVAR el efecto si hay escudo detectado,
+          // pero permitir DESACTIVARLO aunque ya no haya tracking
+          if (!effectOn && !isTracking) return;
+
+          effectOn = !effectOn;
+          setCameraEffect(effectOn);
+          effectBtn.textContent = effectOn ? 'Quitar efecto' : 'Efecto';
+        });
+      }
 
       function abrirModalVideo(url) {
         // Limpiar area
@@ -981,20 +982,45 @@
         }
       });
 
-      let animando = true;
+      // Estado de animación y modelo actualmente activo (del país detectado)
+      let animando = false;
+      let currentModel = null;
+
       animateBtn.addEventListener('click', () => {
+        if (!currentModel) return; // aún no hay ningún escudo detectado
+
         if (animando) {
-          // Detener animación
-          copaEl.removeAttribute('animation');
-          copaEl.removeAttribute('animation__spin');
+          // Detener animación del modelo actual
+          currentModel.removeAttribute('animation');
+          currentModel.removeAttribute('animation__spin');
           animateBtn.textContent = 'Reanudar animación';
         } else {
-          // Reanudar animación a la velocidad original (6000ms)
-          copaEl.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear');
+          // Aplicar animación solicitada al modelo actual
+          currentModel.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear');
           animateBtn.textContent = 'Detener animación';
         }
         animando = !animando;
       });
+
+      // Actualiza el modelo actual a partir de un target MindAR (sirve para todos los países)
+      function setCurrentModelFromTarget(targetEl) {
+        if (!targetEl) return;
+        const model = targetEl.querySelector('[gltf-model]');
+        if (!model) return;
+
+        // Si había otro modelo animándose, quitarle la animación
+        if (currentModel && currentModel !== model) {
+          currentModel.removeAttribute('animation');
+          currentModel.removeAttribute('animation__spin');
+        }
+
+        currentModel = model;
+
+        // Si el botón ya estaba en modo "animando", aplicar animación al nuevo modelo
+        if (animando) {
+          currentModel.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear');
+        }
+      }
 
       infoBtn.addEventListener('click', () => {
         infoPanel.style.display = infoPanel.style.display === 'block' ? 'none' : 'block';
@@ -1037,7 +1063,839 @@
           await new Promise(resolve => setTimeout(resolve, 1500));
           debugLog('MindAR listo');
 
+          // Listener genérico: cuando se detecte cualquier escudo,
+          // tomamos su modelo 3D como modelo actual a animar
+          const allTargets = document.querySelectorAll('[mindar-image-target]');
+          allTargets.forEach(target => {
+            target.addEventListener('targetFound', (event) => {
+              setCurrentModelFromTarget(event.target);
+            });
+
+            // Y cuando se pierda cualquier escudo, apagamos el efecto de cámara si estaba activo
+            target.addEventListener('targetLost', () => {
+              if (effectOn) {
+                effectOn = false;
+                setCameraEffect(false);
+                if (effectBtn) effectBtn.textContent = 'Efecto';
+              }
+            });
+          });
+
           /* Configurar eventos de tracking DESPUÉS de que todo esté listo */
+
+          /* Target 0: Escudo de Alemania */
+          const alemaniaTarget = document.getElementById('alemaniaTarget');
+          if (alemaniaTarget) {
+            debugLog('Target de Alemania encontrado, configurando eventos...');
+            
+            alemaniaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ALEMANIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Alemania - Gigante de Europa. ¡Listos para conquistar el Mundial 2026!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('alemania'); } catch (e) { console.warn(e); }
+            });
+            
+            alemaniaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Alemania perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Alemania');
+          }
+
+          /* Target 1: Escudo de Arabia Saudita */
+          const arabiaTarget = document.getElementById('arabiaTarget');
+          if (arabiaTarget) {
+            debugLog('Target de Arabia Saudita encontrado, configurando eventos...');
+            
+            arabiaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ARABIA SAUDITA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Arabia Saudita - Poder de Asia. ¡El equipo árabe busca hacer historia!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('arabia'); } catch (e) { console.warn(e); }
+            });
+            
+            arabiaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Arabia Saudita perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Arabia Saudita');
+          }
+
+          /* Target 2: Escudo de Argelia */
+          const argeliaTarget = document.getElementById('argeliaTarget');
+          if (argeliaTarget) {
+            debugLog('Target de Argelia encontrado, configurando eventos...');
+            
+            argeliaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ARGELIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Argelia - Garra de África. ¡Listos para superar los Octavos!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('argelia'); } catch (e) { console.warn(e); }
+            });
+            
+            argeliaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Argelia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Argelia');
+          }
+
+          /* Target 3: Escudo de Argentina */
+          const argentinaTarget = document.getElementById('argentinaTarget');
+          if (argentinaTarget) {
+            debugLog('Target de Argentina encontrado, configurando eventos...');
+            
+            argentinaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ARGENTINA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Argentina - Selección campeona del continente. ¡Listos para representar a América!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('argentina'); } catch (e) { console.warn(e); }
+            });
+            
+            argentinaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Argentina perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Argentina');
+          }
+
+          /* Target 4: Escudo de Australia */
+          const australiaTarget = document.getElementById('australiaTarget');
+          if (australiaTarget) {
+            debugLog('Target de Australia encontrado, configurando eventos...');
+            
+            australiaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE AUSTRALIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Australia - Selección campeona del continente. ¡Listos para representar a América!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('australia'); } catch (e) { console.warn(e); }
+            });
+            
+            australiaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Australia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Australia');
+          }
+
+          /* Target 5: Escudo de Austria */
+          const austriaTarget = document.getElementById('austriaTarget');
+          if (austriaTarget) {
+            debugLog('Target de Austria encontrado, configurando eventos...');
+            
+            austriaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE AUSTRIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Austria - Potencia en Ascenso. ¡El Das Team va por la sorpresa!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('austria'); } catch (e) { console.warn(e); }
+            });
+            
+            austriaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Austria perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Austria');
+          }
+
+          /* Target 6: Escudo de Belgica */
+          const belgicaTarget = document.getElementById('belgicaTarget');
+          if (belgicaTarget) {
+            debugLog('Target de Belgica encontrado, configurando eventos...');
+            
+            belgicaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE BELGICA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Belgica - Potencia en Ascenso. ¡El Das Team va por la sorpresa!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('belgica'); } catch (e) { console.warn(e); }
+            });
+            
+            belgicaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Belgica perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Belgica');
+          }
+
+          /* Target 7: Escudo de Brasil */
+          const brasilTarget = document.getElementById('brasilTarget');
+          if (brasilTarget) {
+            debugLog('Target de Brasil encontrado, configurando eventos...');
+            
+            brasilTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE BRASIL DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Brasil - Líder en la Copa América. ¡El Seleção está listo para competir!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('brasil'); } catch (e) { console.warn(e); }
+            });
+            
+            brasilTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Brasil perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Brasil');
+          }
+
+            /* Target 8: Escudo de Camerun */
+          const camerunTarget = document.getElementById('camerunTarget');
+          if (camerunTarget) {
+            debugLog('Target de Camerun encontrado, configurando eventos...');
+            
+            camerunTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE CAMERUN DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Camerun - Participante en la Copa Mundial. ¡El Indomitable Leones está listo para competir!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('camerun'); } catch (e) { console.warn(e); }
+            });
+            
+            camerunTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Camerun perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Camerun');
+          }
+
+          /* Target 9: Escudo de Canada */
+          const canadaTarget = document.getElementById('canadaTarget');
+          if (canadaTarget) {
+            debugLog('Target de Canada encontrado, configurando eventos...');
+            
+            canadaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE CANADA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Canadá - Participante en la Copa Mundial. ¡El Maple Leafs está listo para competir!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('canada'); } catch (e) { console.warn(e); }
+            });
+            
+            canadaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Canadá perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Canadá');
+          }
+
+          /* Target 10: Escudo de Chile */
+          const chileTarget = document.getElementById('chileTarget');
+          if (chileTarget) {
+            debugLog('Target de Chile encontrado, configurando eventos...');
+            
+            chileTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE CHILE DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Chile - Participante en la Copa Mundial. La Universidad de Chile está listo para competir!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('chile'); } catch (e) { console.warn(e); }
+            });
+            
+            chileTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Chile perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Chile');
+          }
+
+          /* Target 11: Escudo de Colombia */
+          const colombiaTarget = document.getElementById('colombiaTarget');
+          if (colombiaTarget) {
+            debugLog('Target de Colombia encontrado, configurando eventos...');
+            
+            colombiaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE COLOMBIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Colombia - Ritmo y Magia. ¡El equipo sudamericano busca la cima!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('colombia'); } catch (e) { console.warn(e); }
+            });
+            
+            colombiaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Colombia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Colombia');
+          }
+
+          /* Target 12: Escudo de Corea del Sur */
+          const coreaTarget = document.getElementById('coreaTarget');
+          if (coreaTarget) {
+            debugLog('Target de Corea del Sur encontrado, configurando eventos...');
+            
+            coreaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE COREA DEL SUR DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Corea del Sur - Semifinalista 2002. ¡Los Guerreros Taeguk van por la copa!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('corea'); } catch (e) { console.warn(e); }
+            });
+            
+            coreaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Corea del Sur perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Corea del Sur');
+          }
+
+          /* Target 13: Escudo de Costa De Marfil */
+          const costaMarfilTarget = document.getElementById('costaMarfilTarget');
+          if (costaMarfilTarget) {
+            debugLog('Target de Costa De Marfil encontrado, configurando eventos...');
+            
+            costaMarfilTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE COSTA DE MARFIL DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Costa de Marfil - La Garra del Elefante. ¡En busca del sueño mundial!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('costamarfil'); } catch (e) { console.warn(e); }
+            });
+            
+            costaMarfilTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Costa de Marfil perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Costa de Marfil');
+          }
+
+          /* Target 14: Escudo de Costa Rica */
+          const costaRicaTarget = document.getElementById('costaRicaTarget');
+          if (costaRicaTarget) {
+            debugLog('Target de Costa Rica encontrado, configurando eventos...');
+            
+            costaRicaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE COSTA RICA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Costa Rica - Hazaña de Brasil 2014. ¡Los Ticos vuelven por la gloria!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('costarica'); } catch (e) { console.warn(e); }
+            });
+            
+            costaRicaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Costa Rica perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Costa Rica');
+          }
+
+          /* Target 15: Escudo de Croacia */
+          const croaciaTarget = document.getElementById('croaciaTarget');
+          if (croaciaTarget) {
+            debugLog('Target de Croacia encontrado, configurando eventos...');
+            
+            croaciaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE CROACIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Croacia - Medallistas 2018 y 2022.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('croacia'); } catch (e) { console.warn(e); }
+            });
+            
+            croaciaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Croacia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Croacia');
+          }
+
+          /* Target 16: Escudo de Dinamarca */
+          const dinamarcaTarget = document.getElementById('dinamarcaTarget');
+          if (dinamarcaTarget) {
+            debugLog('Target de Dinamarca encontrado, configurando eventos...');
+            
+            dinamarcaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE DINAMARCA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Dinamarca - El Legado de los Vikingos. ¡Dinamita pura en el Mundial!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('dinamarca'); } catch (e) { console.warn(e); }
+            });
+            
+            dinamarcaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Dinamarca perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Dinamarca');
+          }
+
+          /* Target 17: Escudo de Ecuador */
+          const ecuadorTarget = document.getElementById('ecuadorTarget');
+          if (ecuadorTarget) {
+            debugLog('Target de Ecuador encontrado, configurando eventos...');
+            
+            ecuadorTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ECUADOR DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Ecuador - Sangre joven y garra andina: ¡El equipo tricolor asalta el Mundial!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('ecuador'); } catch (e) { console.warn(e); }
+            });
+            
+            ecuadorTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Ecuador perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Ecuador');
+          }
+
+
+          /* Target 18: Escudo de Egipto */
+          const egiptoTarget = document.getElementById('egiptoTarget');
+          if (egiptoTarget) {
+            debugLog('Target de Egipto encontrado, configurando eventos...');
+            
+            egiptoTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE EGIPTO DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Egipto - El equipo de la Pharaón. ¡Un equipo lleno de historia y tradición!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('egipto'); } catch (e) { console.warn(e); }
+            });
+            
+            egiptoTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Egipto perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Egipto');
+          }
+
+          /* Target 19: Escudo de Emiratos Arabes Unidos */
+          const emiratosTarget = document.getElementById('emiratosTarget');
+          if (emiratosTarget) {
+            debugLog('Target de Emiratos Arabes Unidos encontrado, configurando eventos...');
+            
+            emiratosTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE EMIRATOS ARABES UNIDOS DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Emiratos Arabes Unidos - busca escribir su nombre en la historia';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('emiratos'); } catch (e) { console.warn(e); }
+            });
+            
+            emiratosTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Emiratos Arabes Unidos perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Emiratos Arabes Unidos');
+          }
+
+          /* Target 20: Escudo de España */
+          const españaTarget = document.getElementById('españaTarget');
+          if (españaTarget) {
+            debugLog('Target de España encontrado, configurando eventos...');
+            
+            españaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ESPAÑA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'España - El "Tiki-Taka" evoluciona. ¡La Roja busca su segunda estrella!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('españa'); } catch (e) { console.warn(e); }
+            });
+            
+            españaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo España perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para España');
+          }
+
+          /* Target 21: Escudo de Francia */
+          const franciaTarget = document.getElementById('franciaTarget');
+          if (franciaTarget) {
+            debugLog('Target de Francia encontrado, configurando eventos...');
+            
+            franciaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE FRANCIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Francia - Legado de Rusia 2018: Francia y su armada invencible van por todo.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('francia'); } catch (e) { console.warn(e); }
+            });
+            
+            franciaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Francia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Francia');
+          }
+
+
+          /* Target 22: Escudo de Ghana */
+          const ghanaTarget = document.getElementById('ghanaTarget');
+          if (ghanaTarget) {
+            debugLog('Target de Ghana encontrado, configurando eventos...');
+            
+            ghanaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE GHANA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Ghana - ¡Las Estrellas Negras brillan de nuevo en el 2026!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('ghana'); } catch (e) { console.warn(e); }
+            });
+            
+            ghanaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Ghana perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Ghana');
+          }
+
+          /* Target 23: Escudo de Inglaterra */
+          const inglaterraTarget = document.getElementById('inglaterraTarget');
+          if (inglaterraTarget) {
+            debugLog('Target de Inglaterra encontrado, configurando eventos...');
+            
+            inglaterraTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE INGLATERRA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Inglaterra - Orgullo de Wembley: ¡El equipo inglés listo para dominar el campo!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('inglaterra'); } catch (e) { console.warn(e); }
+            });
+            
+            inglaterraTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Inglaterra perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Inglaterra');
+          }
+
+          /* Target 24: Escudo de Irak */
+          const irakTarget = document.getElementById('irakTarget');
+          if (irakTarget) {
+            debugLog('Target de Irak encontrado, configurando eventos...');
+            
+            irakTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE IRAK DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Irak - Orgullo de Bagdad: La garra iraquí llega para sorprender al mundo.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('irak'); } catch (e) { console.warn(e); }
+            });
+            
+            irakTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Irak perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Irak');
+          }
+
+          /* Target 25: Escudo de Iran */
+          const iranTarget = document.getElementById('iranTarget');
+          if (iranTarget) {
+            debugLog('Target de Iran encontrado, configurando eventos...');
+            
+            iranTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE IRAN DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Iran - ¡El gigante persa viene por la gloria en Norteamérica!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('iran'); } catch (e) { console.warn(e); }
+            });
+            
+            iranTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Iran perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Iran');
+          }
+
+          /* Target 26: Escudo de Italia */
+          const italiaTarget = document.getElementById('italiaTarget');
+          if (italiaTarget) {
+            debugLog('Target de Italia encontrado, configurando eventos...');
+            
+            italiaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE ITALIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Italia - ¿Llegará la quinta estrella? El gigante europeo';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('italia'); } catch (e) { console.warn(e); }
+            });
+            
+            italiaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Italia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Italia');
+          }
+
+          /* Target 27: Escudo de Jamaica */
+          const jamaicaTarget = document.getElementById('jamaicaTarget');
+          if (jamaicaTarget) {
+            debugLog('Target de Jamaica encontrado, configurando eventos...');
+            
+            jamaicaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE JAMAICA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Jamaica - ¡Los Reggae Boyz traen el ritmo y la magia al 2026!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('jamaica'); } catch (e) { console.warn(e); }
+            });
+            
+            jamaicaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Jamaica perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Jamaica');
+          }
+
+          /* Target 28: Escudo de Japon */
+          const japonTarget = document.getElementById('japonTarget');
+          if (japonTarget) {
+            debugLog('Target de Japon encontrado, configurando eventos...');
+            
+            japonTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE JAPON DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Japon - ¿Superarán los Octavos? El gigante asiático busca su mejor marca.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('japon'); } catch (e) { console.warn(e); }
+            });
+            
+            japonTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Japon perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Japon');
+          }
+
+          /* Target 29: Escudo de Marruecos */
+          const marruecosTarget = document.getElementById('marruecosTarget');
+          if (marruecosTarget) {
+            debugLog('Target de Marruecos encontrado, configurando eventos...');
+            
+            marruecosTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE MARRUECOS DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Marruecos - Mística y Muralla: Marruecos y su defensa de hierro.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('marruecos'); } catch (e) { console.warn(e); }
+            });
+            
+            marruecosTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Marruecos perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Marruecos');
+          }
+
+          /* Target 30: Escudo de México */
           const mexicoTarget = document.getElementById('mexicoTarget');
           if (mexicoTarget) {
             debugLog('Target de México encontrado, configurando eventos...');
@@ -1053,7 +1911,7 @@
             });
 
             mexicoTarget.addEventListener('targetLost', (event) => {
-              debugLog('Escudo perdido');
+              debugLog('Escudo de México perdido');
               isTracking = false;
               document.getElementById('statusText').textContent = 'Buscando escudo...';
               infoPanel.style.display = 'none';
@@ -1061,9 +1919,468 @@
               try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
             });
             
-            debugLog('Eventos configurados correctamente');
+            debugLog('Eventos configurados correctamente para México');
           } else {
             debugLog('ERROR: No se encontró el elemento mexicoTarget');
+          }
+
+          /* Target 31: Escudo de Nigeria */
+          const nigeriaTarget = document.getElementById('nigeriaTarget');
+          if (nigeriaTarget) {
+            debugLog('Target de Nigeria encontrado, configurando eventos...');
+            
+            nigeriaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE NIGERIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Nigeria - Poderío Físico y Magia: El gigante africano.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('nigeria'); } catch (e) { console.warn(e); }
+            });
+            
+            nigeriaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Nigeria perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Nigeria');
+          }
+
+          /* Target 32: Escudo de Nueva Zelanda */
+          const nuevaZelandaTarget = document.getElementById('nuevaZelandaTarget');
+          if (nuevaZelandaTarget) {
+            debugLog('Target de Nueva Zelanda encontrado, configurando eventos...');
+            
+            nuevaZelandaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE NUEVA ZELANDA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Nueva Zelanda - Tierra de los Páramos: Un país cultura y naturaleza impresionante.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('nuevaZelanda'); } catch (e) { console.warn(e); }
+            });
+            
+            nuevaZelandaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Nueva Zelanda perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Nueva Zelanda');
+          }
+
+          /* Target 33: Escudo de Paises bajos */
+          const paisesBajosTarget = document.getElementById('paisesBajosTarget');
+          if (paisesBajosTarget) {
+            debugLog('Target de Paises Bajos encontrado, configurando eventos...');
+            
+            paisesBajosTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE PAISES BAJOS DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Paises Bajos - Tierra de los Páramos: Un país cultura y naturaleza impresionante.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('paisesBajos'); } catch (e) { console.warn(e); }
+            });
+            
+            paisesBajosTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Paises Bajos perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Paises Bajos');
+          }
+
+          /* Target 34: Escudo de Panama */
+          const panamaTarget = document.getElementById('panamaTarget');
+          if (panamaTarget) {
+            debugLog('Target de Panama encontrado, configurando eventos...');
+            
+            panamaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE PANAMA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Panama - Orgullo del Istmo: La marea roja lista para inundar el Mundial.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('panama'); } catch (e) { console.warn(e); }
+            });
+            
+            panamaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Panama perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Panama');
+          }
+
+          /* Target 35: Escudo de Peru */
+          const peruTarget = document.getElementById('peruTarget');
+          if (peruTarget) {
+            debugLog('Target de Peru encontrado, configurando eventos...');
+            
+            peruTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE PERU DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Peru - Garra Inca y Corazón: El equipo de todos.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('peru'); } catch (e) { console.warn(e); }
+            });
+            
+            peruTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Peru perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Peru');
+          }
+
+          /* Target 36: Escudo de Polonia */
+          const poloniaTarget = document.getElementById('poloniaTarget');
+          if (poloniaTarget) {
+            debugLog('Target de Polonia encontrado, configurando eventos...');
+            
+            poloniaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE POLONIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Polonia - Orgullo de Varsovia.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('polonia'); } catch (e) { console.warn(e); }
+            });
+            
+            poloniaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Polonia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Polonia');
+          }
+
+          /* Target 37: Escudo de Portugal */
+          const portugalTarget = document.getElementById('portugalTarget');
+          if (portugalTarget) {
+            debugLog('Target de Portugal encontrado, configurando eventos...');
+            
+            portugalTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE PORTUGAL DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Portugal - Talento sin límites y ambición: Portugal asalta el escenario mundial.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('portugal'); } catch (e) { console.warn(e); }
+            });
+            
+            portugalTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Portugal perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Portugal');
+          }
+
+          /* Target 38: Escudo de Qatar */
+          const qatarTarget = document.getElementById('qatarTarget');
+          if (qatarTarget) {
+            debugLog('Target de Qatar encontrado, configurando eventos...');
+            
+            qatarTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE QATAR DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Qatar - Espíritu de la copa: Qatar destaca en el escenario mundial.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('qatar'); } catch (e) { console.warn(e); }
+            });
+            
+            qatarTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Qatar perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Qatar');
+          }
+
+          /* Target 39: Escudo de Senegal */
+          const senegalTarget = document.getElementById('senegalTarget');
+          if (senegalTarget) {
+            debugLog('Target de Senegal encontrado, configurando eventos...');
+            
+            senegalTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE SENEGAL DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Senegal - ¡La armada senegalesa viene a conquistar el Mundial!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('senegal'); } catch (e) { console.warn(e); }
+            });
+            
+            senegalTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Senegal perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Senegal');
+          }
+
+          /* Target 40: Escudo de Serbia */
+          const serbiaTarget = document.getElementById('serbiaTarget');
+          if (serbiaTarget) {
+            debugLog('Target de Serbia encontrado, configurando eventos...');
+            
+            serbiaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE SERBIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Serbia - Fuerza, técnica y corazón: El gigante serbio.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('serbia'); } catch (e) { console.warn(e); }
+            });
+            
+            serbiaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Serbia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Serbia');
+          }
+
+          /* Target 41: Escudo de Suecia */
+          const sueciaTarget = document.getElementById('sueciaTarget');
+          if (sueciaTarget) {
+            debugLog('Target de Suecia encontrado, configurando eventos...');
+            
+            sueciaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE SUECIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Suecia - Fuerza Escandinava y Estrategia: El gigante del norte.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('suecia'); } catch (e) { console.warn(e); }
+            });
+            
+            sueciaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Suecia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Suecia');
+          }
+
+          /* Target 42: Escudo de Suiza */
+          const suizaTarget = document.getElementById('suizaTarget');
+          if (suizaTarget) {
+            debugLog('Target de Suiza encontrado, configurando eventos...');
+            
+            suizaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE SUIZA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Suiza - Precision y Resistencia: El equipo suizo.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('suiza'); } catch (e) { console.warn(e); }
+            });
+            
+            suizaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Suiza perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Suiza');
+          }
+
+          /* Target 43: Escudo de Tunez */
+          const tunezTarget = document.getElementById('tunezTarget');
+          if (tunezTarget) {
+            debugLog('Target de Tunez encontrado, configurando eventos...');
+            
+            tunezTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE TUNEZ DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Túnez - ¡Las Águilas de Cartago despliegan sus alas hacia el 2026!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('tunez'); } catch (e) { console.warn(e); }
+            });
+            
+            tunezTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Tunez perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Tunez');
+          }
+
+          /* Target 44: Escudo de Turquia */
+          const turquiaTarget = document.getElementById('turquiaTarget');
+          if (turquiaTarget) {
+            debugLog('Target de Turquia encontrado, configurando eventos...');
+            
+            turquiaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE TURQUÍA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Turquía - ¡Las Estrellas Crecientes vuelven con sed de gloria al 2026!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('turquia'); } catch (e) { console.warn(e); }
+            });
+            
+            turquiaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Turquia perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Turquia');
+          }
+
+          /* Target 45: Escudo de Ucrania */
+          const ucraniaTarget = document.getElementById('ucraniaTarget');
+          if (ucraniaTarget) {
+            debugLog('Target de Ucrania encontrado, configurando eventos...');
+            
+            ucraniaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE UCRANIA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Ucrania - ¡El orgullo de Europa en el Mundial 2026!';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('ucrania'); } catch (e) { console.warn(e); }
+            });
+            
+            ucraniaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Ucrania perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Ucrania');
+          }
+
+          /* Target 46: Escudo de Uruguay */
+          const uruguayTarget = document.getElementById('uruguayTarget');
+          if (uruguayTarget) {
+            debugLog('Target de Uruguay encontrado, configurando eventos...');
+            
+            uruguayTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE URUGUAY DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'Uruguay - En busca de su tercer estrella.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('uruguay'); } catch (e) { console.warn(e); }
+            });
+            
+            uruguayTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo Uruguay perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para Uruguay');
+          }
+
+          /* Target 47: Escudo de USA */
+          const usaTarget = document.getElementById('usaTarget');
+          if (usaTarget) {
+            debugLog('Target de USA encontrado, configurando eventos...');
+            
+            usaTarget.addEventListener('targetFound', (event) => {
+              debugLog('¡¡¡ESCUDO DE USA DETECTADO!!!');
+              isTracking = true;
+              document.getElementById('statusText').textContent = 'Escudo detectado - Mostrando copa';
+              infoPanel.textContent = 'USA - ¿Llegó el momento de la gloria?.';
+              infoPanel.style.display = 'block';
+              // Mostrar botón de video para la selección detectada
+              try { mostrarBotonVideo('usa'); } catch (e) { console.warn(e); }
+            });
+            
+            usaTarget.addEventListener('targetLost', (event) => {
+              debugLog('Escudo USA perdido');
+              isTracking = false;
+              const statusEl = document.getElementById('statusText');
+              if (statusEl) statusEl.textContent = 'Buscando escudo...';
+              infoPanel.style.display = 'none';
+              try { ocultarBotonVideo(); } catch (e) { console.warn(e); }
+            });
+
+            debugLog('Eventos configurados correctamente para USA');
           }
 
           /* Agregar listeners globales al sistema MindAR */
@@ -1107,7 +2424,7 @@
           }
 
           document.getElementById('statusText').textContent = 'Buscando escudo...';
-          infoPanel.textContent = 'Apunta la cámara al escudo de México para ver el modelo 3D.';
+          infoPanel.textContent = 'Apunta a la cámara el escudo para ver el modelo 3D.';
           infoPanel.style.display = 'block';
           
           debugLog('=== SISTEMA AR LISTO ===');
