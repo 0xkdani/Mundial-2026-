@@ -11,6 +11,7 @@ export function Videos() {
   
   const [showFilterMenu, setShowFilterMenu] = useState(false);
   const canvasRefs = useRef<{ [key: number]: HTMLCanvasElement | null }>({});
+  const playbackCanvasRefs = useRef<{ [key: number]: HTMLCanvasElement | null }>({});
   const [ratios, setRatios] = useState<Record<number, number>>({});
   const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
   const wrapperRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
@@ -81,6 +82,89 @@ export function Videos() {
       });
     }
   }, [selectedFilter]);
+
+  useEffect(() => {
+    if (activeVideoId === null || (selectedFilter !== 'pixelated' && selectedFilter !== 'thermal')) {
+      return;
+    }
+
+    const video = videoRefs.current[activeVideoId];
+    const canvas = playbackCanvasRefs.current[activeVideoId];
+
+    if (!video || !canvas) {
+      return;
+    }
+
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) {
+      return;
+    }
+
+    let frameId = 0;
+
+    const drawFrame = () => {
+      if (!video || !canvas || !ctx || video.paused || video.ended || video.readyState < 2) {
+        frameId = requestAnimationFrame(drawFrame);
+        return;
+      }
+
+      const width = video.videoWidth || 640;
+      const height = video.videoHeight || 360;
+
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      if (selectedFilter === 'pixelated') {
+        const pixelSize = 12;
+        const w = Math.max(1, Math.floor(width / pixelSize));
+        const h = Math.max(1, Math.floor(height / pixelSize));
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(video, 0, 0, w, h);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(canvas, 0, 0, w, h, 0, 0, width, height);
+      } else {
+        ctx.drawImage(video, 0, 0, width, height);
+
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+
+          if (avg < 64) {
+            data[i] = 0;
+            data[i + 1] = 0;
+            data[i + 2] = avg * 4;
+          } else if (avg < 128) {
+            data[i] = (avg - 64) * 4;
+            data[i + 1] = 0;
+            data[i + 2] = 255;
+          } else if (avg < 192) {
+            data[i] = 255;
+            data[i + 1] = (avg - 128) * 4;
+            data[i + 2] = 255 - (avg - 128) * 4;
+          } else {
+            data[i] = 255;
+            data[i + 1] = 255;
+            data[i + 2] = (255 - avg) * 4;
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+      }
+
+      frameId = requestAnimationFrame(drawFrame);
+    };
+
+    frameId = requestAnimationFrame(drawFrame);
+
+    return () => cancelAnimationFrame(frameId);
+  }, [activeVideoId, selectedFilter]);
 
   // Pause and reset video when exiting fullscreen
   useEffect(() => {
@@ -222,7 +306,7 @@ export function Videos() {
             <section key={teamName} className="mb-10">
               <h2 className="text-3xl font-extrabold text-white mb-4">{teamName}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {teamVideos.slice(0, 3).map((video) => (
+                {teamVideos.slice(0, 1).map((video) => (
                   <div
                     key={video.id}
                     className="bg-black/60 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-500 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all group cursor-pointer"
@@ -237,24 +321,38 @@ export function Videos() {
                           {video.videoUrl ? (
                             // Renderizamos solo la miniatura/preview; el <video> se monta al pulsar (lazy-load)
                             activeVideoId === video.id ? (
-                              <video
-                                ref={(el) => (videoRefs.current[video.id] = el)}
-                                controls
-                                autoPlay
-                                preload="none"
-                                className="absolute inset-0 w-full h-full object-contain"
-                                poster={video.thumbnail}
-                                style={{ filter: getFilterStyle(selectedFilter) }}
-                                onLoadedMetadata={(e) => {
-                                  const el = e.currentTarget as HTMLVideoElement;
-                                  if (el.videoWidth && el.videoHeight) {
-                                    setRatios((p) => ({ ...p, [video.id]: el.videoWidth / el.videoHeight }));
-                                  }
-                                }}
-                              >
-                                <source src={video.videoUrl} type="video/mp4" />
-                                Tu navegador no soporta la reproduccion de video.
-                              </video>
+                              <>
+                                <video
+                                  ref={(el) => (videoRefs.current[video.id] = el)}
+                                  controls={selectedFilter !== 'pixelated' && selectedFilter !== 'thermal'}
+                                  autoPlay
+                                  preload="none"
+                                  className="absolute inset-0 w-full h-full object-contain"
+                                  poster={video.thumbnail}
+                                  style={{
+                                    filter: useCanvasFilter ? 'none' : getFilterStyle(selectedFilter),
+                                    opacity: useCanvasFilter ? 0 : 1,
+                                    pointerEvents: useCanvasFilter ? 'none' : 'auto',
+                                  }}
+                                  onLoadedMetadata={(e) => {
+                                    const el = e.currentTarget as HTMLVideoElement;
+                                    if (el.videoWidth && el.videoHeight) {
+                                      setRatios((p) => ({ ...p, [video.id]: el.videoWidth / el.videoHeight }));
+                                    }
+                                  }}
+                                >
+                                  <source src={video.videoUrl} type="video/mp4" />
+                                  Tu navegador no soporta la reproduccion de video.
+                                </video>
+                                {useCanvasFilter && (
+                                  <canvas
+                                    ref={(el) => {
+                                      playbackCanvasRefs.current[video.id] = el;
+                                    }}
+                                    className="absolute inset-0 w-full h-full object-contain"
+                                  />
+                                )}
+                              </>
                             ) : (
                               <ImageWithFallback
                                 src={video.thumbnail}
@@ -330,18 +428,10 @@ export function Videos() {
             </section>
           );
 
-          // Mostrar todas las selecciones del listado `teams` (incluso si no tienen videos)
-          return teams.map((teamName) => {
-            const teamVideos = map.get(teamName) ?? [];
-            return teamVideos.length > 0 ? (
-              renderTeamSection(teamName, teamVideos)
-            ) : (
-              <section key={teamName} className="mb-10">
-                <h2 className="text-3xl font-extrabold text-white mb-4">{teamName}</h2>
-                <div className="p-8 bg-black/50 rounded-xl border border-purple-800 text-purple-300">No hay videos para esta selección aún.</div>
-              </section>
-            );
-          });
+          // Mostrar solo selecciones que tengan al menos un video
+          return teams
+            .filter((teamName) => (map.get(teamName)?.length ?? 0) > 0)
+            .map((teamName) => renderTeamSection(teamName, map.get(teamName)!));
         })()}
 
         {/* No Results */}
