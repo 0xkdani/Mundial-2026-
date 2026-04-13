@@ -33,6 +33,25 @@
 
       /* Escena 3D sobre la camara */
       #sceneWrap{position:fixed;inset:0;z-index:5;pointer-events:none}
+      #sparkLayer{position:fixed;inset:0;z-index:15;pointer-events:none;display:none;overflow:hidden}
+      #sparkLayer.active{display:block}
+      .spark{
+        position:absolute;
+        width:18px;
+        height:18px;
+        background:linear-gradient(180deg,#fff7c2 0%,#ffd54f 55%,#ffb300 100%);
+        clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+        box-shadow:0 0 10px rgba(255,245,157,.95),0 0 22px rgba(255,193,7,.7);
+        opacity:0;
+        mix-blend-mode:screen;
+        animation:sparkBurst var(--spark-duration,2.2s) ease-in-out forwards;
+      }
+      @keyframes sparkBurst{
+        0%{opacity:0;transform:translate3d(0,18px,0) scale(.45) rotate(0deg)}
+        15%{opacity:1}
+        55%{opacity:.95}
+        100%{opacity:0;transform:translate3d(var(--spark-x,0px),var(--spark-y,-120px),0) scale(1.15) rotate(var(--spark-rotate,180deg))}
+      }
       a-scene{background:transparent!important}
       a-scene canvas,.a-canvas{background:transparent!important}
 
@@ -89,12 +108,50 @@
       .filters-row{display:flex;gap:8px;align-items:center}
       .filters-row label{color:#e6e8eb;font-size:13px}
       .close-video-btn{margin-left:auto;padding:8px 12px;border-radius:8px;background:#a78bfa;color:#111;border:none;cursor:pointer}
+
+      @media (max-width: 768px) {
+        #cameraVideo,
+        #sceneWrap{
+          transform:scale(1.08,1.22);
+          transform-origin:center center;
+        }
+
+        #statusBar{
+          bottom:calc(env(safe-area-inset-bottom, 0px) + 6px);
+          left:12px;
+          right:12px;
+          padding:7px 12px;
+          font-size:12px;
+        }
+
+        #actionBar{
+          bottom:calc(env(safe-area-inset-bottom, 0px) + 42px);
+          gap:8px;
+        }
+
+        .action-btn{
+          padding:7px 12px;
+          font-size:12px;
+        }
+
+        #infoPanel{
+          bottom:calc(env(safe-area-inset-bottom, 0px) + 80px);
+          left:12px;
+          right:12px;
+          padding:8px 10px;
+          font-size:12px;
+          line-height:1.35;
+          max-height:72px;
+          overflow:auto;
+        }
+      }
     </style>
   </head>
   <body>
 
     <!-- Video de la camara -->
     <video id="cameraVideo" autoplay playsinline muted></video>
+    <div id="sparkLayer"></div>
 
     <!-- Overlay de inicio -->
     <div id="overlay">
@@ -806,6 +863,7 @@
       const scanFrame = document.getElementById('scanFrame');
       const errorBox  = document.getElementById('errorBox');
       const video     = document.getElementById('cameraVideo');
+      const sparkLayer = document.getElementById('sparkLayer');
       const copaEl    = document.getElementById('copaEntity');
       const copaAlemaniaEl = document.getElementById('copaAlemaniaEntity');
       const scene     = document.getElementById('arScene');
@@ -886,15 +944,53 @@
       }
 
       // Efecto para la cámara (botón Efecto)
-      const effectClass = 'effect-on';
+      let sparkInterval = null;
+      let sparkCleanupTimeout = null;
+
+      function createSpark() {
+        if (!sparkLayer) return;
+        const spark = document.createElement('span');
+        spark.className = 'spark';
+
+        spark.style.left = `${6 + Math.random() * 88}%`;
+        spark.style.top = `${12 + Math.random() * 76}%`;
+        spark.style.width = `${12 + Math.random() * 14}px`;
+        spark.style.height = spark.style.width;
+        spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 36}px`);
+        spark.style.setProperty('--spark-y', `${-18 - Math.random() * 52}px`);
+        spark.style.setProperty('--spark-rotate', `${90 + Math.random() * 240}deg`);
+        spark.style.setProperty('--spark-duration', `${1.6 + Math.random() * 1.2}s`);
+
+        sparkLayer.appendChild(spark);
+        window.setTimeout(() => spark.remove(), 3200);
+      }
+
       function setCameraEffect(on) {
-        if (!video) return;
+        if (!sparkLayer) return;
+
+        if (sparkCleanupTimeout) {
+          clearTimeout(sparkCleanupTimeout);
+          sparkCleanupTimeout = null;
+        }
+
         if (on) {
-          video.classList.add(effectClass);
-          document.body.classList.add('ar-effect-on');
+          sparkLayer.classList.add('active');
+          if (!sparkInterval) {
+            for (let i = 0; i < 18; i += 1) createSpark();
+            sparkInterval = window.setInterval(() => {
+              const burstCount = 4 + Math.floor(Math.random() * 4);
+              for (let i = 0; i < burstCount; i += 1) createSpark();
+            }, 260);
+          }
         } else {
-          video.classList.remove(effectClass);
-          document.body.classList.remove('ar-effect-on');
+          if (sparkInterval) {
+            clearInterval(sparkInterval);
+            sparkInterval = null;
+          }
+          sparkCleanupTimeout = window.setTimeout(() => {
+            sparkLayer.classList.remove('active');
+            sparkLayer.innerHTML = '';
+          }, 700);
         }
       }
 
