@@ -6,349 +6,291 @@ interface Question {
   question: string;
   options: string[];
   correct: number;
-  trivia: string;
 }
 
-const questions: Question[] = [
-  {
-    id: 1,
-    question: '¿En qué ciudades se jugarán más partidos del Mundial 2026 dentro de Estados Unidos?',
-    options: ['Nueva York/Nueva Jersey, Dallas y Los Ángeles', 'Miami, Seattle y Houston', 'Boston, Atlanta y Filadelfia', 'San Francisco, Kansas City y Orlando'],
-    correct: 0,
-    trivia: 'Nueva York/Nueva Jersey, Dallas y Los Ángeles están entre las sedes con mayor carga de partidos en Estados Unidos.'
-  },
-  {
-    id: 2,
-    question: '¿Cuántas veces ha sido sede de un Mundial México antes de 2026?',
-    options: ['0', '1', '2', '3'],
-    correct: 2,
-    trivia: 'México organizó los Mundiales de 1970 y 1986 antes de 2026.'
-  },
-  {
-    id: 3,
-    question: '¿Qué ciudades canadienses serán sede del Mundial 2026?',
-    options: ['Toronto y Montreal', 'Vancouver y Calgary', 'Toronto y Vancouver', 'Ottawa y Toronto'],
-    correct: 2,
-    trivia: 'Las dos sedes de Canadá para 2026 son Toronto y Vancouver.'
-  },
-  {
-    id: 4,
-    question: '¿Cuál fue la mejor participación de Costa Rica en un Mundial?',
-    options: ['Octavos de final en 1990', 'Cuartos de final en 2014', 'Semifinales en 2014', 'Final en 2014'],
-    correct: 1,
-    trivia: 'Costa Rica llegó a cuartos de final en Brasil 2014, su mejor actuación histórica.'
-  },
-  {
-    id: 5,
-    question: '¿En qué año debutó Panamá en un Mundial?',
-    options: ['2010', '2014', '2018', '2022'],
-    correct: 2,
-    trivia: 'Panamá debutó en una Copa del Mundo en Rusia 2018.'
-  },
-  {
-    id: 6,
-    question: '¿Cómo se le conoce a la selección de Jamaica?',
-    options: ['Los Leones del Caribe', 'The Reggae Boyz', 'Los Guerreros Verdes', 'The Islanders'],
-    correct: 1,
-    trivia: 'El apodo más conocido de Jamaica es The Reggae Boyz.'
-  },
-  {
-    id: 7,
-    question: '¿Cuántas Copas del Mundo ha ganado Brasil?',
-    options: ['3', '4', '5', '6'],
-    correct: 2,
-    trivia: 'Brasil es la selección con más títulos mundiales: cinco.'
-  },
-  {
-    id: 8,
-    question: '¿Quién fue la figura clave de Argentina en el Mundial 2022?',
-    options: ['Lautaro Martínez', 'Ángel Di María', 'Lionel Messi', 'Julián Álvarez'],
-    correct: 2,
-    trivia: 'Lionel Messi fue el gran líder de Argentina rumbo al título en Qatar 2022.'
-  },
-  {
-    id: 9,
-    question: '¿En qué años ganó Uruguay sus dos Mundiales?',
-    options: ['1930 y 1950', '1934 y 1954', '1950 y 1970', '1928 y 1932'],
-    correct: 0,
-    trivia: 'Uruguay fue campeón del mundo en 1930 y 1950.'
-  },
-  {
-    id: 10,
-    question: '¿Qué jugador colombiano fue goleador del Mundial 2014?',
-    options: ['Radamel Falcao', 'Carlos Bacca', 'Juan Cuadrado', 'James Rodríguez'],
-    correct: 3,
-    trivia: 'James Rodríguez terminó como máximo goleador en Brasil 2014 con 6 goles.'
-  },
-  {
-    id: 11,
-    question: '¿En qué año jugó Ecuador su primer Mundial?',
-    options: ['1998', '2002', '2006', '2010'],
-    correct: 1,
-    trivia: 'Ecuador debutó en una Copa del Mundo en Corea-Japón 2002.'
-  },
-  {
-    id: 12,
-    question: '¿Qué títulos importantes ganó Chile en 2015 y 2016?',
-    options: ['Dos Copas Confederaciones', 'Dos Copas América', 'Una Copa América y un Mundial Sub-20', 'Una Copa América y una Finalissima'],
-    correct: 1,
-    trivia: 'Chile ganó la Copa América 2015 y la Copa América Centenario 2016.'
-  },
-  {
-    id: 13,
-    question: '¿En qué años Francia ha ganado la Copa del Mundo?',
-    options: ['1998 y 2018', '1994 y 2006', '2002 y 2018', '1986 y 1998'],
-    correct: 0,
-    trivia: 'Francia fue campeona del mundo en 1998 y 2018.'
-  },
-  {
-    id: 14,
-    question: '¿Qué estilo de juego hizo famoso a España en 2010?',
-    options: ['Catenaccio', 'Tiki-taka', 'Fútbol total', 'Juego directo'],
-    correct: 1,
-    trivia: 'La España campeona en 2010 se asoció al estilo tiki-taka.'
-  },
-  {
-    id: 15,
-    question: '¿En qué año ganó Inglaterra su único Mundial?',
-    options: ['1958', '1962', '1966', '1970'],
-    correct: 2,
-    trivia: 'Inglaterra levantó su único título mundial en 1966.'
-  },
-  {
-    id: 16,
-    question: '¿Cuántos Mundiales ha ganado Alemania?',
-    options: ['2', '3', '4', '5'],
-    correct: 2,
-    trivia: 'Alemania suma cuatro títulos mundiales (1954, 1974, 1990, 2014).'
-  },
-  {
-    id: 17,
-    question: '¿Qué color representa tradicionalmente a la selección italiana?',
-    options: ['Rojo', 'Verde', 'Blanco', 'Azul'],
-    correct: 3,
-    trivia: 'Italia es conocida como la Azzurra por su clásico color azul.'
-  },
-  {
-    id: 18,
-    question: '¿Qué jugador es el máximo referente histórico de Portugal?',
-    options: ['Eusébio', 'Luis Figo', 'Cristiano Ronaldo', 'Deco'],
-    correct: 2,
-    trivia: 'Cristiano Ronaldo es el gran referente moderno e histórico de Portugal por récords y longevidad.'
-  },
-  {
-    id: 19,
-    question: '¿Cómo se le apoda a la selección de Países Bajos?',
-    options: ['La Naranja Mecánica', 'Los Tulipanes de Oro', 'La Furia Naranja', 'El Molinillo'],
-    correct: 0,
-    trivia: 'Países Bajos es recordada por el apodo de la Naranja Mecánica.'
-  },
-  {
-    id: 20,
-    question: '¿Cómo se le conoce a la “generación dorada” de Bélgica?',
-    options: ['Los Diablos Verdes', 'Los Diablos Rojos', 'Los Leones Rojos', 'Los Titanes Flamencos'],
-    correct: 1,
-    trivia: 'La selección belga es conocida como los Diablos Rojos, nombre también asociado a su generación dorada.'
-  },
-  {
-    id: 21,
-    question: '¿A qué final llegó Croacia en 2018?',
-    options: ['A la final de la Eurocopa', 'A la final de la Nations League', 'A la final del Mundial', 'A la final de la Copa Confederaciones'],
-    correct: 2,
-    trivia: 'Croacia fue subcampeona del Mundial de Rusia 2018.'
-  },
-  {
-    id: 22,
-    question: '¿Qué logró Dinamarca en la Eurocopa de 1992?',
-    options: ['Fue subcampeona', 'Ganó el torneo', 'Llegó a semifinales', 'No se clasificó'],
-    correct: 1,
-    trivia: 'Dinamarca sorprendió al mundo ganando la Eurocopa 1992.'
-  },
-  {
-    id: 23,
-    question: '¿Por qué es conocida Suiza en términos de neutralidad?',
-    options: ['Por su neutralidad política histórica', 'Por no participar en torneos FIFA', 'Por no tener ejército', 'Por organizar todos los Mundiales'],
-    correct: 0,
-    trivia: 'Suiza es mundialmente conocida por su política de neutralidad histórica.'
-  },
-  {
-    id: 24,
-    question: '¿Qué delantero ha sido figura reciente de Polonia?',
-    options: ['Arkadiusz Milik', 'Robert Lewandowski', 'Krzysztof Piatek', 'Piotr Zielinski'],
-    correct: 1,
-    trivia: 'Robert Lewandowski es el referente ofensivo reciente de Polonia.'
-  },
-  {
-    id: 25,
-    question: '¿De qué antigua nación formó parte Serbia?',
-    options: ['Checoslovaquia', 'Yugoslavia', 'Unión Soviética', 'Imperio Austrohúngaro'],
-    correct: 1,
-    trivia: 'Serbia formó parte de la antigua Yugoslavia.'
-  },
-  {
-    id: 26,
-    question: '¿Qué jugador legendario sueco destacó en los 2000?',
-    options: ['Henrik Larsson', 'Freddie Ljungberg', 'Zlatan Ibrahimovic', 'Kim Kallstrom'],
-    correct: 2,
-    trivia: 'Zlatan Ibrahimovic fue la gran figura sueca durante los 2000 y 2010.'
-  },
-  {
-    id: 27,
-    question: '¿En qué continente se encuentra Austria?',
-    options: ['Asia', 'Europa', 'América', 'África'],
-    correct: 1,
-    trivia: 'Austria se encuentra en Europa central.'
-  },
-  {
-    id: 28,
-    question: '¿Entre qué dos continentes se ubica Turquía?',
-    options: ['Europa y Asia', 'Asia y África', 'Europa y África', 'América y Europa'],
-    correct: 0,
-    trivia: 'Turquía tiene territorio en Europa y Asia.'
-  },
-  {
-    id: 29,
-    question: '¿Qué logro histórico consiguió Marruecos en Qatar 2022?',
-    options: ['Llegar a octavos de final', 'Llegar a cuartos de final', 'Llegar a semifinales', 'Ser campeón mundial'],
-    correct: 2,
-    trivia: 'Marruecos fue la primera selección africana en alcanzar unas semifinales mundialistas.'
-  },
-  {
-    id: 30,
-    question: '¿Qué torneo ganó Senegal en 2021?',
-    options: ['Mundial Sub-20', 'Copa Africana de Naciones', 'Copa Confederaciones', 'CHAN'],
-    correct: 1,
-    trivia: 'Senegal ganó la Copa Africana de Naciones (edición disputada en 2022, correspondiente a 2021).'
-  },
-  {
-    id: 31,
-    question: '¿Cuál es el apodo de la selección de Nigeria?',
-    options: ['Las Águilas Verdes', 'Los Leones Verdes', 'Las Panteras Verdes', 'Los Halcones del Golfo'],
-    correct: 0,
-    trivia: 'Nigeria es conocida como las Súper Águilas (Águilas Verdes en español).'
-  },
-  {
-    id: 32,
-    question: '¿Qué ocurrió con el penal de Ghana contra Uruguay en 2010?',
-    options: ['Lo anotó y Ghana clasificó', 'Lo atajó Muslera en tiempo extra', 'Lo erró Asamoah Gyan y luego Ghana cayó en penales', 'Se repitió por invasión y lo marcó en el segundo intento'],
-    correct: 2,
-    trivia: 'Asamoah Gyan falló el penal al final del alargue y Ghana terminó eliminada en la tanda.'
-  },
-  {
-    id: 33,
-    question: '¿Qué famoso río atraviesa Egipto?',
-    options: ['Río Congo', 'Río Níger', 'Río Nilo', 'Río Jordán'],
-    correct: 2,
-    trivia: 'El río Nilo es esencial para la historia y la vida en Egipto.'
-  },
-  {
-    id: 34,
-    question: '¿En qué continente se ubica Argelia?',
-    options: ['Europa', 'América', 'Asia', 'África'],
-    correct: 3,
-    trivia: 'Argelia está en el norte de África.'
-  },
-  {
-    id: 35,
-    question: '¿Qué jugador famoso fue referente de Costa de Marfil?',
-    options: ['Yaya Touré', 'Didier Drogba', 'Salomon Kalou', 'Gervinho'],
-    correct: 1,
-    trivia: 'Didier Drogba es el símbolo más reconocido del fútbol marfileño.'
-  },
-  {
-    id: 36,
-    question: '¿Cómo se le conoce a la selección de Camerún?',
-    options: ['Los Leones Azules', 'Los Tigres Indomables', 'Los Leones Indomables', 'Los Halcones Negros'],
-    correct: 2,
-    trivia: 'Camerún es conocido como los Leones Indomables.'
-  },
-  {
-    id: 37,
-    question: '¿En qué región del mundo está Túnez?',
-    options: ['Norte de África', 'África austral', 'Oriente Medio', 'Europa mediterránea'],
-    correct: 0,
-    trivia: 'Túnez se ubica en el norte de África, frente al mar Mediterráneo.'
-  },
-  {
-    id: 38,
-    question: '¿Qué tecnología es famosa en Japón a nivel mundial?',
-    options: ['Tecnología robótica y electrónica', 'Tecnología petrolera', 'Tecnología aeroespacial militar', 'Tecnología minera'],
-    correct: 0,
-    trivia: 'Japón es reconocido globalmente por su innovación en robótica y electrónica.'
-  },
-  {
-    id: 39,
-    question: '¿Qué logró Corea del Sur en el Mundial 2002?',
-    options: ['Ganó el Mundial', 'Llegó a semifinales', 'Llegó a la final', 'Quedó eliminada en grupos'],
-    correct: 1,
-    trivia: 'Corea del Sur alcanzó las semifinales en 2002, su mejor resultado histórico.'
-  },
-  {
-    id: 40,
-    question: '¿En qué hemisferio se encuentra Australia?',
-    options: ['Hemisferio norte', 'Hemisferio sur', 'Ambos hemisferios', 'No tiene hemisferio definido'],
-    correct: 1,
-    trivia: 'Australia se ubica principalmente en el hemisferio sur.'
-  },
-  {
-    id: 41,
-    question: '¿Cómo se llamaba antiguamente Irán?',
-    options: ['Mesopotamia', 'Persia', 'Partia', 'Media'],
-    correct: 1,
-    trivia: 'Irán fue conocido históricamente como Persia.'
-  },
-  {
-    id: 42,
-    question: '¿Qué ciudad sagrada se encuentra en Arabia Saudita?',
-    options: ['Dubái', 'Riad', 'La Meca', 'Doha'],
-    correct: 2,
-    trivia: 'La Meca es una de las ciudades más sagradas del islam y está en Arabia Saudita.'
-  },
-  {
-    id: 43,
-    question: '¿Qué evento deportivo importante organizó Qatar en 2022?',
-    options: ['Juegos Olímpicos', 'Copa Mundial de la FIFA', 'Copa Asiática', 'Mundial de Clubes'],
-    correct: 1,
-    trivia: 'Qatar organizó la Copa Mundial de la FIFA 2022.'
-  },
-  {
-    id: 44,
-    question: '¿Qué ciudad famosa está en Emiratos Árabes Unidos por sus rascacielos?',
-    options: ['Abu Dabi', 'Doha', 'Kuwait City', 'Dubái'],
-    correct: 3,
-    trivia: 'Dubái es famosa por sus rascacielos, incluido el Burj Khalifa.'
-  },
-  {
-    id: 45,
-    question: '¿En qué región geográfica se encuentra Irak?',
-    options: ['Balcanes', 'Oriente Medio', 'Asia central', 'Norte de África'],
-    correct: 1,
-    trivia: 'Irak se encuentra en la región de Oriente Medio.'
-  },
-  {
-    id: 46,
-    question: '¿Qué deporte es el más popular en Nueva Zelanda además del fútbol?',
-    options: ['Béisbol', 'Críquet', 'Rugby', 'Hockey sobre hielo'],
-    correct: 2,
-    trivia: 'El rugby es el deporte más emblemático de Nueva Zelanda.'
-  },
-  {
-    id: 47,
-    question: '¿Qué comida típica peruana es famosa mundialmente?',
-    options: ['Lomo saltado', 'Ceviche', 'Ají de gallina', 'Anticuchos'],
-    correct: 1,
-    trivia: 'El ceviche es uno de los platos peruanos más reconocidos a nivel mundial.'
-  },
-  {
-    id: 48,
-    question: '¿En qué continente se encuentra Ucrania?',
-    options: ['Asia', 'Europa', 'África', 'Oceanía'],
-    correct: 1,
-    trivia: 'Ucrania se encuentra en Europa oriental.'
-  }
+type RawQuestion = [question: string, options: [string, string, string, string], correct: number];
+
+const rawQuestions: RawQuestion[] = [
+  ['¿En qué años México ha sido sede de la Copa del Mundo?', ['1970 y 1986', '1994 y 2006', '1966 y 1998', '2002 y 2010'], 0],
+  ['¿Cuál es el apodo de la selección de México?', ['Guerreros', 'El Tri', 'Aztecas', 'Verdes'], 1],
+  ['¿Cuál es el estadio más emblemático donde juega México?', ['Estadio Akron', 'Estadio BBVA', 'Estadio Azteca', 'Estadio CU'], 2],
+  ['¿Contra qué selección tiene mayor rivalidad México?', ['Argentina', 'Brasil', 'Estados Unidos', 'España'], 2],
+  ['¿Hasta qué fase ha llegado México en Copas del Mundo?', ['Final', 'Semifinal', 'Cuartos de final', 'Octavos'], 2],
+  ['¿En qué año Estados Unidos organizó la Copa del Mundo?', ['1994', '2002', '2010', '1986'], 0],
+  ['¿Cuál es el apodo de la selección de Estados Unidos?', ['Eagles', 'Team USA', 'Yankees', 'Stars'], 1],
+  ['¿Quién es una de las principales estrellas actuales de Estados Unidos?', ['Landon Donovan', 'Christian Pulisic', 'Clint Dempsey', 'Gio Reyna'], 1],
+  ['¿A qué confederación pertenece Estados Unidos?', ['UEFA', 'CONMEBOL', 'CONCACAF', 'AFC'], 2],
+  ['¿Cuál es el mejor resultado de Estados Unidos en un Mundial?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 2],
+  ['¿En qué año Canadá participó por primera vez en un Mundial?', ['1986', '1994', '2002', '1978'], 0],
+  ['¿Qué jugador es una de las principales figuras actuales de Canadá?', ['Jonathan David', 'Alphonso Davies', 'Larin', 'Buchanan'], 1],
+  ['¿Cuál es el apodo de la selección de Canadá?', ['Los Rojos', 'Los Blancos', 'Maple Team', 'Norteños'], 0],
+  ['¿Qué torneo ganó Canadá en el año 2000?', ['Copa América', 'Copa Oro', 'Nations League', 'Confederaciones'], 1],
+  ['¿A qué confederación pertenece Canadá?', ['UEFA', 'AFC', 'CONCACAF', 'CAF'], 2],
+  ['¿Cuál ha sido la mejor participación de Costa Rica en un Mundial?', ['Octavos', 'Cuartos de final 2014', 'Semifinal', 'Final'], 1],
+  ['¿Qué portero fue clave para Costa Rica en el Mundial 2014?', ['Ochoa', 'Keylor Navas', 'Bravo', 'Muslera'], 1],
+  ['¿Cuál es el apodo de la selección de Costa Rica?', ['Ticos', 'Verdes', 'Cafeteros', 'Guerreros'], 0],
+  ['¿A qué confederación pertenece Costa Rica?', ['CONCACAF', 'UEFA', 'CAF', 'AFC'], 0],
+  ['¿Qué selección eliminó Costa Rica en el Mundial 2014?', ['España', 'Italia', 'Brasil', 'Francia'], 1],
+  ['¿En qué año Panamá debutó en la Copa del Mundo?', ['2014', '2018', '2022', '2010'], 1],
+  ['¿Contra qué selección jugó su primer partido mundialista Panamá?', ['Inglaterra', 'Bélgica', 'Japón', 'Brasil'], 1],
+  ['¿Cuál es el apodo de la selección de Panamá?', ['Canaleros', 'Rojos', 'Guerreros', 'Tigres'], 0],
+  ['¿Quién anotó el primer gol de Panamá en un Mundial?', ['Torres', 'Baloy', 'Gómez', 'Rodríguez'], 1],
+  ['¿A qué confederación pertenece Panamá?', ['UEFA', 'CONCACAF', 'AFC', 'CAF'], 1],
+  ['¿En qué año Jamaica participó en su primer Mundial?', ['1998', '2002', '1994', '2010'], 0],
+  ['¿Cuál es el apodo de la selección de Jamaica?', ['Reggae Boyz', 'Rastas', 'Caribeños', 'Verdes'], 0],
+  ['¿Qué otro deporte es muy popular en Jamaica además del fútbol?', ['Béisbol', 'Atletismo', 'Rugby', 'Básquetbol'], 1],
+  ['¿A qué confederación pertenece Jamaica?', ['CONCACAF', 'UEFA', 'CAF', 'AFC'], 0],
+  ['¿Contra qué selección consiguió su primera victoria mundialista Jamaica?', ['Francia', 'Japón', 'Brasil', 'México'], 1],
+  ['¿Cuántos Mundiales ha ganado Argentina?', ['2', '3', '4', '5'], 1],
+  ['¿Qué jugador fue clave para que Argentina ganara el Mundial 2022?', ['Di María', 'Lionel Messi', 'Julián Álvarez', 'Dybala'], 1],
+  ['¿Cuál es el apodo de la selección de Argentina?', ['Gauchos', 'Albiceleste', 'Pampas', 'Leones'], 1],
+  ['¿Qué jugador histórico es considerado leyenda en Argentina?', ['Pelé', 'Maradona', 'Zidane', 'Ronaldo'], 1],
+  ['¿Contra qué país tiene mayor rivalidad Argentina?', ['Uruguay', 'Brasil', 'Chile', 'España'], 1],
+  ['¿Cuántos Mundiales ha ganado Brasil?', ['3', '4', '5', '6'], 2],
+  ['¿Qué jugador es considerado el mejor de la historia de Brasil?', ['Ronaldo', 'Ronaldinho', 'Pelé', 'Neymar'], 2],
+  ['¿Cuál es el apodo de la selección de Brasil?', ['Verdeamarela', 'Canarinha', 'Samba', 'Guerreros'], 1],
+  ['¿Qué color predomina en el uniforme de Brasil?', ['Azul', 'Verde', 'Amarillo', 'Blanco'], 2],
+  ['¿En qué año ganó su último Mundial Brasil?', ['1998', '2002', '2006', '2010'], 1],
+  ['¿Cuántos Mundiales ha ganado Uruguay?', ['1', '2', '3', '4'], 1],
+  ['¿En qué año organizó Uruguay el primer Mundial?', ['1920', '1930', '1940', '1950'], 1],
+  ['¿Cuál es el apodo de la selección de Uruguay?', ['Celeste', 'Charrúas', 'Guerreros', 'Leones'], 0],
+  ['¿Contra qué país tiene mayor rivalidad Uruguay?', ['Brasil', 'Argentina', 'Chile', 'Perú'], 1],
+  ['¿Qué logró Uruguay en el Mundial 2010?', ['Campeón', 'Subcampeón', 'Cuarto lugar', 'Octavos'], 2],
+  ['¿Qué jugador fue figura de Colombia en el Mundial 2014?', ['Falcao', 'James Rodríguez', 'Cuadrado', 'Valderrama'], 1],
+  ['¿Cuál es el apodo de la selección de Colombia?', ['Cafeteros', 'Tricolores', 'Guerreros', 'Leones'], 0],
+  ['¿A qué confederación pertenece Colombia?', ['UEFA', 'CONMEBOL', 'CONCACAF', 'CAF'], 1],
+  ['¿Cuál ha sido el mejor resultado de Colombia en un Mundial?', ['Final', 'Semifinal', 'Cuartos de final', 'Octavos'], 2],
+  ['¿Qué color predomina en el uniforme de Colombia?', ['Azul', 'Amarillo', 'Rojo', 'Verde'], 1],
+  ['¿Qué torneo ganó Chile en 2015 y 2016?', ['Mundial', 'Copa América', 'Confederaciones', 'Nations League'], 1],
+  ['¿Cuál es el apodo de la selección de Chile?', ['Roja', 'Guerreros', 'Cóndores', 'Andes'], 0],
+  ['¿Cómo se le conoce a la generación exitosa de Chile?', ['Generación Oro', 'Generación Dorada', 'Generación Roja', 'Generación Andina'], 1],
+  ['¿A qué confederación pertenece Chile?', ['CONMEBOL', 'UEFA', 'CONCACAF', 'AFC'], 0],
+  ['¿Cuál ha sido el mejor resultado de Chile en un Mundial?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 2],
+  ['¿En qué año debutó Ecuador en un Mundial?', ['1998', '2002', '2006', '2010'], 1],
+  ['¿Cuál es el apodo de la selección de Ecuador?', ['Tri', 'Amarillos', 'Andes', 'Guerreros'], 0],
+  ['¿A qué confederación pertenece Ecuador?', ['UEFA', 'CONMEBOL', 'CONCACAF', 'CAF'], 1],
+  ['¿Cuál ha sido el mejor resultado de Ecuador en un Mundial?', ['Cuartos', 'Octavos de final', 'Semifinal', 'Final'], 1],
+  ['¿Qué colores usa la selección de Ecuador?', ['Azul y blanco', 'Amarillo, azul y rojo', 'Verde y blanco', 'Rojo y negro'], 1],
+  ['¿Cuántos Mundiales ha ganado Francia?', ['1', '2', '3', '4'], 1],
+  ['¿Qué jugador fue figura en el Mundial 2018 con Francia?', ['Griezmann', 'Mbappé', 'Benzema', 'Pogba'], 1],
+  ['¿Cuál es el apodo de la selección de Francia?', ['Les Bleus', 'Galos', 'Guerreros', 'Leones'], 0],
+  ['¿Qué jugador es estrella actual de Francia?', ['Giroud', 'Mbappé', 'Kanté', 'Coman'], 1],
+  ['¿Contra qué país tiene rivalidad histórica Francia?', ['España', 'Alemania', 'Italia', 'Inglaterra'], 1],
+  ['¿En qué año ganó España su Mundial?', ['2006', '2010', '2014', '2018'], 1],
+  ['¿Cuál es el apodo de la selección de España?', ['Roja', 'Toros', 'Guerreros', 'Iberia'], 0],
+  ['¿Qué estilo de juego hizo famoso a España?', ['Contraataque', 'Tiki-taka', 'Defensa total', 'Juego largo'], 1],
+  ['¿Quién anotó el gol en la final del Mundial 2010 para España?', ['Villa', 'Iniesta', 'Torres', 'Xavi'], 1],
+  ['¿A qué confederación pertenece España?', ['UEFA', 'CONMEBOL', 'AFC', 'CONCACAF'], 0],
+  ['¿Cuántos Mundiales ha ganado Inglaterra?', ['0', '1', '2', '3'], 1],
+  ['¿En qué año ganó Inglaterra su único Mundial?', ['1958', '1966', '1970', '1982'], 1],
+  ['¿Cuál es el apodo de la selección de Inglaterra?', ['Lions', 'Three Lions', 'Eagles', 'Kings'], 1],
+  ['¿Qué liga pertenece a Inglaterra?', ['LaLiga', 'Serie A', 'Premier League', 'Bundesliga'], 2],
+  ['¿Quién es uno de los goleadores recientes de Inglaterra?', ['Rooney', 'Kane', 'Lampard', 'Gerrard'], 1],
+  ['¿Cuántos Mundiales ha ganado Alemania?', ['3', '4', '5', '2'], 1],
+  ['¿En qué año ganó su último Mundial Alemania?', ['2010', '2014', '2006', '2018'], 1],
+  ['¿Cuál es el apodo de la selección de Alemania?', ['Die Mannschaft', 'Eagles', 'Guerreros', 'Leones'], 0],
+  ['¿Quién anotó el gol de la final 2014 para Alemania?', ['Müller', 'Kroos', 'Götze', 'Özil'], 2],
+  ['¿Contra qué país tiene rivalidad histórica Alemania?', ['Francia', 'Argentina', 'Italia', 'España'], 1],
+  ['¿Cuántos Mundiales ha ganado Italia?', ['3', '4', '2', '5'], 1],
+  ['¿Cuál es el apodo de la selección de Italia?', ['Azzurri', 'Romanos', 'Gladiadores', 'Leones'], 0],
+  ['¿En qué año ganó su último Mundial Italia?', ['2002', '2006', '2010', '2014'], 1],
+  ['¿Qué estilo defensivo es famoso en Italia?', ['Tiki-taka', 'Catenaccio', 'Presión alta', 'Juego largo'], 1],
+  ['¿Qué jugador histórico es leyenda en Italia?', ['Maldini', 'Zidane', 'Messi', 'Ronaldo'], 0],
+  ['¿Cuántas finales ha jugado Países Bajos?', ['1', '2', '3', '4'], 2],
+  ['¿Cuál es el apodo de la selección de Países Bajos?', ['Naranja Mecánica', 'Tulipanes', 'Guerreros', 'Leones'], 0],
+  ['¿Qué color identifica a Países Bajos?', ['Azul', 'Naranja', 'Verde', 'Rojo'], 1],
+  ['¿Qué estilo desarrolló Países Bajos?', ['Defensa total', 'Fútbol Total', 'Contraataque', 'Juego directo'], 1],
+  ['¿A qué confederación pertenece Países Bajos?', ['UEFA', 'CONMEBOL', 'CAF', 'AFC'], 0],
+  ['¿Cómo se le conoce a la generación exitosa de Bélgica?', ['Generación Dorada', 'Generación Roja', 'Generación Europa', 'Generación Fútbol'], 0],
+  ['¿Cuál es el mejor resultado de Bélgica en un Mundial?', ['Campeón', 'Final', 'Tercer lugar 2018', 'Cuartos'], 2],
+  ['¿Qué jugador es estrella de Bélgica?', ['Hazard', 'De Bruyne', 'Lukaku', 'Courtois'], 1],
+  ['¿A qué confederación pertenece Bélgica?', ['UEFA', 'CAF', 'AFC', 'CONMEBOL'], 0],
+  ['¿Cuál es el apodo de la selección de Bélgica?', ['Diablos Rojos', 'Leones', 'Guerreros', 'Águilas'], 0],
+  ['¿Qué jugador es el más famoso de Portugal?', ['Figo', 'Cristiano Ronaldo', 'Pepe', 'Bernardo Silva'], 1],
+  ['¿Qué título importante ha ganado Portugal?', ['Mundial', 'Eurocopa 2016', 'Copa América', 'Nations League'], 1],
+  ['¿Cuál es el apodo de la selección de Portugal?', ['Lusos', 'Quinas', 'Guerreros', 'Marinos'], 1],
+  ['¿A qué confederación pertenece Portugal?', ['UEFA', 'CONMEBOL', 'CAF', 'AFC'], 0],
+  ['¿Cuál ha sido el mejor resultado de Portugal en un Mundial?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 2],
+  ['¿Qué logró Croacia en el Mundial 2018?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 1],
+  ['¿Quién fue la figura de Croacia en 2018?', ['Mandžukić', 'Luka Modrić', 'Rakitić', 'Perišić'], 1],
+  ['¿Cuál es el apodo de la selección de Croacia?', ['Vatreni', 'Guerreros', 'Balcánicos', 'Leones'], 0],
+  ['¿A qué confederación pertenece Croacia?', ['UEFA', 'CONMEBOL', 'AFC', 'CAF'], 0],
+  ['¿Qué colores usa Croacia en su uniforme?', ['Azul', 'Rojo y blanco', 'Verde', 'Negro'], 1],
+  ['¿Qué torneo ganó Dinamarca en 1992?', ['Mundial', 'Eurocopa', 'Copa América', 'Nations League'], 1],
+  ['¿Cuál es el apodo de la selección de Dinamarca?', ['Vikingos', 'Daneses Rojos', 'Daneses', 'Guerreros'], 2],
+  ['¿A qué confederación pertenece Dinamarca?', ['UEFA', 'CONCACAF', 'CAF', 'AFC'], 0],
+  ['¿Qué jugador histórico es figura de Dinamarca?', ['Laudrup', 'Eriksen', 'Poulsen', 'Schmeichel'], 0],
+  ['¿Cuál ha sido el mejor resultado de Dinamarca en un Mundial?', ['Campeón', 'Cuartos de final', 'Semifinal', 'Final'], 1],
+  ['¿Cuál es el apodo de la selección de Suiza?', ['Helvéticos', 'Nati', 'Alpinos', 'Guerreros'], 1],
+  ['¿A qué confederación pertenece Suiza?', ['UEFA', 'AFC', 'CAF', 'CONMEBOL'], 0],
+  ['¿Cuál es el mejor resultado de Suiza en Mundiales?', ['Campeón', 'Cuartos de final', 'Semifinal', 'Final'], 1],
+  ['¿Qué color predomina en el uniforme de Suiza?', ['Azul', 'Verde', 'Rojo', 'Negro'], 2],
+  ['¿Qué país tiene una bandera similar a la de Suiza?', ['Japón', 'Dinamarca', 'Italia', 'Francia'], 1],
+  ['¿Cuál es el apodo de la selección de Serbia?', ['Águilas Blancas', 'Leones', 'Guerreros', 'Balcánicos'], 0],
+  ['¿A qué confederación pertenece Serbia?', ['UEFA', 'CAF', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué país representaba antes Serbia en torneos internacionales?', ['Yugoslavia', 'Rusia', 'Austria', 'Hungría'], 0],
+  ['¿Qué colores usa la selección de Serbia?', ['Verde', 'Rojo, azul y blanco', 'Negro', 'Amarillo'], 1],
+  ['¿Cuál ha sido el mejor resultado histórico de Serbia/Yugoslavia en un Mundial?', ['Campeón', 'Subcampeón', 'Cuartos de final', 'Octavos'], 2],
+  ['¿Qué jugador es la principal figura actual de Polonia?', ['Lewandowski', 'Zielinski', 'Szczesny', 'Milik'], 0],
+  ['¿Cuál es el apodo de la selección de Polonia?', ['Águilas Blancas', 'Guerreros', 'Polacos', 'Leones'], 0],
+  ['¿A qué confederación pertenece Polonia?', ['UEFA', 'CAF', 'AFC', 'CONCACAF'], 0],
+  ['¿Cuál ha sido el mejor resultado de Polonia en un Mundial?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 2],
+  ['¿Qué colores usa Polonia?', ['Azul', 'Rojo y blanco', 'Verde', 'Negro'], 1],
+  ['¿Qué logró Turquía en el Mundial 2002?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 2],
+  ['¿Cuál es el apodo de la selección de Turquía?', ['Media Luna', 'Guerreros', 'Leones', 'Imperio'], 0],
+  ['¿A qué confederación pertenece Turquía?', ['UEFA', 'AFC', 'CAF', 'CONMEBOL'], 0],
+  ['¿Qué color predomina en el uniforme de Turquía?', ['Azul', 'Verde', 'Rojo', 'Blanco'], 2],
+  ['¿En qué continente se ubica parcialmente Turquía?', ['América', 'Europa y Asia', 'África', 'Oceanía'], 1],
+  ['¿Qué logró Suecia en el Mundial 1958?', ['Campeón', 'Subcampeón', 'Tercer lugar', 'Cuartos'], 1],
+  ['¿Cuál es el apodo de la selección de Suecia?', ['Vikingos', 'Blågult', 'Guerreros', 'Leones'], 1],
+  ['¿Qué jugador famoso ha representado a Suecia?', ['Ibrahimović', 'Haaland', 'Modrić', 'Bale'], 0],
+  ['¿A qué confederación pertenece Suecia?', ['UEFA', 'CAF', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué colores usa Suecia?', ['Rojo y blanco', 'Azul y amarillo', 'Verde', 'Negro'], 1],
+  ['¿Cuál ha sido el mejor resultado de Ucrania en un Mundial?', ['Campeón', 'Semifinal', 'Cuartos 2006', 'Octavos'], 2],
+  ['¿Qué jugador histórico destaca en Ucrania?', ['Shevchenko', 'Modrić', 'Lewandowski', 'Bale'], 0],
+  ['¿A qué confederación pertenece Ucrania?', ['UEFA', 'CAF', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué colores usa la selección de Ucrania?', ['Azul y amarillo', 'Rojo', 'Verde', 'Negro'], 0],
+  ['¿En qué año debutó Ucrania en un Mundial?', ['2002', '2006', '2010', '1998'], 1],
+  ['¿Qué logró Marruecos en el Mundial 2022?', ['Campeón', 'Subcampeón', 'Semifinales', 'Cuartos'], 2],
+  ['¿Cuál es el apodo de la selección de Marruecos?', ['Leones del Atlas', 'Guerreros', 'Tigres', 'Águilas'], 0],
+  ['¿A qué confederación pertenece Marruecos?', ['CAF', 'UEFA', 'AFC', 'CONMEBOL'], 0],
+  ['¿Qué colores usa la selección de Marruecos?', ['Azul', 'Rojo y verde', 'Amarillo', 'Negro'], 1],
+  ['¿En qué continente se ubica Marruecos?', ['Europa', 'Asia', 'África', 'América'], 2],
+  ['¿Qué logró Senegal en el Mundial 2002?', ['Campeón', 'Subcampeón', 'Cuartos de final', 'Octavos'], 2],
+  ['¿Cuál es el apodo de la selección de Senegal?', ['Leones de Teranga', 'Guerreros', 'Tigres', 'Águilas'], 0],
+  ['¿Qué jugador fue figura de Senegal recientemente?', ['Salah', 'Mané', 'Drogba', 'Eto’o'], 1],
+  ['¿A qué confederación pertenece Senegal?', ['CAF', 'UEFA', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué color predomina en el uniforme de Senegal?', ['Verde', 'Azul', 'Rojo', 'Negro'], 0],
+  ['¿Cuál es el apodo de la selección de Nigeria?', ['Súper Águilas', 'Leones', 'Guerreros', 'Tigres'], 0],
+  ['¿Qué logro olímpico tiene Nigeria en fútbol?', ['Plata', 'Oro 1996', 'Bronce', 'Ninguno'], 1],
+  ['¿A qué confederación pertenece Nigeria?', ['CAF', 'UEFA', 'AFC', 'CONMEBOL'], 0],
+  ['¿Qué colores usa la selección de Nigeria?', ['Verde y blanco', 'Rojo', 'Azul', 'Negro'], 0],
+  ['¿Cuál ha sido el mejor resultado de Nigeria en Mundiales?', ['Semifinal', 'Cuartos', 'Octavos de final', 'Final'], 2],
+  ['¿Qué logró Camerún en el Mundial 1990?', ['Campeón', 'Subcampeón', 'Cuartos de final', 'Octavos'], 2],
+  ['¿Cuál es el apodo de la selección de Camerún?', ['Leones Indomables', 'Guerreros', 'Tigres', 'Águilas'], 0],
+  ['¿Qué jugador histórico destacó en Camerún?', ['Drogba', 'Eto’o', 'Salah', 'Mané'], 1],
+  ['¿A qué confederación pertenece Camerún?', ['CAF', 'UEFA', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué colores usa la selección de Camerún?', ['Verde, rojo y amarillo', 'Azul', 'Negro', 'Blanco'], 0],
+  ['¿Qué logró Ghana en el Mundial 2010?', ['Campeón', 'Subcampeón', 'Cuartos de final', 'Octavos'], 2],
+  ['¿Cuál es el apodo de la selección de Ghana?', ['Estrellas Negras', 'Leones', 'Guerreros', 'Águilas'], 0],
+  ['¿A qué confederación pertenece Ghana?', ['CAF', 'UEFA', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué colores usa la selección de Ghana?', ['Rojo, amarillo y verde', 'Azul', 'Negro', 'Blanco'], 0],
+  ['¿Qué jugador destacó en Ghana?', ['Gyan', 'Salah', 'Mané', 'Eto’o'], 0],
+  ['¿Qué victoria histórica logró Argelia en 1982?', ['vs Brasil', 'vs Alemania', 'vs Francia', 'vs Italia'], 1],
+  ['¿Cuál es el apodo de la selección de Argelia?', ['Zorros del Desierto', 'Leones', 'Guerreros', 'Tigres'], 0],
+  ['¿A qué confederación pertenece Argelia?', ['CAF', 'UEFA', 'AFC', 'CONMEBOL'], 0],
+  ['¿Qué color predomina en el uniforme de Argelia?', ['Verde', 'Azul', 'Rojo', 'Negro'], 0],
+  ['¿Cuál ha sido el mejor resultado de Argelia en un Mundial?', ['Cuartos', 'Octavos de final', 'Semifinal', 'Final'], 1],
+  ['¿Cuál es el apodo de la selección de Túnez?', ['Águilas de Cartago', 'Leones', 'Guerreros', 'Tigres'], 0],
+  ['¿A qué confederación pertenece Túnez?', ['CAF', 'UEFA', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué color predomina en el uniforme de Túnez?', ['Rojo', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Cuál ha sido el mejor resultado de Túnez en un Mundial?', ['Cuartos', 'Octavos', 'Fase de grupos', 'Semifinal'], 2],
+  ['¿En qué año debutó Túnez en un Mundial?', ['1978', '1982', '1990', '2002'], 0],
+  ['¿Qué jugador es la estrella actual de Egipto?', ['Mané', 'Salah', 'Drogba', 'Eto’o'], 1],
+  ['¿Cuál es el apodo de la selección de Egipto?', ['Faraones', 'Guerreros', 'Leones', 'Águilas'], 0],
+  ['¿A qué confederación pertenece Egipto?', ['CAF', 'UEFA', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué color usa la selección de Egipto?', ['Rojo', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Qué logro tiene Egipto en África?', ['Más Copas África', 'Más Mundiales', 'Más Eurocopas', 'Más Confederaciones'], 0],
+  ['¿Qué jugador famoso fue figura de Costa de Marfil?', ['Drogba', 'Salah', 'Mané', 'Eto’o'], 0],
+  ['¿Cuál es el apodo de la selección de Costa de Marfil?', ['Elefantes', 'Leones', 'Guerreros', 'Tigres'], 0],
+  ['¿A qué confederación pertenece Costa de Marfil?', ['CAF', 'UEFA', 'AFC', 'CONCACAF'], 0],
+  ['¿Qué color predomina en el uniforme de Costa de Marfil?', ['Naranja', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Cuál ha sido el mejor resultado de Costa de Marfil en Mundiales?', ['Cuartos', 'Octavos', 'Fase de grupos', 'Semifinal'], 2],
+  ['¿Cuál es el apodo de la selección de Japón?', ['Samuráis Azules', 'Dragones', 'Guerreros', 'Tigres'], 0],
+  ['¿A qué confederación pertenece Japón?', ['AFC', 'UEFA', 'CAF', 'CONMEBOL'], 0],
+  ['¿Cuál ha sido el mejor resultado de Japón en Mundiales?', ['Cuartos', 'Octavos de final', 'Semifinal', 'Final'], 1],
+  ['¿Qué color usa la selección de Japón?', ['Azul', 'Rojo', 'Verde', 'Negro'], 0],
+  ['¿Qué caracteriza el juego de Japón?', ['Fuerza', 'Técnica', 'Defensa', 'Juego largo'], 1],
+  ['¿Qué logró Corea del Sur en 2002?', ['Campeón', 'Subcampeón', 'Semifinales', 'Cuartos'], 2],
+  ['¿Cuál es el apodo de la selección de Corea del Sur?', ['Tigres Asiáticos', 'Dragones', 'Guerreros', 'Leones'], 0],
+  ['¿A qué confederación pertenece Corea del Sur?', ['AFC', 'UEFA', 'CAF', 'CONCACAF'], 0],
+  ['¿Qué jugador es figura de Corea del Sur?', ['Son Heung-min', 'Kubo', 'Honda', 'Park'], 0],
+  ['¿Qué color usa la selección de Corea del Sur?', ['Rojo', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Cuál es el apodo de la selección de Irán?', ['Team Melli', 'Guerreros', 'Tigres', 'Leones'], 0],
+  ['¿A qué confederación pertenece Irán?', ['AFC', 'UEFA', 'CAF', 'CONMEBOL'], 0],
+  ['¿Qué color predomina en el uniforme de Irán?', ['Blanco', 'Azul', 'Rojo', 'Negro'], 0],
+  ['¿Cuál ha sido el mejor resultado de Irán en Mundiales?', ['Cuartos', 'Octavos', 'Fase de grupos', 'Semifinal'], 2],
+  ['¿En qué región se ubica Irán?', ['Europa', 'Medio Oriente', 'África', 'América'], 1],
+  ['¿A qué selección venció Arabia Saudita en el Mundial 2022?', ['Brasil', 'Argentina', 'Francia', 'España'], 1],
+  ['¿Cuál es el apodo de la selección de Arabia Saudita?', ['Halcones Verdes', 'Tigres', 'Guerreros', 'Leones'], 0],
+  ['¿A qué confederación pertenece Arabia Saudita?', ['AFC', 'UEFA', 'CAF', 'CONCACAF'], 0],
+  ['¿Qué color predomina en su uniforme?', ['Verde', 'Azul', 'Rojo', 'Negro'], 0],
+  ['¿En qué región se ubica Arabia Saudita?', ['Europa', 'Medio Oriente', 'África', 'Oceanía'], 1],
+  ['¿A qué confederación pertenece Australia actualmente?', ['OFC', 'AFC', 'UEFA', 'CAF'], 1],
+  ['¿Cuál es el apodo de la selección de Australia?', ['Socceroos', 'Canguros', 'Guerreros', 'Tigres'], 0],
+  ['¿Cuál ha sido el mejor resultado de Australia en un Mundial?', ['Cuartos', 'Octavos de final', 'Semifinal', 'Final'], 1],
+  ['¿Qué colores usa Australia?', ['Verde y amarillo', 'Azul', 'Rojo', 'Negro'], 0],
+  ['¿En qué continente está Australia?', ['Asia', 'Oceanía', 'Europa', 'América'], 1],
+  ['¿En qué año organizó el Mundial Qatar?', ['2018', '2022', '2014', '2010'], 1],
+  ['¿Cuál es el apodo de la selección de Qatar?', ['Granate', 'Guerreros', 'Tigres', 'Águilas'], 0],
+  ['¿A qué confederación pertenece Qatar?', ['AFC', 'UEFA', 'CAF', 'CONMEBOL'], 0],
+  ['¿Qué colores usa Qatar?', ['Blanco y vino', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Qué torneo ganó recientemente Qatar?', ['Mundial', 'Copa Asia', 'Eurocopa', 'Copa América'], 1],
+  ['¿Qué torneo ganó Irak en 2007?', ['Mundial', 'Copa Asia', 'Copa Oro', 'Eurocopa'], 1],
+  ['¿Cuál es el apodo de la selección de Irak?', ['Leones de Mesopotamia', 'Tigres', 'Guerreros', 'Águilas'], 0],
+  ['¿A qué confederación pertenece Irak?', ['AFC', 'UEFA', 'CAF', 'CONMEBOL'], 0],
+  ['¿Qué color usa la selección de Irak?', ['Verde', 'Azul', 'Rojo', 'Negro'], 0],
+  ['¿En qué región se ubica Irak?', ['Europa', 'Medio Oriente', 'África', 'América'], 1],
+  ['¿En qué año participó Emiratos Árabes Unidos en un Mundial?', ['1986', '1990', '1994', '2002'], 1],
+  ['¿Cuál es el apodo de la selección de Emiratos Árabes Unidos?', ['Blancos', 'Halcones', 'Guerreros del Desierto', 'Blancos del Golfo'], 3],
+  ['¿A qué confederación pertenece Emiratos Árabes Unidos?', ['AFC', 'UEFA', 'CAF', 'CONCACAF'], 0],
+  ['¿Qué colores usa la selección de Emiratos Árabes Unidos?', ['Blanco, rojo y verde', 'Azul', 'Negro', 'Amarillo'], 0],
+  ['¿En qué región se ubica Emiratos Árabes Unidos?', ['Europa', 'Medio Oriente', 'África', 'Oceanía'], 1],
+  ['¿A qué confederación pertenece Nueva Zelanda?', ['OFC', 'AFC', 'UEFA', 'CONMEBOL'], 0],
+  ['¿Cuál es el apodo de la selección de Nueva Zelanda?', ['All Whites', 'Guerreros', 'Leones', 'Tigres'], 0],
+  ['¿En qué año participó Nueva Zelanda en un Mundial reciente?', ['2006', '2010', '2014', '2018'], 1],
+  ['¿Qué color usa la selección de Nueva Zelanda?', ['Blanco', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿En qué continente se ubica Nueva Zelanda?', ['Asia', 'Oceanía', 'Europa', 'América'], 1],
+  ['¿En qué año volvió Perú a un Mundial recientemente?', ['2014', '2018', '2022', '2010'], 1],
+  ['¿Cuál es el apodo de la selección de Perú?', ['Blanquirroja', 'Guerreros', 'Incas', 'Leones'], 0],
+  ['¿A qué confederación pertenece Perú?', ['CONMEBOL', 'UEFA', 'CAF', 'AFC'], 0],
+  ['¿Qué colores usa la selección de Perú?', ['Blanco y rojo', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Qué jugador es histórico en Perú?', ['Guerrero', 'Messi', 'Neymar', 'Suárez'], 0],
+  ['¿Cuál es el apodo de la selección de Paraguay?', ['Albirroja', 'Guerreros', 'Leones', 'Tigres'], 0],
+  ['¿A qué confederación pertenece Paraguay?', ['CONMEBOL', 'UEFA', 'CAF', 'AFC'], 0],
+  ['¿Cuál ha sido el mejor resultado de Paraguay en un Mundial?', ['Cuartos de final 2010', 'Semifinal', 'Final', 'Campeón'], 0],
+  ['¿Qué colores usa la selección de Paraguay?', ['Rojo y blanco', 'Azul', 'Verde', 'Negro'], 0],
+  ['¿Qué jugador histórico destacó en Paraguay?', ['Chilavert', 'Messi', 'Ronaldo', 'Zidane'], 0],
 ];
 
+const QUESTIONS_PER_ROUND = 10;
+
+const allQuestions: Question[] = rawQuestions.map(([question, options, correct], index) => ({
+  id: index + 1,
+  question,
+  options,
+  correct,
+}));
+
+const shuffleQuestions = (questions: Question[]) => {
+  const shuffled = [...questions];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
+  }
+
+  return shuffled;
+};
+
+const createQuestionRound = (usedQuestionIds: number[] = []) => {
+  const usedQuestions = new Set(usedQuestionIds);
+  const availableQuestions = allQuestions.filter((question) => !usedQuestions.has(question.id));
+  const shouldResetUsedQuestions = availableQuestions.length < QUESTIONS_PER_ROUND;
+  const questionSource = shouldResetUsedQuestions ? allQuestions : availableQuestions;
+  const questions = shuffleQuestions(questionSource).slice(0, QUESTIONS_PER_ROUND);
+
+  return {
+    questions,
+    usedQuestionIds: shouldResetUsedQuestions
+      ? questions.map((question) => question.id)
+      : [...usedQuestionIds, ...questions.map((question) => question.id)],
+  };
+};
+
 export function Quiz() {
+  const [questionRound, setQuestionRound] = useState(() => createQuestionRound());
+  const questions = questionRound.questions;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -357,12 +299,12 @@ export function Quiz() {
 
   const handleAnswer = (index: number) => {
     if (selectedAnswer !== null) return;
-    
+
     setSelectedAnswer(index);
     setShowResult(true);
-    
+
     if (index === questions[currentQuestion].correct) {
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1);
     }
   };
 
@@ -377,6 +319,7 @@ export function Quiz() {
   };
 
   const handleRestart = () => {
+    setQuestionRound((currentRound) => createQuestionRound(currentRound.usedQuestionIds));
     setCurrentQuestion(0);
     setSelectedAnswer(null);
     setShowResult(false);
@@ -386,10 +329,10 @@ export function Quiz() {
 
   const getScoreMessage = () => {
     const percentage = (score / questions.length) * 100;
-    if (percentage === 100) return "¡Perfecto! Eres un experto del Mundial 🏆";
-    if (percentage >= 75) return "¡Excelente! Conoces muy bien el fútbol ⚽";
-    if (percentage >= 50) return "¡Bien! Vas por buen camino 👍";
-    return "Sigue aprendiendo sobre el Mundial 📚";
+    if (percentage === 100) return '¡Perfecto! Eres un experto del Mundial 🏆';
+    if (percentage >= 75) return '¡Excelente! Conoces muy bien el fútbol ⚽';
+    if (percentage >= 50) return '¡Bien! Vas por buen camino 👍';
+    return 'Sigue aprendiendo sobre el Mundial 📚';
   };
 
   if (quizComplete) {
@@ -401,17 +344,17 @@ export function Quiz() {
               <Trophy className="w-24 h-24 text-purple-500 mx-auto mb-6 animate-bounce" />
               <h2 className="text-4xl font-black text-white mb-4">¡Quiz Completado!</h2>
               <p className="text-purple-300 text-xl mb-8">{getScoreMessage()}</p>
-              
+
               <div className="bg-gradient-to-r from-purple-900/50 to-purple-800/50 rounded-xl p-8 mb-8">
                 <div className="text-6xl font-black text-white mb-2">
                   {score} / {questions.length}
                 </div>
                 <div className="text-purple-300 text-lg">Respuestas Correctas</div>
-                <div className="flex justify-center gap-1 mt-4">
+                <div className="flex justify-center gap-1 mt-4 flex-wrap">
                   {Array.from({ length: questions.length }).map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-6 h-6 ${
+                      className={`w-4 h-4 ${
                         i < score ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'
                       }`}
                     />
@@ -438,7 +381,6 @@ export function Quiz() {
   return (
     <div className="min-h-screen py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-black text-white mb-3">
             Quiz Mundial 2026
@@ -446,7 +388,6 @@ export function Quiz() {
           <p className="text-purple-300 text-lg">Demuestra tu conocimiento sobre el fútbol</p>
         </div>
 
-        {/* Progress */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
             <span className="text-purple-300 font-bold">
@@ -464,7 +405,6 @@ export function Quiz() {
           </div>
         </div>
 
-        {/* Question Card */}
         <div className="bg-black/60 backdrop-blur-lg rounded-2xl p-8 border border-purple-500 shadow-2xl mb-6">
           <h2 className="text-2xl md:text-3xl font-black text-white mb-8">
             {question.question}
@@ -482,7 +422,7 @@ export function Quiz() {
                   key={index}
                   onClick={() => handleAnswer(index)}
                   disabled={selectedAnswer !== null}
-                  className={`w-full p-5 rounded-xl font-bold text-left transition-all border-2 flex items-center justify-between ${
+                  className={`w-full p-5 rounded-xl font-bold text-left transition-all border-2 flex items-center justify-between gap-4 ${
                     showCorrect
                       ? 'bg-green-600 border-green-500 text-white'
                       : showIncorrect
@@ -493,24 +433,15 @@ export function Quiz() {
                   }`}
                 >
                   <span className="text-lg">{option}</span>
-                  {showCorrect && <Check className="w-6 h-6" />}
-                  {showIncorrect && <X className="w-6 h-6" />}
+                  {showCorrect && <Check className="w-6 h-6 shrink-0" />}
+                  {showIncorrect && <X className="w-6 h-6 shrink-0" />}
                 </button>
               );
             })}
           </div>
 
-          {/* Trivia */}
-          {showResult && (
-            <div className="mt-6 p-4 bg-purple-900/30 border border-purple-700 rounded-lg">
-              <p className="text-purple-200 text-sm">
-                <span className="font-bold text-purple-400">💡 Sabías que:</span> {question.trivia}
-              </p>
-            </div>
-          )}
         </div>
 
-        {/* Next Button */}
         {showResult && (
           <div className="text-center">
             <button
