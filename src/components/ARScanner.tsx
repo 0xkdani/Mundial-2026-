@@ -31,8 +31,9 @@ export function ARScanner({ onBack }: ARScannerProps) {
     if (videoOpen && videoPos === null && typeof window !== 'undefined') {
       const defaultWidth = Math.min(440, Math.floor(window.innerWidth * 0.45));
       const defaultHeight = Math.max(160, Math.floor(defaultWidth * 9 / 16));
+      const defaultTop = Math.max(72, Math.floor(window.innerHeight * 0.1));
       setVideoSize({ width: defaultWidth, height: defaultHeight });
-      setVideoPos({ top: 12, left: Math.max(12, Math.floor((window.innerWidth - defaultWidth) / 2)) });
+      setVideoPos({ top: defaultTop, left: Math.max(12, Math.floor((window.innerWidth - defaultWidth) / 2)) });
     }
   }, [videoOpen, videoPos]);
 
@@ -168,18 +169,19 @@ export function ARScanner({ onBack }: ARScannerProps) {
               </button>
             </>
           ) : (
-            <div className="text-left">
-              <div className="flex items-center justify-between gap-3 mb-4">
-                <p className="text-white font-semibold">Escaner AR activo</p>
+            <div className="fixed inset-0 z-[70] bg-black">
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-[200] flex items-center justify-between p-4 pt-[max(1rem,env(safe-area-inset-top))]">
+                <p className="rounded-full bg-black/60 px-3 py-1 text-sm font-semibold text-white backdrop-blur-sm">Escaner AR activo</p>
                 <button
                   onClick={() => setArActive(false)}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-white transition-colors"
+                  className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-purple-500 bg-black/70 px-4 py-2 text-sm font-semibold text-purple-200 backdrop-blur-sm transition-colors hover:text-white"
                 >
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="h-4 w-4" />
                   Cerrar escaner
                 </button>
               </div>
-              <div className="w-full overflow-hidden rounded-2xl border border-purple-800 bg-black" style={{ aspectRatio: '16/9', position: 'relative' }}>
+
+              <div className="relative h-full w-full">
                 <iframe
                   src="/ar.html?autostart=1"
                   title="Escaner AR"
@@ -245,7 +247,7 @@ export function ARScanner({ onBack }: ARScannerProps) {
                       window.addEventListener('mouseup', onMouseUp);
                     }
                   }}
-                  style={{ position: 'absolute', left: 0, top: 0, zIndex: 80, pointerEvents: 'auto', width: videoSize.width }}
+                  style={{ position: 'absolute', left: 0, top: 0, zIndex: 90, pointerEvents: 'auto', width: videoSize.width }}
                 >
                   <div
                     style={{

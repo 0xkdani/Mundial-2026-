@@ -292,7 +292,16 @@ export function Videos() {
               const re = new RegExp(t.replace(/[-/\^$*+?.()|[\]{}]/g, '\\$&'), 'i');
               if (re.test(src)) return t;
             }
-            return 'General';
+
+            // Fallback: derivar nombre desde el title para no ocultar videos no contemplados en teams.ts
+            const fromTitle = (v.title || '')
+              .replace(/^videos?/i, '')
+              .replace(/^video/i, '')
+              .replace(/[-_]/g, ' ')
+              .replace(/\s+\d+$/g, '')
+              .trim();
+
+            return fromTitle || 'General';
           };
 
           const map = new Map<string, typeof videos[number][]>();
@@ -306,21 +315,27 @@ export function Videos() {
             <section key={teamName} className="mb-10">
               <h2 className="text-3xl font-extrabold text-white mb-4">{teamName}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {teamVideos.slice(0, 1).map((video) => (
+                {[...teamVideos]
+                  .sort((a, b) => a.id - b.id)
+                  .slice(0, 1)
+                  .map((video) => (
                   <div
                     key={video.id}
                     className="bg-black/60 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-500 shadow-xl hover:shadow-2xl hover:border-purple-400 transition-all group cursor-pointer"
                   >
                     {(() => {
                       const ratio = ratios[video.id];
+                      const isActive = activeVideoId === video.id;
                       const paddingTop = ratio ? `${(1 / ratio) * 100}%` : undefined;
-                      const wrapperClass = `relative overflow-hidden bg-black ${!ratio ? 'aspect-video' : ''}`;
+                      const wrapperClass = `relative overflow-hidden bg-black ${!ratio && !isActive ? 'aspect-video' : ''}`;
+                      // Always preserve the computed aspect ratio on the wrapper to avoid layout jumps
+                      const wrapperStyle = ratio ? { paddingTop } : undefined;
 
                       return (
-                        <div ref={(el) => (wrapperRefs.current[video.id] = el)} className={wrapperClass} style={ratio ? { paddingTop } : undefined}>
+                        <div ref={(el) => (wrapperRefs.current[video.id] = el)} className={wrapperClass} style={wrapperStyle}>
                           {video.videoUrl ? (
-                            // Renderizamos solo la miniatura/preview; el <video> se monta al pulsar (lazy-load)
-                            activeVideoId === video.id ? (
+                            // Si está activo, renderizar el <video> dentro de la tarjeta y dejar que la tarjeta crezca
+                            isActive ? (
                               <>
                                 <video
                                   ref={(el) => (videoRefs.current[video.id] = el)}
@@ -365,15 +380,10 @@ export function Videos() {
                                   }
                                 }}
                                 onClick={() => {
-                                  // Montar el video y reproducir en fullscreen
+                                  // Reproducir dentro de la misma tarjeta (expandirla)
                                   setActiveVideoId(video.id);
-                                  // pequeña espera para que el elemento <video> se monte
                                   setTimeout(() => {
-                                    const wrap = wrapperRefs.current[video.id];
                                     const vid = videoRefs.current[video.id];
-                                    if (wrap && (wrap as any).requestFullscreen) {
-                                      (wrap as any).requestFullscreen().catch(() => {});
-                                    }
                                     if (vid) vid.play().catch(() => {});
                                   }, 80);
                                 }}
@@ -417,7 +427,7 @@ export function Videos() {
                   
 
                     <div className="p-4">
-                      <h3 className="text-white font-bold text-lg line-clamp-2">{video.title}</h3>
+                      <h3 className="text-white font-bold text-lg line-clamp-2">Video</h3>
                       <div className="mt-2 inline-block px-3 py-1 bg-purple-900/50 rounded-full text-purple-300 text-xs font-bold uppercase">
                         {video.category}
                       </div>
@@ -428,9 +438,9 @@ export function Videos() {
             </section>
           );
 
-          // Mostrar solo selecciones que tengan al menos un video
-          return teams
-            .filter((teamName) => (map.get(teamName)?.length ?? 0) > 0)
+          // Mostrar todos los grupos detectados y ordenarlos alfabeticamente
+          return Array.from(map.keys())
+            .sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }))
             .map((teamName) => renderTeamSection(teamName, map.get(teamName)!));
         })()}
 

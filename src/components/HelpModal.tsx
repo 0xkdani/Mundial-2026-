@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, HelpCircle } from 'lucide-react';
+import InteractiveInstructions from './InteractiveInstructions';
 
 export function HelpModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,49 +38,8 @@ export function HelpModal() {
               </button>
             </div>
 
-            {/* Content */}
-            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 text-gray-100">
-              <div>
-                <h3 className="text-base sm:text-xl font-bold text-purple-400 mb-1 sm:mb-2">🏆 Página Principal</h3>
-                <p className="text-sm sm:text-base text-gray-300">
-                  Explora información sobre el Mundial 2026, equipos participantes y datos generales del torneo.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-base sm:text-xl font-bold text-purple-400 mb-1 sm:mb-2">📅 Partidos</h3>
-                <p className="text-sm sm:text-base text-gray-300">
-                  Visualiza todos los partidos del torneo, resultados y calendario de competencia.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-base sm:text-xl font-bold text-purple-400 mb-1 sm:mb-2">🧠 Quiz</h3>
-                <p className="text-sm sm:text-base text-gray-300">
-                  Responde preguntas sobre el fútbol y el Mundial 2026. Acumula puntos y compite con tu conocimiento.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-base sm:text-xl font-bold text-purple-400 mb-1 sm:mb-2">🎥 Videos</h3>
-                <p className="text-sm sm:text-base text-gray-300">
-                  Mira resúmenes, highlights y contenido relacionado con los equipos del torneo.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-base sm:text-xl font-bold text-purple-400 mb-1 sm:mb-2">📱 Escáner AR</h3>
-                <p className="text-sm sm:text-base text-gray-300">
-                  Activa tu cámara y apunta a los escudos de los equipos. Verás la Copa del Mundo en 3D flotando en realidad aumentada.
-                </p>
-              </div>
-
-              <div className="bg-purple-900/30 border border-purple-700 rounded-lg p-3 sm:p-4">
-                <p className="text-xs sm:text-sm text-gray-400">
-                  💡 <strong>Consejo:</strong> Abre esta ventana en cualquier momento desde el botón de ayuda en la esquina superior derecha.
-                </p>
-              </div>
-            </div>
+            {/* Content: interactive instructions component */}
+            <InteractiveInstructions />
 
             {/* Footer */}
             <div className="border-t border-purple-700 bg-slate-800/50 px-4 sm:px-6 py-3 sm:py-4 flex justify-end">

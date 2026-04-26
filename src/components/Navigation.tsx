@@ -8,31 +8,18 @@ interface NavigationProps {
 export function Navigation({ activeSection, onNavigate }: NavigationProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-purple-900 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           {/* Logo */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
-            <Trophy className="w-8 h-8 text-purple-500" />
+          <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
+            <Trophy className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-purple-500" />
             <div>
-              <div className="font-black text-xl text-white tracking-tight">FIFA WORLD CUP™</div>
-              <div className="text-sm font-bold text-purple-400">2026</div>
+              <div className="font-black text-xs sm:text-sm md:text-lg leading-none text-white tracking-tight whitespace-nowrap">FWC 2026</div>
             </div>
           </div>
 
           {/* Navigation Links */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => onNavigate('home')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-all ${
-                activeSection === 'home'
-                  ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg border border-purple-500'
-                  : 'text-gray-300 hover:bg-slate-900 hover:text-white'
-              }`}
-            >
-              <Trophy className="w-5 h-5" />
-              <span className="hidden md:inline">Inicio</span>
-            </button>
-            
             <button
               onClick={() => onNavigate('matches')}
               className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-all ${

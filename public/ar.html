@@ -79,16 +79,16 @@
       #debugInfo{display:none}
 
       /* Controles AR */
-      #backBtn{position:fixed;top:14px;left:14px;z-index:20;display:none;align-items:center;gap:6px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
+      #backBtn{position:fixed;top:14px;left:14px;z-index:130;display:none;align-items:center;gap:6px;background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
 
-      #statusBar{position:fixed;bottom:20px;left:16px;right:16px;z-index:20;display:none;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,.65);color:#e9d5ff;border:1px solid rgba(124,58,237,.4);border-radius:999px;padding:10px 18px;font-size:14px;font-weight:500;backdrop-filter:blur(6px)}
+      #statusBar{position:fixed;bottom:20px;left:16px;right:16px;z-index:130;display:none;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,.65);color:#e9d5ff;border:1px solid rgba(124,58,237,.4);border-radius:999px;padding:10px 18px;font-size:14px;font-weight:500;backdrop-filter:blur(6px)}
       .pulse-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
       @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 
-      #actionBar{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:20;display:none;align-items:center;gap:10px}
+      #actionBar{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:130;display:none;align-items:center;gap:10px}
       .action-btn{background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:1px solid rgba(124,58,237,.6);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px)}
 
-      #infoPanel{position:fixed;bottom:120px;left:16px;right:16px;z-index:20;display:none;background:rgba(15,23,42,.85);color:#e2e8f0;border:1px solid rgba(124,58,237,.35);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;backdrop-filter:blur(8px)}
+      #infoPanel{position:fixed;bottom:120px;left:16px;right:16px;z-index:130;display:none;background:rgba(15,23,42,.85);color:#e2e8f0;border:1px solid rgba(124,58,237,.35);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;backdrop-filter:blur(8px)}
 
       /* Marco de escaneo */
       #scanFrame{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;pointer-events:none}
@@ -101,7 +101,7 @@
       .scan-line{position:absolute;left:4px;right:4px;height:2px;background:linear-gradient(90deg,transparent,#a78bfa,transparent);animation:scanAnim 2s ease-in-out infinite}
       @keyframes scanAnim{0%{top:4px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
       /* Video modal */
-      #videoModal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7)}
+      #videoModal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7)}
       .video-modal-content{width:min(920px,94vw);background:#0b1020;border-radius:12px;padding:12px;box-shadow:0 8px 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:8px}
       .video-area{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:8px}
       .video-area video, .video-area iframe{width:100%;height:100%;object-fit:cover;border:0}
@@ -902,8 +902,48 @@
 
       // Mapeo de videos por clave de target (extiende según necesites)
       const videosPorSeleccion = {
-        mexico: '/Videos/Video%20Mexico.mp4'
-        // agrega otras entradas como: argentina: '/Videos/Video%20Argentina.mp4'
+        alemania: '/Videos/Videos-Alemania/Videos-Alemania-1.mp4',
+        arabia: '/Videos/Arabia Saudita.mp4',
+        argelia: '/Videos/Argelia.mp4',
+        argentina: '/Videos/Videos-Argentina/Video-Argentina-1.mp4',
+        austria: '/Videos/Austria.mp4',
+        belgica: '/Videos/VideoBelgica.mp4',
+        brasil: '/Videos/Videos-Brasil/Video-Brasil-1.mp4',
+        camerun: '/Videos/Camerun.mp4',
+        canada: '/Videos/Videos-Canada/Video-Canada-1.mp4',
+        chile: '/Videos/VideoChile.mp4',
+        colombia: '/Videos/VideoColombia.mp4',
+        corea: '/Videos/Corea.mp4',
+        costamarfil: '/Videos/Costa de Marfil.mp4',
+        croacia: '/Videos/Croacia.mp4',
+        dinamarca: '/Videos/VideoDinamarca.mp4',
+        ecuador: '/Videos/VideoEcuador.mp4',
+        egipto: '/Videos/Egipto.mp4',
+        emiratos: '/Videos/Emiratos.mp4',
+        españa: '/Videos/Videos-España/Video-España-1.mp4',
+        francia: '/Videos/Videos-Francia/Video-Francia-1.mp4',
+        ghana: '/Videos/Ghana.mp4',
+        inglaterra: '/Videos/VideoInglaterra.mp4',
+        irak: '/Videos/Irak.mp4',
+        iran: '/Videos/Iran.mp4',
+        italia: '/Videos/VideoItalia.mp4',
+        jamaica: '/Videos/VideoJamaica.mp4',
+        japon: '/Videos/Japon.mp4',
+        marruecos: '/Videos/Marruecos.mp4',
+        mexico: '/Videos/Video Mexico.mp4',
+        nigeria: '/Videos/Nigeria.mp4',
+        nuevaZelanda: '/Videos/Nueva Zelanda.mp4',
+        paisesBajos: '/Videos/VideoPaisesBajos.mp4',
+        panama: '/Videos/videoPanama.mp4',
+        peru: '/Videos/Peru.mp4',
+        polonia: '/Videos/Polonia.mp4',
+        portugal: '/Videos/VideoPortugal.mp4',
+        senegal: '/Videos/Senegal.mp4',
+        serbia: '/Videos/Serbia.mp4',
+        suecia: '/Videos/Suecia.mp4',
+        suiza: '/Videos/VideoSuiza.mp4',
+        uruguay: '/Videos/VideosUruguay.mp4',
+        usa: '/Videos/Videos-USA/Video-USA-1.mp4'
       };
 
       // Modal y reproductor embebido (soporta mp4 local o YouTube iframe)
@@ -1014,12 +1054,13 @@
       }
 
       function abrirModalVideo(url) {
+        const safeUrl = /^https?:\/\//i.test(url) ? url : encodeURI(url);
         // Limpiar area
         videoArea.innerHTML = '';
         // Elegir entre mp4 local o youtube
-        if (url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.ogg')) {
+        if (safeUrl.endsWith('.mp4') || safeUrl.endsWith('.webm') || safeUrl.endsWith('.ogg')) {
           const v = document.createElement('video');
-          v.src = url;
+          v.src = safeUrl;
           v.controls = true;
           v.autoplay = true;
           v.playsInline = true;
@@ -1027,7 +1068,7 @@
         } else {
           // asumir YouTube u otras iframes
           const iframe = document.createElement('iframe');
-          iframe.src = url.replace('watch?v=', 'embed/');
+          iframe.src = safeUrl.replace('watch?v=', 'embed/');
           iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
           iframe.allowFullscreen = true;
           videoArea.appendChild(iframe);
